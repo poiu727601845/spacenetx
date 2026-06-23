@@ -931,7 +931,7 @@
         </a>
         <div class="nav-links">
             <a href="/" class="active">首页</a>
-            <a href="/articles.html">文章库</a>
+            <a href="/articles/">文章库</a>
             <a href="/tools-rank.html">工具排行</a>
             <a href="/about.html">关于</a>
         </div>
@@ -1013,7 +1013,7 @@
         <!-- 📰 文章列表 -->
         <div class="section-header">
             <h2 class="section-title"><span class="icon">📰</span> 最新投研文章</h2>
-            <a href="/articles.html" style="font-size:0.78rem;color:#667eea;font-weight:600">查看全部 →</a>
+            <a href="/articles/" style="font-size:0.78rem;color:#667eea;font-weight:600">查看全部 →</a>
         </div>
         <div class="article-list" id="articleList">
             <p style="color:var(--text-muted);padding:20px;text-align:center;">加载中...</p>
@@ -1480,6 +1480,86 @@
         }
     }
 
+    /* --- 文章URL映射表（title → UUID文件路径）--- */
+    const ARTICLE_URL_MAP = {
+"AI板块轮动加速，012733的攻守之道": "/articles/0030b9e4-20260622.html",
+"医疗板块轮动与003095配置价值深度解读": "/articles/007565b3-20260621.html",
+"医疗接棒半导体，5基组合暗藏什么玄机？": "/articles/07d27c6d-20260619.html",
+"中证A500ETF全面评测与选择指南": "/articles/091afedc-20260610.html",
+"AI主题基金投资正当时？深度解析与策略建议": "/articles/0b0f5e1d-20260609.html",
+"半仓变阵：第三次轮动能否打破收益天花板？": "/articles/116abcba-20260619.html",
+"红利低波ETF vs 中证红利ETF，谁更抗跌？": "/articles/12e095a3-20260604.html",
+"06/16 A股投研日报": "/articles/12e5c30b-2026-06-16.html",
+"北向资金大举流入，科技板块获青睐": "/articles/1884b36c-20260606.html",
+"新能源板块轮动加速，001410配置价值凸显": "/articles/1977f7da-20260614.html",
+"AI主题基金热潮来袭：现在上车还来得及吗？": "/articles/1e292d76-20260604.html",
+"北向资金逆势加仓，主力资金切换信号解读": "/articles/212beb6a-20260607.html",
+"科创50ETF近期表现与投资价值评测": "/articles/257fa36e-20260609.html",
+"板块轮动规律：今日资金流向揭示下一个风口": "/articles/29697228-20260607.html",
+"今日主力资金流向：信号解读与板块轮动": "/articles/2b8d85a0-20260603.html",
+"小金属ETF当前能否纳入持仓？": "/articles/40e2f11b-20260618.html",
+"科创50ETF深度评测：估值与成长性": "/articles/43c428b8-20260602.html",
+"兴全合润LOF持仓解析：调仓信号与操作策略": "/articles/44b1ee6f-20260619.html",
+"电网设备板块投资策略：聚焦特高压与智能配网": "/articles/4838f812-20260608.html",
+"5只基金谁更抗跌：持仓深度体检": "/articles/4ff97a30-20260622.html",
+"AI基金还能追吗？深度解析布局策略": "/articles/57e6ddf7-20260605.html",
+"5只基金收益大比拼：谁才是真正的王者？": "/articles/6010943d-20260619.html",
+"资金流向信号解读与持仓调整逻辑": "/articles/6231c9e6-20260623.html",
+"黄金ETF再创新高，如何选择？": "/articles/64e5b1e7-20260605.html",
+"半导体板块再升温：AI芯片与存储周期共振": "/articles/6866bd47-20260612.html",
+"新能源板块轮动加速，001410配置正当时": "/articles/6b32772c-20260617.html",
+"5只基金全拆解：谁的收益最强？我的真实持仓": "/articles/6b9ca563-20260616.html",
+"板块轮动加速，精准调仓策略": "/articles/6c2456c6-20260618.html",
+"北向资金大幅流入的实战信号解读": "/articles/713c4a91-20260612.html",
+"AI主题基金深度解析：布局2025年核心赛道": "/articles/7d1ea281-20260608.html",
+"主力资金暗流涌动：今日信号解读": "/articles/861669c5-20260618.html",
+"北向资金逆势加仓，信号指向科技成长": "/articles/90e3c7ee-20260612.html",
+"板块轮动新信号：资金从科技转向消费": "/articles/913d527c-20260610.html",
+"南方东英AI ETF持仓解析与今日操作策略": "/articles/93f9df49-20260622.html",
+"北向资金转向，主力暗藏新风向": "/articles/97a2bbc7-20260611.html",
+"半导体板块强势反弹，AI芯片成新引擎": "/articles/9a7f097b-20260608.html",
+"今日ETF风向：科技与红利谁主沉浮": "/articles/a0b7d511-20260606.html",
+"AI主题基金(012733)持仓解析：算力/应用层哪个弹性更大？": "/articles/ai-theme-fund-012733-analysis.html",
+"AI主题ETF持仓大拆解：谁在押注半导体？": "/articles/ai主题etf持仓大拆解谁在押注半导体-20260605.html",
+"AI主题ETF横向评测：谁更胜一筹？": "/articles/ai主题etf横向评测谁更胜一筹-20260530.html",
+"AI主题基金012733深度评测：配置与评分指南": "/articles/ai主题基金012733深度评测配置与评分指南-20260607.html",
+"AI基金深拆：算力应用谁更猛？": "/articles/ai基金深拆算力谁更猛-20260602.html",
+"科创50ETF波动加剧，如何把握？": "/articles/b100849b-20260610.html",
+"AI板块轮动加速，012733配置正当时": "/articles/c2d32530-20260616.html",
+"小金属ETF爆发，今日能否纳入持仓？": "/articles/c886abcd-20260621.html",
+"电网设备板块迎政策催化，特高压投资提速": "/articles/d2117598-20260609.html",
+"板块轮动规律揭秘：抓准下一波领涨方向": "/articles/d3a6fd79-20260610.html",
+"资金流向暗藏玄机：今日主力动向解读": "/articles/d506c928-20260612.html",
+"红利低波ETF实战评测：抗跌与收益平衡": "/articles/e99095c0-20260612.html",
+"医疗板块轮动下003095的配置价值分析": "/articles/ea424890-20260615.html",
+"北向资金加速流入，抄底信号浮现？": "/articles/eaf58dfc-20260612.html",
+"半导体ETF vs AI ETF：谁更值得布局？": "/articles/eeea78e7-20260613.html",
+"电网ETF(025832)深度评测：低估值+政策红利，目标仓位25%怎么做？": "/articles/etf-025832-power-grid-review-2026.html",
+"2026年A股ETF筛选工具横评：天天基金 vs 同花顺 vs 东方财富": "/articles/etf-selection-tool-comparison-2026.html",
+"半导体板块异动，光刻机与先进封装领涨": "/articles/fb0a2e35-20260605.html",
+"主力资金流向信号解读：净流入转正≠立即买入，这3个细节要注意": "/articles/fund-flow-signal-interpretation.html",
+"GPT-4o 图像生成能力重大升级：原生图像生成正式上线": "/articles/gpt4o-image-update-2026.html",
+"PCB/电子元件ETF评测：国产替代强主线追踪": "/articles/pcb电子元件etf评测国产替代强主线追踪-20260602.html",
+"ETF组合仓位管理实战：目标仓位法+回调买入纪律": "/articles/position-management-etf-portfolio.html",
+"电网设备板块2026年投资逻辑：特高压+智能电网催化下的配置机会": "/articles/power-grid-equipment-sector-2026.html",
+"半导体ETF(007300)买入信号拆解：净流入转正+量比>1.2怎么判断": "/articles/semiconductor-etf-007300-signal-2026.html",
+"国内半导体产业链2026年进展：先进封装与HBM国产化追踪": "/articles/semiconductor-supply-chain-2026.html",
+"中银基金费率优惠：哪只ETF更值得买？": "/articles/中银基金费率优惠哪只etf更值得买-170116.html",
+"兴全天添益暂停申购，货币ETF替代策略来了": "/articles/兴全天添益暂停申购货币etf替代策略来了-182125.html",
+"半导体ETF资金大揭秘：谁是下一个爆发点？": "/articles/半导体etf资金大揭秘谁是下一个爆发点-20260608.html",
+"华夏创业板200ETF改名，有何投资玄机？": "/articles/华夏创业板200etf改名有何投资玄机-174233.html",
+"同花顺VS东方财富：量化工具哪家强？": "/articles/同花顺vs东方财富量化工具哪家强-20260601.html",
+"玻纤板块狂飙89%！这只ETF还能追吗？": "/articles/玻纤板块狂飙89这只etf还能追吗-20260602.html",
+"电网ETF目标价复盘：025832能否突破前高": "/articles/电网etf目标价复盘025832能否突破前高-20260606.html",
+"电网爆发在即：绿电ETF评测与策略": "/articles/电网爆发在即绿电etf评测与策略-20260604.html",
+"电网设备回调：025832目标价1.40-1.42买入策略": "/articles/电网设备回调025832目标价140-142买入策略-20260602.html",
+"端午后首战五大板块预测：算力、半导体、有色全线出击": "/articles/端午后首战五大板块预测算力半导体有色全线出击-20260622.html",
+"诺安多策略恢复申购，量化工具ETF怎么选": "/articles/诺安多策略恢复申购量化工具etf怎么选-070024.html",
+"通信ETF评测：四维评分13/16，百亿资金抢筹时机": "/articles/通信etf评测四维评分1316百亿资金抢筹时机-20260602.html",
+"通信设备ETF评测：四维13分，百亿资金涌向何处？": "/articles/通信设备etf评测四维13分百亿资金涌向何处-20260602.html",
+"量比>1.2轮动下，半导体ETF(512480)还能追吗？": "/articles/量比12轮动下半导体etf512480还能追吗-20260603.html"
+};
+
     /* --- 文章列表（动态加载 /data/articles.json）--- */
     async function fetchArticles() {
         const list = document.getElementById('articleList');
@@ -1499,19 +1579,29 @@
             const latest = articles.slice(0, 10); // 展示最新10篇
 
             list.innerHTML = latest.map(a => {
-                const title   = a.title || '无标题';
+                const rawTitle = a.title || '无标题';
+                // 清理标题（去掉 " | A股投研工具箱" 后缀）
+                const title   = rawTitle.split(' | ')[0];
                 const date    = (a.date || '');
                 const parts   = date.split('-');
                 const month  = parts[1] || '--';
                 const day     = parts[2] || '--';
                 const tag     = a.tag || a.category || '投研';
                 const tagColor = TAG_COLORS[tag] || TAG_COLORS['default'];
-                // 摘要：优先summary > 用title截断（因为实际summary大多为空）
-                let excerpt = (a.summary || '').trim();
+                // 摘要
+                let excerpt = (a.excerpt || a.summary || '').trim();
                 if (!excerpt) excerpt = title.length > 50 ? title.substring(0, 50) + '...' : title;
                 else if (excerpt.length > 80) excerpt = excerpt.substring(0, 80) + '...';
-                // URL：articles.json中字段名为 file
-                const url     = '/' + (a.file || a.url || '');
+                // 🔧 URL修复：优先用映射表匹配UUID文件名，避免中文文件名400错误
+                let url = ARTICLE_URL_MAP[title] || '';
+                if (!url) {
+                    // 尝试模糊匹配（去除标点和空格后比较）
+                    const cleanTitle = title.replace(/[？?！!，,。.:;（）()\s]/g, '');
+                    for (const [k, v] of Object.entries(ARTICLE_URL_MAP)) {
+                        if (k.replace(/[？?！!，,。.:;（）()\s]/g, '') === cleanTitle) { url = v; break; }
+                    }
+                }
+                if (!url) url = '/articles/index.html'; // 兜底到文章列表页
 
                 return '<div class="article-card" onclick="location.href=\'' + url + '\'" style="cursor:pointer">' +
                     '<div class="article-date-box"><div class="article-day">' + day + '</div><div class="article-month">' + month + '月</div></div>' +
