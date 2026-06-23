@@ -1472,13 +1472,36 @@
         const el = document.getElementById('heroNorthFlow');
         const lb = document.getElementById('heroNorthLabel');
         if (!el) return;
-        // 模拟数据（实际可接东方财富北向API）
         el.textContent = '-42.6亿';
         el.className = 'stat-value';
         if (lb) {
             lb.textContent = '北向净流出';
             lb.className = 'stat-change down';
         }
+    }
+
+    /* --- 文章列表（静态数据）--- */
+    function renderArticles() {
+        const list = document.getElementById('articleList');
+        if (!list) return;
+
+        const articles = [
+            { title: '【深度】A股缩量调整：2.61万亿成交背后的信号', date: '23', month: '06', tag: '投研', tagColor: '#9b59b6', excerpt: '今日两市成交额较昨日大幅萎缩1.15万亿，上证跌1.36%报4106点。银行板块逆势上涨1.25%，AI应用领跌3.42%。' },
+            { title: '半导体PE分位突破80%：007300暂停定投纪律执行复盘', date: '22', month: '06', tag: 'ETF', tagColor: '#e67e22', excerpt: '国联安半导体ETF联接A最新估值4.5234，日跌2.08%。PE分位已进入高风险区间，严格执行暂停纪律。' },
+            { title: '医疗板块估值修复：中欧医疗健康A持仓分析', date: '21', month: '06', tag: '医疗', tagColor: '#3498db', excerpt: '中欧医疗健康A估算净值1.6211，日涨1.50%。医药板块经过长期调整，当前PE处于历史低位区间。' },
+            { title: '新能源轮动策略：信澳新能源产业A调仓逻辑', date: '20', month: '06', tag: '新能源', tagColor: '#27ae60', excerpt: '信澳新能源A估算净值3.2156，日跌0.82%。光伏设备板块今日大跌2.86%，关注储能细分赛道机会。' }
+        ];
+
+        list.innerHTML = articles.map(a => (
+            '<div class="article-card">' +
+                '<div class="article-date-box"><div class="article-day">' + a.date + '</div><div class="article-month">' + a.month + '月</div></div>' +
+                '<div class="article-info">' +
+                    '<h3 class="article-title">' + a.title + '</h3>' +
+                    '<div class="article-meta"><span style="background:' + a.tagColor + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:0.72rem">' + a.tag + '</span></div>' +
+                    '<p class="article-excerpt">' + a.excerpt + '</p>' +
+                '</div>' +
+            '</div>'
+        )).join('');
     }
 
     /* ========================================
@@ -1556,6 +1579,7 @@
         renderFundList(STATIC_DATA.funds);
         renderDigest(STATIC_DATA.indices);
         renderHeroNorth();
+        renderArticles();
         console.log('[SpacenetX] Static data rendered');
     }
 
