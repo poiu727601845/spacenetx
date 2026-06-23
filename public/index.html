@@ -1489,7 +1489,7 @@
             const resp = await fetch('/data/articles.json?t=' + Date.now());
             const data = await resp.json();
             const articles = Array.isArray(data) ? data : (data.articles || []);
-            const latest = articles.slice(0, 10);
+            const latest = articles; // 显示全部文章，不再限制10篇
             const list = document.getElementById('articleList');
             if (!list) return;
 
