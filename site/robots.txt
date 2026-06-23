@@ -1,0 +1,30 @@
+# spacenetx.com - robots.txt
+# Generated on 2026-06-16
+# https://spacenetx.com/
+
+User-agent: *
+Allow: /
+Allow: /data/
+Allow: /articles/
+Allow: /fund-screener.html
+Allow: /watchlist.html
+Allow: /faq.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /privacy.html
+
+# 禁止抓取的路径
+Disallow: /api/
+Disallow: /logs/
+Disallow: /*.json$
+
+# Sitemap 位置
+Sitemap: https://spacenetx.com/sitemap.xml
+
+# Google Bot 特别规则
+User-agent: Googlebot
+Allow: /
+
+# Bing Bot
+User-agent: bingbot
+Allow: /

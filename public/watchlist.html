@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="A股基金自选股工具 - 管理您的基金持仓和投资组合"/>
+<title>A股投研工具箱 - 自选股管理</title>
+<style>
+:root{
+  --primary:#e11d48;--gold:#f5a623;--gold-light:#ffd700;--bg:#1a2332;--bg2:#0f1923;--bg3:#243447;--bg-card:#1e2d3d;
+  --border:#2d4a5e;--border-light:#3a5f7a;--text:#e8edf2;--text2:#8fa4b8;--text3:#5a7189;
+  --radius:14px;--font:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --red:#e74c3c;--green:#27ae60;--blue:#3498db;--purple:#9b59b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* 导航栏 */
+nav{background:rgba(15,25,35,0.95);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.15rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--gold));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{color:var(--text2);padding:8px 14px;border-radius:8px;transition:all 0.2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg3)}
+
+/* 页面头部 */
+.page-header{background:linear-gradient(180deg,rgba(245,166,35,0.1) 0%,transparent 100%);padding:36px 24px 28px;text-align:center}
+.page-header h1{font-size:1.8rem;font-weight:900;margin-bottom:10px}
+.page-header h1 .grad{background:linear-gradient(135deg,#ffd700,#f5a623,#ff8a65);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-header p{color:var(--text2);font-size:0.95rem}
+
+/* 统计概览 */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;max-width:1200px;margin:0 auto 24px;padding:0 24px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center}
+.stat-card .sc-val{font-size:1.6rem;font-weight:800;margin-bottom:4px}
+.stat-card .sc-label{font-size:0.78rem;color:var(--text3)}
+
+/* 情绪指数卡片 */
+.emotion-section{max-width:1200px;margin:0 auto 24px;padding:0 24px}
+.emotion-card-main{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.emotion-main-row{display:flex;align-items:center;gap:24px;margin-bottom:18px;flex-wrap:wrap}
+.emotion-big-score{font-size:3.5rem;font-weight:900;min-width:100px;text-align:center}
+.emotion-info h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.emotion-info p{font-size:0.85rem;color:var(--text2);line-height:1.5}
+.emotion-level-tag{display:inline-block;padding:3px 12px;border-radius:12px;font-size:0.78rem;font-weight:600;margin-top:6px}
+.emotion-level-tag.overbought{color:#fff;background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.emotion-level-tag.hot{color:#fff;background:linear-gradient(135deg,#e67e22,#f39c12)}
+.emotion-level-tag.balance{color:var(--text);background:linear-gradient(135deg,#7f8c8d,#95a5a6)}
+.emotion-level-tag.oversold{color:#fff;background:linear-gradient(135deg,#c0392b,#e74c3c)}
+
+.emotion-bars{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.emotion-bar-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px}
+.emotion-bar-label{font-size:0.8rem;color:var(--text2);margin-bottom:8px;font-weight:600}
+.emotion-bar-track{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-bottom:4px}
+.emotion-bar-fill{height:100%;border-radius:4px;transition:width 0.8s ease}
+.emotion-bar-val{font-size:0.78rem;font-weight:700}
+
+/* 自选基金列表 */
+.watchlist-section{max-width:1200px;margin:0 auto;padding:0 24px 40px}
+.watchlist-section h2{font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.watchlist-section h2::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.watchlist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.wl-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all 0.25s;position:relative;overflow:hidden}
+.wl-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.wl-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;opacity:0;transition:opacity 0.25s}
+.wl-card:hover::before{opacity:1}
+.wl-card.pos-half::before{background:var(--purple)}
+.wl-card.pos-new::before{background:var(--blue)}
+
+.wl-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.wl-code{font-size:0.8rem;color:var(--text3);font-weight:700}
+.wl-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.wl-sector{font-size:0.78rem;color:var(--gold)}
+.wl-remove{cursor:pointer;color:var(--text3);font-size:1.1rem;padding:4px 8px;border-radius:6px;transition:all 0.2s;flex-shrink:0}
+.wl-remove:hover{color:var(--red);background:rgba(231,76,60,0.1)}
+
+.wl-perfs{display:flex;gap:14px;flex-wrap:wrap;margin:12px 0}
+.wl-perf{font-size:0.8rem;color:var(--text2)}
+.wl-perf span{font-weight:700}
+.wl-perf .pos{color:var(--red)}
+.wl-perf .neg{color:var(--green)}
+
+.wl-signal{font-size:0.78rem;padding:6px 10px;border-radius:6px;margin-top:8px;line-height:1.5}
+.wl-signal.strong{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.2);color:var(--red)}
+.wl-signal.moderate{background:rgba(243,156,18,0.1);border:1px solid rgba(243,156,18,0.2);color:#f39c12}
+.wl-signal.weak{background:rgba(127,140,141,0.1);border:1px solid rgba(127,140,141,0.2);color:var(--text3)}
+
+.wl-actions{display:flex;gap:8px;margin-top:12px}
+.btn{padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--primary));color:#fff;border:none}
+.btn-primary:hover{opacity:0.9}
+.btn-outline{background:transparent;border-color:var(--border);color:var(--text2)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{background:transparent;border-color:rgba(231,76,60,0.3);color:var(--red)}
+.btn-danger:hover{background:rgba(231,76,60,0.1)}
+
+/* 空状态 */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3)}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:16px;opacity:0.5}
+.empty-state h3{font-size:1.1rem;color:var(--text2);margin-bottom:8px}
+.empty-state p{font-size:0.9rem;margin-bottom:20px}
+
+/* 资金流向提示 */
+.flow-notice{max-width:1200px;margin:0 auto 24px;padding:0 24px}
+.flow-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.flow-card h3{font-size:0.95rem;font-weight:700;margin-bottom:14px;color:var(--gold)}
+.flow-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.flow-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px}
+.flow-item .fi-label{font-size:0.82rem;color:var(--text2);font-weight:600}
+.flow-item .fi-val{font-size:0.9rem;font-weight:700}
+.flow-item .fi-val.up{color:var(--red)}
+.flow-item .fi-val.down{color:var(--green)}
+
+/* 页脚 */
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 24px;margin-top:40px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer p{color:var(--text3);font-size:0.85rem}
+.footer a{color:var(--gold);text-decoration:none}
+.footer-nav{display:flex;gap:16px;flex-wrap:wrap}
+.footer-nav a{color:var(--text2);padding:8px 16px;border-radius:8px;border:1px solid var(--border);transition:all 0.2s}
+.footer-nav a:hover{border-color:var(--gold);color:var(--text);background:var(--bg3)}
+
+/* 响应式 */
+@media(max-width:768px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .watchlist-grid{grid-template-columns:1fr}
+  .emotion-bars{grid-template-columns:1fr 1fr}
+  .flow-list{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+@media(max-width:480px){
+  .page-header h1{font-size:1.4rem}
+  .stats-row{grid-template-columns:1fr}
+  .emotion-bars{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-inner">
+  <a href="/" class="logo"><div class="logo-icon">AI</div>A股投研工具箱</a>
+  <ul class="nav-links">
+    <li><a href="/">首页</a></li>
+    <li><a href="/fund-screener.html">基金筛选器</a></li>
+    <li><a href="/watchlist.html" class="active">自选股</a></li>
+    <li><a href="/reports/weekly_report_w24_2026-06-14.html">周报</a></li>
+  </ul>
+</div>
+</nav>
+
+<div class="page-header">
+  <h1><span class="grad">自选股管理</span></h1>
+  <p>管理您的基金组合，跟踪实时表现与情绪指数</p>
+</div>
+
+<!-- 统计概览 -->
+<div class="stats-row" id="stats-row">
+  <div class="stat-card"><div class="sc-val" id="stat-total">0</div><div class="sc-label">自选基金</div></div>
+  <div class="stat-card"><div class="sc-val" id="stat-avg-1m">-</div><div class="sc-label">1月平均涨幅</div></div>
+  <div class="stat-card"><div class="sc-val" id="stat-avg-1y">-</div><div class="sc-label">1年平均涨幅</div></div>
+  <div class="stat-card"><div class="sc-val" id="stat-won">0</div><div class="sc-label">近1月上涨</div></div>
+</div>
+
+<!-- 情绪指数 -->
+<div class="emotion-section">
+  <div class="emotion-card-main">
+    <div class="emotion-main-row">
+      <div class="emotion-big-score" id="emotion-score">--</div>
+      <div class="emotion-info">
+        <h3>组合情绪指数</h3>
+        <p id="emotion-desc">根据您持仓基金的表现计算综合情绪指标</p>
+        <span class="emotion-level-tag balance" id="emotion-tag">计算中...</span>
+      </div>
+    </div>
+    <div class="emotion-bars" id="emotion-bars"></div>
+  </div>
+</div>
+
+<!-- 资金流向 -->
+<div class="flow-notice">
+  <div class="flow-card">
+    <h3>资金流向参考</h3>
+    <div class="flow-list" id="flow-list"></div>
+  </div>
+</div>
+
+<!-- 自选基金列表 -->
+<div class="watchlist-section">
+  <h2>我的自选基金</h2>
+  <div class="watchlist-grid" id="watchlist-grid"></div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div><p>2026 <a href="https://spacenetx.com">A股投研工具箱 spacenetx.com</a></p><p>AI Agent 自动运营 每日更新</p></div>
+    <div class="footer-nav">
+      <a href="/">首页</a>
+      <a href="/fund-screener.html">基金筛选器</a>
+      <a href="/watchlist.html">自选股</a>
+      <a href="/reports/weekly_report_w24_2026-06-14.html">周报</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================
+// 基金数据库
+// ============================
+var fundDatabase = [
+  { code:"012733", name:"南方东英AI主题ETF", sector:"AI/科技", type:"ETF", performance_1m:5.2, performance_3m:12.8, performance_6m:25.6, performance_1y:48.2, scale:"10亿-50亿" },
+  { code:"007300", name:"汇添富半导体ETF", sector:"半导体", type:"ETF", performance_1m:3.8, performance_3m:15.2, performance_6m:28.5, performance_1y:42.1, scale:"50亿以上" },
+  { code:"003095", name:"中欧医疗健康混合", sector:"医疗", type:"混合", performance_1m:-2.1, performance_3m:5.8, performance_6m:12.5, performance_1y:18.6, scale:"50亿以上" },
+  { code:"001410", name:"信澳新能源产业", sector:"新能源", type:"股票", performance_1m:1.5, performance_3m:8.2, performance_6m:15.8, performance_1y:22.5, scale:"10亿-50亿" },
+  { code:"163406", name:"兴全合润混合LOF", sector:"综合/成长", type:"混合", performance_1m:2.8, performance_3m:10.5, performance_6m:20.2, performance_1y:35.8, scale:"50亿以上" },
+  { code:"006771", name:"华夏半导体ETF", sector:"半导体", type:"ETF", performance_1m:3.5, performance_3m:14.2, performance_6m:26.8, performance_1y:38.5, scale:"50亿以上" },
+  { code:"005936", name:"工银医疗健康混合", sector:"医疗", type:"混合", performance_1m:-1.8, performance_3m:6.2, performance_6m:11.8, performance_1y:16.5, scale:"10亿-50亿" },
+  { code:"002190", name:"易方达新能源汽车", sector:"新能源", type:"混合", performance_1m:2.2, performance_3m:9.5, performance_6m:18.2, performance_1y:25.8, scale:"50亿以上" },
+  { code:"013833", name:"广发人工智能主题", sector:"AI/科技", type:"混合", performance_1m:4.8, performance_3m:11.5, performance_6m:22.8, performance_1y:45.2, scale:"10亿-50亿" },
+  { code:"001956", name:"景顺长城沪港深成长", sector:"综合/成长", type:"混合", performance_1m:3.2, performance_3m:12.8, performance_6m:24.5, performance_1y:38.2, scale:"10亿-50亿" },
+  { code:"515980", name:"鹏华中证电网ETF", sector:"电网设备", type:"ETF", performance_1m:2.5, performance_3m:9.8, performance_6m:18.5, performance_1y:28.6, scale:"50亿以上" },
+  { code:"011809", name:"易方达创业板ETF", sector:"综合/成长", type:"ETF", performance_1m:4.1, performance_3m:11.2, performance_6m:22.0, performance_1y:32.5, scale:"50亿以上" },
+  { code:"007697", name:"万家北智新产业", sector:"AI/科技", type:"混合", performance_1m:6.5, performance_3m:14.5, performance_6m:28.2, performance_1y:52.8, scale:"10亿-50亿" },
+  { code:"006786", name:"前海开源半导体主题", sector:"半导体", type:"混合", performance_1m:4.2, performance_3m:13.8, performance_6m:27.5, performance_1y:40.2, scale:"10亿-50亿" },
+  { code:"012221", name:"华泰柏瑞中证电网", sector:"电网设备", type:"ETF", performance_1m:3.0, performance_3m:10.5, performance_6m:19.8, performance_1y:30.2, scale:"10亿-50亿" },
+  { code:"001618", name:"农银新能源主题", sector:"新能源", type:"股票", performance_1m:1.8, performance_3m:7.5, performance_6m:14.2, performance_1y:20.8, scale:"50亿以上" },
+  { code:"010679", name:"中欧医疗健康C", sector:"医疗", type:"混合", performance_1m:-1.5, performance_3m:6.5, performance_6m:13.2, performance_1y:19.5, scale:"50亿以上" },
+  { code:"013400", name:"富国人工智能混合", sector:"AI/科技", type:"混合", performance_1m:5.5, performance_3m:13.2, performance_6m:26.5, performance_1y:47.8, scale:"10亿-50亿" }
+];
+
+// ============================
+// 自选股管理
+// ============================
+function getWatchlist() {
+  try { return JSON.parse(localStorage.getItem('fund_watchlist') || '[]'); } catch(e) { return []; }
+}
+
+function removeFromWatchlist(code) {
+  if (!confirm('确定要移除 ' + code + ' 吗？')) return;
+  var list = getWatchlist().filter(function(c) { return c !== code; });
+  localStorage.setItem('fund_watchlist', JSON.stringify(list));
+  renderAll();
+}
+
+// ============================
+// 情绪指数
+// ============================
+function getEmotionLevel(score) {
+  if (score >= 70) return { cls: 'overbought', text: '过热', color: '#c0392b' };
+  if (score >= 50) return { cls: 'hot', text: '偏热', color: '#e67e22' };
+  if (score >= 30) return { cls: 'balance', text: '平衡', color: '#7f8c8d' };
+  return { cls: 'oversold', text: '超卖', color: '#e74c3c' };
+}
+
+// ============================
+// 渲染函数
+// ============================
+function renderAll() {
+  var list = getWatchlist();
+  var grid = document.getElementById('watchlist-grid');
+
+  // 统计
+  document.getElementById('stat-total').textContent = list.length;
+  var watchedFunds = [];
+  list.forEach(function(code) {
+    var fund = fundDatabase.find(function(f) { return f.code === code; });
+    if (fund) watchedFunds.push(fund);
+  });
+
+  if (watchedFunds.length === 0) {
+    document.getElementById('stat-avg-1m').textContent = '-';
+    document.getElementById('stat-avg-1y').textContent = '-';
+    document.getElementById('stat-won').textContent = '0';
+    document.getElementById('emotion-score').textContent = '--';
+    document.getElementById('emotion-score').style.color = 'var(--text3)';
+    document.getElementById('emotion-tag').textContent = '暂无数据';
+    document.getElementById('emotion-desc').textContent = '请先通过基金筛选器添加基金到自选';
+    document.getElementById('emotion-bars').innerHTML = '';
+    document.getElementById('flow-list').innerHTML = '';
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">&#9733;</div><h3>自选列表为空</h3><p>前往基金筛选器，点击"加自选"按钮添加感兴趣的基金</p><a href="/fund-screener.html" class="btn btn-primary">前往筛选</a></div>';
+    return;
+  }
+
+  // 平均涨幅
+  var avg1m = watchedFunds.reduce(function(s, f) { return s + f.performance_1m; }, 0) / watchedFunds.length;
+  var avg1y = watchedFunds.reduce(function(s, f) { return s + f.performance_1y; }, 0) / watchedFunds.length;
+  var won = watchedFunds.filter(function(f) { return f.performance_1m > 0; }).length;
+
+  document.getElementById('stat-avg-1m').textContent = (avg1m >= 0 ? '+' : '') + avg1m.toFixed(1) + '%';
+  document.getElementById('stat-avg-1m').style.color = avg1m >= 0 ? 'var(--red)' : 'var(--green)';
+  document.getElementById('stat-avg-1y').textContent = (avg1y >= 0 ? '+' : '') + avg1y.toFixed(1) + '%';
+  document.getElementById('stat-avg-1y').style.color = avg1y >= 0 ? 'var(--red)' : 'var(--green)';
+  document.getElementById('stat-won').textContent = won + '/' + watchedFunds.length;
+
+  // 情绪指数
+  var emotionScore = Math.round(avg1m * 2 + 50);
+  emotionScore = Math.max(0, Math.min(100, emotionScore));
+  var emotion = getEmotionLevel(emotionScore);
+  var scoreEl = document.getElementById('emotion-score');
+  scoreEl.textContent = emotionScore;
+  scoreEl.style.color = emotion.color;
+  var tagEl = document.getElementById('emotion-tag');
+  tagEl.className = 'emotion-level-tag ' + emotion.cls;
+  tagEl.textContent = emotion.text;
+
+  // 情绪分板块
+  var sectors = {};
+  watchedFunds.forEach(function(f) {
+    if (!sectors[f.sector]) sectors[f.sector] = [];
+    sectors[f.sector].push(f);
+  });
+  var barsHtml = '';
+  Object.keys(sectors).forEach(function(sector) {
+    var funds = sectors[sector];
+    var avg = funds.reduce(function(s, f) { return s + f.performance_1y; }, 0) / funds.length;
+    var pct = Math.max(0, Math.min(100, avg / 10 + 50));
+    var col = avg >= 0 ? 'var(--red)' : 'var(--green)';
+    barsHtml += '<div class="emotion-bar-item">' +
+      '<div class="emotion-bar-label">' + sector + '</div>' +
+      '<div class="emotion-bar-track"><div class="emotion-bar-fill" style="width:' + pct + '%;background:' + col + '"></div></div>' +
+      '<div class="emotion-bar-val" style="color:' + col + '">' + (avg >= 0 ? '+' : '') + avg.toFixed(1) + '% (1年)</div>' +
+    '</div>';
+  });
+  document.getElementById('emotion-bars').innerHTML = barsHtml;
+
+  // 资金流向（模拟数据）
+  var flows = [
+    { label: 'AI/科技', val: '+12.5亿', up: true },
+    { label: '半导体', val: '+8.3亿', up: true },
+    { label: '医疗', val: '-5.1亿', up: false },
+    { label: '新能源', val: '-3.2亿', up: false },
+    { label: '综合/成长', val: '+6.8亿', up: true },
+    { label: '电网设备', val: '+4.5亿', up: true }
+  ];
+  var flowHtml = '';
+  flows.forEach(function(fl) {
+    flowHtml += '<div class="flow-item">' +
+      '<span class="fi-label">' + fl.label + '</span>' +
+      '<span class="fi-val ' + (fl.up ? 'up' : 'down') + '">' + fl.val + '</span>' +
+    '</div>';
+  });
+  document.getElementById('flow-list').innerHTML = flowHtml;
+
+  // 自选基金卡片
+  var cardsHtml = '';
+  watchedFunds.forEach(function(f) {
+    var perfCls = function(v) { return v >= 0 ? 'pos' : 'neg'; };
+    var signal = getSignal(f);
+    cardsHtml += '<div class="wl-card">' +
+      '<div class="wl-header">' +
+        '<div><div class="wl-code">' + f.code + '</div><div class="wl-name">' + f.name + '</div><div class="wl-sector">' + f.sector + ' · ' + f.type + '</div></div>' +
+        '<span class="wl-remove" onclick="removeFromWatchlist(\'' + f.code + '\')" title="移除">&times;</span>' +
+      '</div>' +
+      '<div class="wl-perfs">' +
+        '<span class="wl-perf">1月: <span class="' + perfCls(f.performance_1m) + '">' + (f.performance_1m >= 0 ? '+' : '') + f.performance_1m.toFixed(1) + '%</span></span>' +
+        '<span class="wl-perf">3月: <span class="' + perfCls(f.performance_3m) + '">' + (f.performance_3m >= 0 ? '+' : '') + f.performance_3m.toFixed(1) + '%</span></span>' +
+        '<span class="wl-perf">6月: <span class="' + perfCls(f.performance_6m) + '">' + (f.performance_6m >= 0 ? '+' : '') + f.performance_6m.toFixed(1) + '%</span></span>' +
+        '<span class="wl-perf">1年: <span class="' + perfCls(f.performance_1y) + '">' + (f.performance_1y >= 0 ? '+' : '') + f.performance_1y.toFixed(1) + '%</span></span>' +
+      '</div>' +
+      '<div class="wl-signal ' + signal.cls + '">' + signal.text + '</div>' +
+      '<div class="wl-actions">' +
+        '<a href="/fund-screener.html" class="btn btn-outline">筛选同类</a>' +
+      '</div>' +
+    '</div>';
+  });
+  grid.innerHTML = cardsHtml;
+}
+
+function getSignal(f) {
+  var avg = (f.performance_1m + f.performance_3m + f.performance_6m + f.performance_1y) / 4;
+  if (avg >= 15) return { cls: 'strong', text: '强势信号：近期表现强劲，建议继续持有或逢低加仓' };
+  if (avg >= 5) return { cls: 'moderate', text: '中性信号：表现温和，建议持有观望' };
+  return { cls: 'weak', text: '弱势信号：近期表现偏弱，建议注意风险，逢高减仓' };
+}
+
+// ============================
+// 初始化
+// ============================
+document.addEventListener('DOMContentLoaded', renderAll);
+</script>
+</body>
+</html>

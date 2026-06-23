@@ -1,0 +1,64 @@
+{
+  "sectors": [
+    {
+      "code": "ai-tech",
+      "name": "AI/科技",
+      "fund_code": "012733",
+      "status": "半仓",
+      "momentum": 0.75,
+      "rsi": 62,
+      "fund_flow": 2.5,
+      "emotion": 72
+    },
+    {
+      "code": "semiconductor",
+      "name": "半导体",
+      "fund_code": "007300",
+      "status": "半仓",
+      "momentum": 0.68,
+      "rsi": 58,
+      "fund_flow": 1.8,
+      "emotion": 65
+    },
+    {
+      "code": "healthcare",
+      "name": "医疗",
+      "fund_code": "003095",
+      "status": "建仓",
+      "momentum": 0.45,
+      "rsi": 35,
+      "fund_flow": -0.5,
+      "emotion": 38
+    },
+    {
+      "code": "new-energy",
+      "name": "新能源",
+      "fund_code": "001410",
+      "status": "持有",
+      "momentum": 0.55,
+      "rsi": 48,
+      "fund_flow": 0.8,
+      "emotion": 52
+    },
+    {
+      "code": "balanced",
+      "name": "综合/成长",
+      "fund_code": "163406",
+      "status": "定投中",
+      "momentum": 0.6,
+      "rsi": 52,
+      "fund_flow": 1.2,
+      "emotion": 58
+    }
+  ],
+  "rotation_signal": {
+    "current_phase": "AI/科技→半导体",
+    "next_target": "医疗",
+    "recommendation": "关注医疗板块超卖机会"
+  },
+  "_meta": {
+    "version": "1.0",
+    "last_updated": "2026-06-14",
+    "source": "spacenetx.com rotation engine"
+  }
+}

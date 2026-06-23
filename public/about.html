@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - 无缘的人</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1923 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #1a2332 0%, #2a3a4a 100%);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f5a623;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #f5a623;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            color: #f5a623;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            color: #888;
+        }
+
+        .content-block {
+            background: #1e2d3d;
+            border: 1px solid #2a3a4a;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .content-block h2 {
+            color: #f5a623;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .content-block p {
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .content-block ul {
+            margin-left: 20px;
+            color: #b0b0b0;
+        }
+        .content-block ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            background: #0d151f;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #2a3a4a;
+        }
+        .footer p { font-size: 0.82rem; color: #666; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .content-block { padding: 20px; }
+            .page-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://spacenetx.com" class="logo">无缘的人</a>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/fund-screener.html">基金筛选</a></li>
+                <li><a href="/watchlist.html">自选股</a></li>
+                <li><a href="/reports/">周报</a></li>
+                <li><a href="/faq.html">常见问题</a></li>
+                <li><a href="/about.html" class="active">关于我们</a></li>
+                <li><a href="/contact.html">联系方式</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>关于我们</h1>
+            <p>了解「无缘的人」的前世今生</p>
+        </div>
+
+        <div class="content-block">
+            <h2>🎯 网站简介</h2>
+            <p>「无缘的人」是一个 Gulf 人智库是一个专注于A股基金持仓追踪的智能化平台。我们通过AI技术实现全自动运营，为投资者提供实时的持仓动态追踪、板块情绪分析和基金筛选工具。</p>
+            <p>网站名称「无缘的人」取自投资路上那些与机遇擦肩而过的时刻——我们希望通过数据和技术，帮助每一位投资者减少这种遗憾。</p>
+        </div>
+
+        <div class="content-block">
+            <h2>🤖 AI全自动运营</h2>
+            <p>本网站采用AI自动化技术实现内容的持续更新与维护：</p>
+            <ul>
+                <li>每日自动生成基金分析文章</li>
+                <li>实时追踪持仓基金净值变化</li>
+                <li>智能分析板块轮动与情绪指标</li>
+                <li>自动推送投资策略复盘</li>
+            </ul>
+            <p>所有内容均由AI生成并经过人工审核，仅供参考，不构成投资建议。</p>
+        </div>
+
+        <div class="content-block">
+            <h2>📈 核心服务</h2>
+            <p><strong>持仓追踪：</strong>实时追踪A股基金持仓动态，包括净值变化、涨跌幅、仓位管理等。</p>
+            <p><strong>板块情绪：</strong>基于多维度数据计算板块情绪指数，辅助投资决策。</p>
+            <p><strong>基金筛选：</strong>提供多维度基金筛选工具，快速找到适合自己的投资标的。</p>
+            <p><strong>智能分析：</strong>AI驱动的市场分析和投资策略建议。</p>
+        </div>
+
+        <div class="content-block">
+            <h2>👤 运营者信息</h2>
+            <p>本站由一位热爱技术和投资的个人开发者运营维护。我们相信数据的力量，也深知投资需要理性与耐心。</p>
+            <p>如果您对本站有任何建议或合作意向，欢迎通过<a href="/contact.html">联系方式</a>与我们取得联系。</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 无缘的人 &middot; A股基金持仓追踪 &middot; AI全自动运营</p>
+    </div>
+</body>
+</html>

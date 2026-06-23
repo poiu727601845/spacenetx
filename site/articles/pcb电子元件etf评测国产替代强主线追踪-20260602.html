@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PCB/电子元件ETF评测：国产替代强主线追踪 | A股投研工具箱</title>
+  <meta name="description" content="本文评测PCB与电子元件ETF，结合12/16强主线策略，分析国产替代逻辑，给出投资建议。" />
+  <meta name="keywords" content="PCB ETF,电子元件ETF,国产替代,投资策略,159999,512480" />
+  <meta property="og:title" content="PCB/电子元件ETF评测：国产替代强主线追踪" />
+  <meta property="og:description" content="本文评测PCB与电子元件ETF，结合12/16强主线策略，分析国产替代逻辑，给出投资建议。" />
+  <meta property="og:image" content="https://spacenetx.com/favicon-og.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://spacenetx.com/articles/pcb电子元件etf评测国产替代强主线追踪-20260602.html" />
+  <link rel="canonical" href="https://spacenetx.com/articles/pcb电子元件etf评测国产替代强主线追踪-20260602.html" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "PCB/电子元件ETF评测：国产替代强主线追踪",
+    "description": "本文评测PCB与电子元件ETF，结合12/16强主线策略，分析国产替代逻辑，给出投资建议。",
+    "datePublished": "2026-06-02",
+    "author": { "@type": "Person", "name": "无缘的人" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "A股投研工具箱",
+      "url": "https://spacenetx.com"
+    }
+  }
+  </script>
+  <style>
+    :root {
+      --primary: #e11d48;
+      --primary-dark: #be123c;
+      --accent: #f59e0b;
+      --bg: #0d0d10;
+      --bg2: #14141a;
+      --bg3: #1c1c24;
+      --border: #28283a;
+      --text: #e8e8f0;
+      --text2: #8888a8;
+      --radius: 12px;
+      --font: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+      --code-bg: #1a1a24;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
+
+    nav {
+      background: rgba(13,13,16,0.96);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 860px; margin: 0 auto;
+      height: 56px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .back-btn { color: var(--text2); text-decoration: none; font-size: 0.85rem; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
+    .back-btn:hover { border-color: var(--primary); color: var(--text); }
+
+    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 240px; gap: 40px; }
+
+    .article-meta { margin-bottom: 28px; }
+    .meta-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tag {
+      font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; border: 1px solid;
+      color: var(--text2); border-color: var(--border); background: var(--tag-bg, #20202c);
+    }
+    .tag.etf  { color: #fca5a5; border-color: rgba(225,29,72,0.3); background: rgba(225,29,72,0.08); }
+    .tag.hot  { color: #fb923c; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
+    .tag.new  { color: #facc15; border-color: rgba(250,204,21,0.3); background: rgba(250,204,21,0.08); }
+    .tag.ai   { color: #a5b4fc; border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); }
+    .tag.semi { color: #6ee7b7; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
+    .tag.strategy { color: #f9a8d4; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
+    .tag.tech   { color: #7dd3fc; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
+
+    .article-title { font-size: 1.9rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+    .article-info { display: flex; gap: 16px; color: var(--text2); font-size: 0.82rem; align-items: center; flex-wrap: wrap; }
+    .info-item { display: flex; align-items: center; gap: 4px; }
+    .ai-badge {
+      background: rgba(225,29,72,0.1); border: 1px solid rgba(225,29,72,0.25);
+      color: #fca5a5; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;
+    }
+
+    /* AD BANNER - TOP */
+    .ad-top {
+      background: var(--bg2); border: 1px dashed var(--border);
+      border-radius: var(--radius); min-height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text2); font-size: 0.75rem;
+      margin-bottom: 24px;
+    }
+
+    /* ARTICLE CONTENT */
+    .article-content { font-size: 0.97rem; color: var(--text); }
+    .article-content h2 { font-size: 1.3rem; font-weight: 700; margin: 32px 0 14px; padding-left: 12px; border-left: 3px solid var(--primary); }
+    .article-content h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 10px; color: #d4d4e0; }
+    .article-content p { margin-bottom: 16px; line-height: 1.85; }
+    .article-content ul, .article-content ol { margin: 12px 0 16px 20px; }
+    .article-content li { margin-bottom: 8px; line-height: 1.7; }
+    .article-content strong { color: #f0f0f8; }
+    .article-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(225,29,72,0.3); }
+    .article-content a:hover { border-color: var(--primary); }
+    .article-content blockquote {
+      border-left: 3px solid var(--primary); padding: 12px 16px;
+      background: rgba(225,29,72,0.06); border-radius: 0 8px 8px 0;
+      margin: 20px 0; color: var(--text2); font-style: italic;
+    }
+    .article-content code {
+      background: var(--code-bg); color: #fca5a5; padding: 1px 6px;
+      border-radius: 4px; font-size: 0.88em;
+    }
+    .article-content table {
+      width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem;
+    }
+    .article-content th { background: var(--bg3); padding: 10px 14px; text-align: left; border: 1px solid var(--border); color: var(--text); }
+    .article-content td { padding: 9px 14px; border: 1px solid var(--border); color: var(--text2); }
+    .article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    /* SCORE TABLE */
+    .score-table { margin: 20px 0; }
+    .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .score-label { width: 80px; font-size: 0.82rem; color: var(--text2); flex-shrink: 0; }
+    .score-bar-wrap { flex: 1; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
+    .score-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+    .score-num { width: 32px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+
+    /* ARTICLE FOOTER */
+    .article-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+    /* AD INLINE */
+    .ad-inline {
+      background: var(--bg2); border: 1px dashed var(--border);
+      border-radius: var(--radius); min-height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text2); font-size: 0.75rem;
+      margin: 20px 0;
+    }
+
+    /* SUBSCRIPTION BOX - BOTTOM */
+    .subscribe-box {
+      background: linear-gradient(135deg, rgba(225,29,72,0.04), rgba(245,158,11,0.03));
+      border: 1px solid rgba(225,29,72,0.2);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 24px;
+      text-align: center;
+    }
+    .subscribe-box h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 6px; }
+    .subscribe-box p { font-size: 0.85rem; color: var(--text2); margin-bottom: 14px; }
+    .sub-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
+    .sub-input {
+      flex: 1; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 12px; color: var(--text);
+      font-size: 0.85rem; font-family: var(--font); outline: none;
+    }
+    .sub-input:focus { border-color: var(--primary); }
+    .sub-input::placeholder { color: var(--text2); opacity: 0.6; }
+    .sub-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; border: none; border-radius: 8px;
+      padding: 10px 20px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
+    }
+    .sub-btn:hover { opacity: 0.9; }
+    .sub-msg { font-size: 0.75rem; margin-top: 8px; min-height: 18px; }
+    .sub-msg.ok { color: var(--green); }
+    .sub-msg.err { color: var(--red); }
+
+    /* DISCLAIMER */
+    .disclaimer {
+      background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 8px; padding: 10px 12px; margin-top: 16px;
+      font-size: 0.75rem; color: var(--text2); line-height: 1.6;
+    }
+    .disclaimer strong { color: var(--accent); }
+
+    /* TOC */
+    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; position: sticky; top: 72px; }
+    .toc-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-item a { font-size: 0.82rem; color: var(--text2); text-decoration: none; display: block; padding: 3px 8px; border-radius: 4px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.4; }
+    .toc-item a:hover, .toc-item a.active { color: var(--primary); background: rgba(225,29,72,0.08); border-left-color: var(--primary); }
+    .toc-sub { padding-left: 12px; }
+
+    /* RELATED */
+    .related { margin-top: 40px; }
+    .section-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .related-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-decoration: none; transition: all 0.2s; }
+    .related-card:hover { border-color: var(--primary); }
+    .related-card h4 { font-size: 0.88rem; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
+    .related-card span { font-size: 0.75rem; color: var(--text2); }
+
+    @media (max-width: 768px) {
+      .article-wrap { grid-template-columns: 1fr; }
+      .toc { display: none; }
+      .article-title { font-size: 1.4rem; }
+      .related-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon">📈</div>
+      A股投研工具箱
+    </a>
+    <a class="back-btn" href="/">← 返回首页</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <article class="article-main">
+
+    <!-- 顶部广告横幅 -->
+    <div class="ad-top"><span>📢 文章顶部广告 · 上线后替换为 AdSense 代码</span></div>
+
+    <div class="article-meta">
+      <div class="meta-tags" id="article-tags"><span class="tag etf">ETF评测</span><span class="tag strategy">投资策略</span></div>
+      <h1 class="article-title" id="article-title">PCB/电子元件ETF评测：国产替代强主线追踪</h1>
+      <div class="article-info">
+        <span class="info-item">📅 <span id="article-date">2026-06-02</span></span>
+        <span class="info-item">⏱ <span id="read-time">3 分钟</span></span>
+        <span class="ai-badge">🤖 AI 生成</span>
+      </div>
+    </div>
+
+    <div class="article-content" id="article-body">
+      <h2 id="h1">引言：国产替代浪潮下的PCB与电子元件ETF</h2>
+<p>2023年以来，以PCB（印制电路板）和电子元件为代表的被动元件板块，在AI算力基建、5G通信、汽车电子等多重需求驱动下，走出了一轮结构性强行情。尤其是随着国产替代逻辑从芯片设计向中游制造、上游材料渗透，PCB和电子元件作为电子产业链的“底盘”环节，其投资价值日益凸显。</p>
+<p>对于普通投资者而言，直接选股难度较高——PCB企业技术路线分化大、客户结构复杂，电子元件品类繁杂且周期性强。此时，ETF（交易型开放式指数基金）成为低成本、高透明度的跟踪工具。本文以<strong>159999（PCB ETF）</strong>和<strong>512480（电子元件ETF）</strong>为核心标的，结合“12/16强主线策略”框架，评测这两只产品的持仓逻辑、风险收益特征及实操要点。</p>
+<blockquote>注：12/16强主线策略是指将市场主线分为12条行业线（如半导体、电网设备、AI主题）和16条细分主题线（如PCB、电子元件、光模块），通过动量与资金流信号动态调整配置。</blockquote>
+
+<h2 id="h2">一、标的对比：159999与512480的持仓与风格差异</h2>
+<h3>1.1 159999 PCB ETF：聚焦印制电路板产业链</h3>
+<p><strong>159999（PCB ETF）</strong>跟踪的是<strong>PCB产业链指数</strong>，成分股主要覆盖覆铜板、PCB制造、电子化学品等环节。前十大重仓股通常包括深南电路、沪电股份、兴森科技、生益科技等，其中深南电路和沪电股份在AI服务器PCB领域市占率领先。该ETF的行业集中度极高，PCB制造占比超过70%，属于典型的“窄基”主题ETF。</p>
+<h3>1.2 512480 电子元件ETF：覆盖被动元件+PCB+连接器</h3>
+<p><strong>512480（电子元件ETF）</strong>跟踪的是<strong>电子元件指数</strong>，成分股涵盖MLCC（片式多层陶瓷电容器）、电感、电阻、PCB、连接器等品类。代表性个股包括风华高科、三环集团、顺络电子、宏发股份等。与159999相比，512480的持仓更分散，被动元件占比约50%，PCB约20%，其余为连接器、结构件等。这种结构使其受单一子行业周期的影响较小，但弹性也相对较弱。</p>
+<table>
+<tr><th>维度</th><th>159999（PCB ETF）</th><th>512480（电子元件ETF）</th></tr>
+<tr><td>跟踪指数</td><td>PCB产业链指数</td><td>电子元件指数</td></tr>
+<tr><td>核心子行业</td><td>PCB制造、覆铜板</td><td>MLCC、电感、PCB、连接器</td></tr>
+<tr><td>前十大重仓集中度</td><td>约60%~70%</td><td>约45%~55%</td></tr>
+<tr><td>近1年最大回撤</td><td>约25%</td><td>约20%</td></tr>
+<tr><td>适用场景</td><td>进攻性强，适合趋势行情</td><td>防御性略好，适合底仓配置</td></tr>
+</table>
+
+<h2 id="h2">二、国产替代逻辑：从“被动跟随”到“主动突破”</h2>
+<p>国产替代是当前PCB和电子元件板块最核心的长期驱动力。过去，高端PCB（如HDI、封装基板）和高端MLCC主要被日本、韩国、中国台湾企业垄断。但近两年，大陆企业在技术突破和客户认证上取得显著进展：</p>
+<ul>
+<li><strong>PCB领域</strong>：深南电路已切入英伟达AI服务器供应链，沪电股份在高速板领域市占率提升；兴森科技在IC载板（封装基板）实现量产突破。</li>
+<li><strong>电子元件领域</strong>：风华高科、三环集团的MLCC在容值、耐压等参数上逐步接近村田、三星电机水平，且具备成本优势；顺络电子的电感产品进入汽车电子供应链。</li>
+</ul>
+<p>从资金面看，2024年以来，北向资金持续增持PCB和电子元件龙头，机构研报也密集上调相关个股的盈利预测。以159999为例，其成分股中超过60%的标的近一年研发费用率超过5%，远高于电子行业平均水平，这为国产替代提供了持续的“弹药”。</p>
+<blockquote>需要指出的是，国产替代并非线性推进。在高端封装基板、车规级MLCC等领域，国内企业仍处于产能爬坡与良率提升阶段，短期业绩可能受制于折旧和客户导入周期。</blockquote>
+
+<h2 id="h2">三、12/16强主线策略下的配置时机判断</h2>
+<h3>3.1 买入信号的量化参考</h3>
+<p>在12/16强主线策略中，我们通常用以下三个指标辅助判断PCB/电子元件ETF的买入时机：</p>
+<ul>
+<li><strong>动量信号</strong>：当ETF的20日均线向上穿越60日均线（金叉），且连续3个交易日收盘价高于两条均线时，视为趋势启动信号。</li>
+<li><strong>资金流信号</strong>：关注ETF每日的成交额和资金净流入。若连续5个交易日成交额较20日均值放大30%以上，且主力资金（大单）净流入为正，说明机构资金正在介入。</li>
+<li><strong>行业景气度信号</strong>：查阅每月公布的PCB行业景气指数（如Prismark数据）或MLCC出货价格（可从行业网站“芯查查”获取），若连续2个月环比回升，则强化买入逻辑。</li>
+</ul>
+<p>以2024年3月为例，159999在3月5日出现20日/60日均线金叉，且随后3日成交额均高于5亿元（20日均值约3.5亿元），资金流信号共振，触发买入信号。此后该ETF在1个月内涨幅超过15%。</p>
+<h3>3.2 数据获取渠道</h3>
+<ul>
+<li><strong>实时行情与资金流</strong>：东方财富Choice、同花顺、雪球APP等均支持ETF主力资金净流入、大单成交等数据查询。</li>
+<li><strong>行业景气数据</strong>：Prismark（PCB行业季度报告）、中国电子元件行业协会（MLCC月度出货量）、芯查查（电子元器件价格指数）。</li>
+<li><strong>研报跟踪</strong>：关注天风证券、中信证券、招商证券的电子组报告，他们会定期更新PCB和电子元件板块的库存周期与需求预测。</li>
+</ul>
+
+<h2 id="h2">四、风险提示与仓位管理建议</h2>
+<p>任何投资都有风险，ETF也不例外。针对159999和512480，以下风险点需要特别留意：</p>
+<ul>
+<li><strong>周期波动风险</strong>：PCB和电子元件均属于强周期行业，受下游需求（如智能手机、PC、汽车）影响显著。若全球宏观经济走弱，行业可能进入去库存阶段，导致ETF净值大幅回撤。</li>
+<li><strong>国产替代不及预期</strong>：技术突破可能慢于市场预期，尤其是高端产品（如IC载板、车规级MLCC）的良率和认证周期存在不确定性。</li>
+<li><strong>流动性风险</strong>：159999的日均成交额约3~5亿元，512480约1~2亿元，在极端市场环境下可能出现买卖价差扩大或流动性不足问题。</li>
+</ul>
+<p>在仓位管理上，建议将PCB/电子元件ETF作为“进攻型配置”的一部分，单个品种占股票总仓位不超过15%。同时，可与半导体ETF（如007300）或AI主题ETF（如012733）搭配，形成“芯片-PCB-电子元件”的产业链组合，分散单一环节风险。</p>
+
+<h2 id="h2">五、评分总表：五大维度横向评测</h2>
+<p>以下是对159999和512480在五大维度的评分（0-10分，10分为最优）：</p>
+<table>
+<tr><th>维度</th><th>159999（PCB ETF）</th><th>512480（电子元件ETF）</th></tr>
+<tr><td><strong>可读性</strong>（指数编制逻辑是否清晰）</td><td>8</td><td>7</td></tr>
+<tr><td><strong>数据准确性</strong>（净值跟踪误差、成分股透明度）</td><td>9</td><td>8</td></tr>
+<tr><td><strong>功能完整性</strong>（是否支持网格交易、定投、期权等）</td><td>7</td><td>7</td></tr>
+<tr><td><strong>使用门槛</strong>（成交活跃度、买卖价差）</td><td>6</td><td>5</td></tr>
+<tr><td><strong>性价比</strong>（管理费率、交易费率）</td><td>8</td><td>8</td></tr>
+<tr><td><strong>综合评分</strong></td><td>7.6</td><td>7.0</td></tr>
+</table>
+<p>注：两者管理费率均为0.5%/年左右，处于行业中等水平；功能完整性和使用门槛受制于ETF本身的规模和流动性，159999略占优势。</p>
+
+<h2 id="h2">六、操作要点总结</h2>
+<ol>
+<li><strong>选对标的</strong>：追求高弹性、集中押注PCB产业链，首选159999；偏好分散配置、降低单一风险，选512480。</li>
+<li><strong>信号验证</strong>：结合20/60日均线金叉（买入信号）与死叉（卖出信号），辅以成交额放大30%+主力资金净流入确认趋势。</li>
+<li><strong>数据工具</strong>：用东方财富Choice查资金流，用Prismark/芯查查跟踪行业景气，用券商研报验证逻辑。</li>
+<li><strong>仓位纪律</strong>：单只ETF不超过总仓位15%，与007300半导体ETF、012733AI主题ETF形成产业链组合。</li>
+<li><strong>止损策略</strong>：若ETF跌破60日均线且连续3日无法站回，或行业景气数据连续2个月下滑，应减仓至半仓以下。</li>
+</ol>
+
+<p class="disclaimer">本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。</p>
+    </div>
+
+    <!-- 文中广告 -->
+    <div class="ad-inline"><span>📢 文中广告位 · 上线后替换为 AdSense 代码</span></div>
+
+    <div class="article-footer">
+      <a class="source-link" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:0.82rem;padding:6px 12px;border:1px solid var(--border);border-radius:6px;text-decoration:none;">🔗 查看原始来源</a>
+
+      <!-- 免责声明 -->
+    
+  <div class="related-posts" style="margin-top:36px;padding:20px;background:#14141a;border:1px solid #28283a;border-radius:12px;">
+    <h3 style="margin:0 0 12px;font-size:1rem;color:#ff6b6b;">📎 相关推荐</h3>
+    <ul style="margin:0;padding-left:20px;list-style:disc;">
+      <li style="margin:6px 0;"><a href="articles/玻纤板块狂飙89这只etf还能追吗-20260602.html" style="color:#e8e8f0;text-decoration:none;font-size:0.92rem;">玻纤板块狂飙89%！这只ETF还能追吗？</a></li>
+      <li style="margin:6px 0;"><a href="articles/通信设备etf评测四维13分百亿资金涌向何处-20260602.html" style="color:#e8e8f0;text-decoration:none;font-size:0.92rem;">通信设备ETF评测：四维13分，百亿资金涌向何处？</a></li>
+      <li style="margin:6px 0;"><a href="articles/43c428b8-20260602.html" style="color:#e8e8f0;text-decoration:none;font-size:0.92rem;">科创50ETF深度评测：估值与成长性</a></li>
+    </ul>
+  </div>
+    <div class="disclaimer">
+        <strong>⚠️ 免责声明</strong><br>
+        本文内容由 AI 自动生成，仅供学习参考，<strong>不构成投资建议</strong>。投资有风险，决策前请做好独立研究。
+      </div>
+    </div>
+
+    <!-- 关注公众号 -->
+    <div class="subscribe-box">
+      <h3>📬 关注公众号</h3>
+      <p>搜索微信公众号 <strong style="color:var(--text)">「无缘的人」</strong> 关注，每日文章推送到微信。</p>
+      <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;">或添加微信：727601845@qq.com</p>
+    </div>
+
+    <!-- 相关文章 -->
+    <div class="related">
+      <div class="section-title">相关文章</div>
+      <div class="related-grid" id="related-grid"></div>
+    </div>
+  </article>
+
+  <!-- 目录 -->
+  <aside>
+    <div class="toc">
+      <div class="toc-title">文章目录</div>
+      <ul class="toc-list" id="toc-list"></ul>
+    </div>
+  </aside>
+</div>
+
+<script>
+// ─── 目录生成 ────────────────────────────────────────
+function buildTOC() {
+  const headings = document.querySelectorAll('.article-content h2, .article-content h3');
+  const toc = document.getElementById('toc-list');
+  headings.forEach((h, i) => {
+    h.id = 'heading-' + i;
+    const li = document.createElement('li');
+    li.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-sub' : '');
+    li.innerHTML = `<a href="#heading-${i}">${h.textContent}</a>`;
+    toc.appendChild(li);
+  });
+}
+
+function initScrollSpy() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = document.querySelector(`.toc-list a[href="#${id}"]`);
+      if (link) link.classList.toggle('active', entry.isIntersecting);
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('.article-content h2, .article-content h3').forEach(h => observer.observe(h));
+}
+
+buildTOC();
+initScrollSpy();
+
+// ─── 相关文章 ────────────────────────────────────────
+async function loadRelated() {
+  try {
+    const res = await fetch('/data/articles.json');
+    const arts = await res.json();
+    const grid = document.getElementById('related-grid');
+    arts.slice(0, 4).forEach(art => {
+      grid.innerHTML += `<a class="related-card" href="/${art.url}">
+        <h4>${art.title}</h4>
+        <span>${art.date} · ${art.readTime || '5 分钟'}</span>
+      </a>`;
+    });
+  } catch {}
+}
+loadRelated();
+</script>
+</body>
+</html>

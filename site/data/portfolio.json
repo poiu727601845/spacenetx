@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "name": "无缘的人 A股基金持仓",
+    "last_update": "2026-06-13",
+    "description": "本持仓清单由每日复盘动态维护，新增或剔除的基金将同步更新至网站。"
+  },
+  "holdings": [
+    {
+      "code": "012733",
+      "name": "南方东英AI主题ETF",
+      "sector": "AI/科技",
+      "position": "半仓",
+      "cost_ref": "参考PE>80%纪律减仓",
+      "status": "持有"
+    },
+    {
+      "code": "007300",
+      "name": "汇添富半导体ETF",
+      "sector": "半导体",
+      "position": "半仓（2026-06-09减仓50%转配医疗）",
+      "cost_ref": "参考PE>80%纪律减仓",
+      "status": "持有"
+    },
+    {
+      "code": "003095",
+      "name": "中欧医疗健康混合",
+      "sector": "医疗",
+      "position": "建仓（2026-06-09转入）",
+      "cost_ref": "PE<40%可加仓",
+      "status": "持有"
+    },
+    {
+      "code": "001410",
+      "name": "信澳新能源产业",
+      "sector": "新能源",
+      "position": "持有",
+      "cost_ref": "定投中",
+      "status": "持有"
+    },
+    {
+      "code": "163406",
+      "name": "兴全合润混合LOF",
+      "sector": "综合/成长",
+      "position": "定投中",
+      "cost_ref": "定投不止，PE<60%可加额",
+      "status": "持有"
+    }
+  ],
+  "watch_list": [
+    {
+      "code": "资源板块ETF",
+      "name": "有色金属/小金属ETF",
+      "sector": "资源/有色",
+      "status": "观察中，等回调不追涨"
+    }
+  ],
+  "rules": {
+    "PE_discipline": "PE>80%历史分位 → 减仓50%",
+    "add_condition": "PE<40%历史分位 + 主力净流入>3日 + 连续阳线",
+    "stop_loss": "单基金回撤>15% → 检视基本面"
+  }
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 无缘的人</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1923 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #1a2332 0%, #2a3a4a 100%);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f5a623;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #f5a623;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .page-header h1 {
+            font-size: 2rem;
+            color: #f5a623;
+            margin-bottom: 10px;
+        }
+        .page-header p {
+            color: #888;
+        }
+
+        .content-block {
+            background: #1e2d3d;
+            border: 1px solid #2a3a4a;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .content-block h2 {
+            color: #f5a623;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            background: #162029;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f5a623;
+        }
+        .contact-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .contact-info h3 {
+            color: #e0e0e0;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        .contact-info p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .contact-info a {
+            color: #f5a623;
+            text-decoration: none;
+        }
+
+        .feedback-form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #162029;
+            border: 1px solid #2a3a4a;
+            border-radius: 4px;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f5a623;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .btn-submit {
+            background: #f5a623;
+            color: #1a2332;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            background: #0d151f;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #2a3a4a;
+        }
+        .footer p { font-size: 0.82rem; color: #666; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .content-block { padding: 20px; }
+            .contact-card { padding: 15px; }
+            .page-header h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://spacenetx.com" class="logo">无缘的人</a>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/fund-screener.html">基金筛选</a></li>
+                <li><a href="/watchlist.html">自选股</a></li>
+                <li><a href="/reports/">周报</a></li>
+                <li><a href="/faq.html">常见问题</a></li>
+                <li><a href="/about.html">关于我们</a></li>
+                <li><a href="/contact.html" class="active">联系方式</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>联系我们</h1>
+            <p>有任何问题或建议，欢迎随时联系</p>
+        </div>
+
+        <div class="content-block">
+            <h2>📧 联系方式</h2>
+            <div class="contact-card">
+                <div class="contact-icon">📮</div>
+                <div class="contact-info">
+                    <h3>电子邮箱</h3>
+                    <p><a href="mailto:xxx">xxx</a></p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🌐</div>
+                <div class="contact-info">
+                    <h3>网站地址</h3>
+                    <p>spacenetx.com / uam.city</p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">⏰</div>
+                <div class="contact-info">
+                    <h3>响应时间</h3>
+                    <p>通常会在24小时内回复您的邮件</p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🤖</div>
+                <div class="contact-info">
+                    <h3>运营方式</h3>
+                    <p>AI全自动运营 + 人工审核</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h2>💬 反馈建议</h2>
+            <p style="color:#b0b0b0; margin-bottom:25px;">我们非常重视您的意见和建议。如果您在使用网站过程中遇到任何问题，或者有任何功能上的需求，请随时联系我们。</p>
+            <div class="feedback-form">
+                <div class="form-group">
+                    <label for="name">您的称呼（可选）</label>
+                    <input type="text" id="name" placeholder="请输入您的称呼">
+                </div>
+                <div class="form-group">
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" placeholder="请输入您的邮箱，方便我们回复您">
+                </div>
+                <div class="form-group">
+                    <label for="message">留言内容</label>
+                    <textarea id="message" placeholder="请输入您的问题或建议..."></textarea>
+                </div>
+                <button class="btn-submit" type="button" onclick="alert('感谢您的反馈！我们会尽快查看您的留言。')">提交反馈</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 无缘的人 &middot; A股基金持仓追踪 &middot; AI全自动运营</p>
+    </div>
+</body>
+</html>

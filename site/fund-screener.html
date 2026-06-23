@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="A股基金筛选器 - 多维度筛选ETF、混合、股票型基金"/>
+<title>A股投研工具箱 - 基金筛选器</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --primary:#e11d48;--gold:#f5a623;--gold-light:#ffd700;--bg:#1a2332;--bg2:#0f1923;--bg3:#243447;--bg-card:#1e2d3d;
+  --border:#2d4a5e;--border-light:#3a5f7a;--text:#e8edf2;--text2:#8fa4b8;--text3:#5a7189;
+  --radius:14px;--font:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  --red:#e74c3c;--green:#27ae60;--blue:#3498db;--purple:#9b59b6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+/* 导航栏 */
+nav{background:rgba(15,25,35,0.95);backdrop-filter:blur(16px);position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.15rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--gold));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{color:var(--text2);padding:8px 14px;border-radius:8px;transition:all 0.2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg3)}
+
+/* 页面头部 */
+.page-header{background:linear-gradient(180deg,rgba(245,166,35,0.1) 0%,transparent 100%);padding:36px 24px 28px;text-align:center}
+.page-header h1{font-size:1.8rem;font-weight:900;margin-bottom:10px}
+.page-header h1 .grad{background:linear-gradient(135deg,#ffd700,#f5a623,#ff8a65);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-header p{color:var(--text2);font-size:0.95rem}
+
+/* 自选股悬浮栏 */
+.watchlist-bar{background:rgba(15,25,35,0.95);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0;max-width:1200px;margin:0 auto;position:sticky;top:64px;z-index:90}
+.watchlist-bar-inner{display:flex;align-items:center;gap:12px;padding:12px 20px;flex-wrap:wrap}
+.watchlist-bar-title{font-size:0.85rem;font-weight:700;color:var(--gold);white-space:nowrap}
+.watchlist-bar-items{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.watchlist-item{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:0.8rem;transition:all 0.2s}
+.watchlist-item:hover{border-color:var(--gold)}
+.watchlist-item .wi-code{color:var(--text3);font-weight:600}
+.watchlist-item .wi-name{color:var(--text)}
+.watchlist-item .wi-del{cursor:pointer;color:var(--text3);margin-left:4px;font-size:0.9rem;transition:color 0.2s}
+.watchlist-item .wi-del:hover{color:var(--red)}
+.watchlist-empty{color:var(--text3);font-size:0.82rem;font-style:italic}
+.watchlist-clear{font-size:0.78rem;color:var(--text3);cursor:pointer;padding:4px 10px;border:1px solid var(--border);border-radius:6px;transition:all 0.2s;white-space:nowrap}
+.watchlist-clear:hover{color:var(--red);border-color:var(--red)}
+
+/* 筛选器面板 */
+.screener-wrapper{max-width:1200px;margin:0 auto;padding:20px 24px}
+.filter-panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.filter-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.filter-group{display:flex;flex-direction:column;gap:6px}
+.filter-group label{font-size:0.78rem;font-weight:600;color:var(--text3)}
+.filter-group select,.filter-group input{padding:8px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.85rem;min-width:150px;outline:none;transition:border-color 0.2s}
+.filter-group select:focus{border-color:var(--gold)}
+.sort-options{display:flex;gap:8px;align-items:center}
+.sort-btn{padding:6px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:0.8rem;cursor:pointer;transition:all 0.2s;font-weight:500}
+.sort-btn:hover{border-color:var(--border-light)}
+.sort-btn.active{background:rgba(245,166,35,0.15);border-color:var(--gold);color:var(--gold)}
+.filter-actions{display:flex;gap:8px;align-items:flex-end}
+.btn{padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--primary));color:#fff;border:none}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-outline{background:transparent;border-color:var(--border);color:var(--text2)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-sm{padding:4px 10px;font-size:0.75rem;border-radius:6px}
+.btn-watch{background:transparent;border-color:var(--gold);color:var(--gold)}
+.btn-watch:hover,.btn-watch.in-watchlist{background:rgba(245,166,35,0.15)}
+
+/* 结果统计 */
+.result-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.85rem;color:var(--text2)}
+.result-count{color:var(--gold);font-weight:700}
+
+/* 表格 */
+.table-wrapper{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+.fund-table{width:100%;border-collapse:collapse}
+.fund-table thead{background:var(--bg3)}
+.fund-table th{padding:12px 16px;text-align:left;font-size:0.8rem;font-weight:700;color:var(--text2);cursor:pointer;user-select:none;white-space:nowrap;transition:color 0.2s}
+.fund-table th:hover{color:var(--gold)}
+.fund-table th .sort-arrow{margin-left:4px;font-size:0.7rem}
+.fund-table td{padding:12px 16px;border-top:1px solid var(--border);font-size:0.85rem;vertical-align:middle}
+.fund-table tbody tr{transition:background 0.2s}
+.fund-table tbody tr:hover{background:var(--bg3)}
+.fund-code{font-weight:700;color:var(--text3);font-size:0.82rem;cursor:pointer;transition:color 0.2s}
+.fund-code:hover{color:var(--gold)}
+.fund-name{font-weight:600;color:var(--text)}
+.sector-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600}
+.sector-tag.ai{color:#a5b4fc;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25)}
+.sector-tag.semi{color:#6ee7b7;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25)}
+.sector-tag.med{color:#fca5a5;background:rgba(225,29,72,0.1);border:1px solid rgba(225,29,72,0.25)}
+.sector-tag.ne{color:#fde68a;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25)}
+.sector-tag.growth{color:#7dd3fc;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.25)}
+.sector-tag.grid{color:#c9b1ff;background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.25)}
+.type-tag{font-size:0.75rem;padding:2px 8px;border-radius:4px;background:rgba(245,166,35,0.1);color:var(--gold);font-weight:600}
+.perf{font-weight:700}
+.perf.pos{color:var(--red)}
+.perf.neg{color:var(--green)}
+.scale-tag{font-size:0.78rem;color:var(--text2);background:var(--bg);padding:2px 8px;border-radius:4px}
+
+/* 分页 */
+.pagination{display:flex;justify-content:center;gap:6px;margin-top:16px}
+.page-btn{padding:6px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:0.82rem;cursor:pointer;transition:all 0.2s}
+.page-btn:hover{border-color:var(--gold);color:var(--gold)}
+.page-btn.active{background:rgba(245,166,35,0.15);border-color:var(--gold);color:var(--gold);font-weight:700}
+.page-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+/* 弹窗 */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);max-width:600px;width:100%;max-height:80vh;overflow-y:auto;padding:28px;position:relative}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:1.3rem;cursor:pointer;transition:color 0.2s}
+.modal-close:hover{color:var(--red)}
+.modal h2{font-size:1.2rem;font-weight:800;margin-bottom:6px;color:var(--gold)}
+.modal .modal-code{font-size:0.82rem;color:var(--text3);margin-bottom:16px}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.modal-stat{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px}
+.modal-stat-label{font-size:0.75rem;color:var(--text3);margin-bottom:4px}
+.modal-stat-val{font-size:1.1rem;font-weight:700}
+.modal-actions{display:flex;gap:10px}
+
+/* 相似基金推荐 */
+.recommend-section{margin-top:24px}
+.recommend-section h3{font-size:1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.recommend-section h3::after{content:'';flex:1;height:1px;background:var(--border)}
+.recommend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.recommend-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all 0.25s}
+.recommend-card:hover{border-color:var(--border-light);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.recommend-card .rc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.recommend-card .rc-code{font-size:0.78rem;color:var(--text3);font-weight:600}
+.recommend-card .rc-name{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.recommend-card .rc-sector{font-size:0.75rem;color:var(--gold);margin-bottom:10px}
+.recommend-card .rc-perfs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.recommend-card .rc-perf{font-size:0.78rem;color:var(--text2)}
+.recommend-card .rc-perf span{font-weight:700}
+.recommend-card .rc-reason{font-size:0.78rem;color:var(--text3);padding:8px 10px;background:rgba(245,166,35,0.05);border:1px solid rgba(245,166,35,0.1);border-radius:6px;line-height:1.5}
+.recommend-card .rc-actions{margin-top:12px;display:flex;gap:8px}
+
+/* 页脚 */
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 24px;margin-top:40px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer p{color:var(--text3);font-size:0.85rem}
+.footer a{color:var(--gold);text-decoration:none}
+.footer-nav{display:flex;gap:16px;flex-wrap:wrap}
+.footer-nav a{color:var(--text2);padding:8px 16px;border-radius:8px;border:1px solid var(--border);transition:all 0.2s}
+.footer-nav a:hover{border-color:var(--gold);color:var(--text);background:var(--bg3)}
+
+/* 响应式 */
+@media(max-width:768px){
+  .filter-row{flex-direction:column}
+  .filter-group select{min-width:100%}
+  .fund-table{font-size:0.8rem}
+  .fund-table th,.fund-table td{padding:8px 10px}
+  .modal{padding:20px;margin:12px}
+  .modal-stats{grid-template-columns:1fr}
+  .recommend-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .footer-inner{flex-direction:column;text-align:center}
+  .watchlist-bar-inner{padding:10px 14px}
+}
+@media(max-width:480px){
+  .page-header h1{font-size:1.4rem}
+  .filter-panel{padding:14px}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-inner">
+  <a href="/" class="logo"><div class="logo-icon">AI</div>A股投研工具箱</a>
+  <ul class="nav-links">
+    <li><a href="/">首页</a></li>
+    <li><a href="/fund-screener.html" class="active">基金筛选器</a></li>
+    <li><a href="/watchlist.html">自选股</a></li>
+    <li><a href="/reports/weekly_report_w24_2026-06-14.html">周报</a></li>
+  </ul>
+</div>
+</nav>
+
+<div class="page-header">
+  <h1><span class="grad">基金多维筛选器</span></h1>
+  <p>按行业、类型、业绩多维度筛选基金，一键加入自选</p>
+</div>
+
+<!-- 自选股悬浮栏 -->
+<div class="watchlist-bar" id="watchlist-bar" style="display:none">
+  <div class="watchlist-bar-inner">
+    <span class="watchlist-bar-title">⭐ 我的自选</span>
+    <div class="watchlist-bar-items" id="watchlist-bar-items"></div>
+    <span class="watchlist-clear" id="clear-all-btn" onclick="clearAllWatchlist()">清空全部</span>
+  </div>
+</div>
+
+<div class="screener-wrapper">
+  <!-- 筛选面板 -->
+  <div class="filter-panel">
+    <div class="filter-row">
+      <div class="filter-group">
+        <label>行业分类</label>
+        <select id="filter-sector">
+          <option value="">全部行业</option>
+          <option value="AI/科技">AI/科技</option>
+          <option value="半导体">半导体</option>
+          <option value="医疗">医疗</option>
+          <option value="新能源">新能源</option>
+          <option value="综合/成长">综合/成长</option>
+          <option value="电网设备">电网设备</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>基金类型</label>
+        <select id="filter-type">
+          <option value="">全部类型</option>
+          <option value="ETF">ETF</option>
+          <option value="混合">混合</option>
+          <option value="股票">股票型</option>
+          <option value="指数">指数型</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>基金规模</label>
+        <select id="filter-scale">
+          <option value="">全部规模</option>
+          <option value="50亿以上">50亿以上</option>
+          <option value="10亿-50亿">10亿-50亿</option>
+          <option value="10亿以下">10亿以下</option>
+        </select>
+      </div>
+      <div class="filter-group" style="flex:1">
+        <label>业绩排序</label>
+        <div class="sort-options">
+          <button class="sort-btn active" data-sort="" onclick="setSort(this)">综合</button>
+          <button class="sort-btn" data-sort="performance_1m" onclick="setSort(this)">近1月</button>
+          <button class="sort-btn" data-sort="performance_3m" onclick="setSort(this)">近3月</button>
+          <button class="sort-btn" data-sort="performance_6m" onclick="setSort(this)">近6月</button>
+          <button class="sort-btn" data-sort="performance_1y" onclick="setSort(this)">近1年</button>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="btn btn-outline" onclick="resetFilters()">重置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 结果统计 -->
+  <div class="result-bar">
+    <span>筛选结果：<span class="result-count" id="result-count">0</span> 只基金</span>
+    <span>每页 <select id="page-size" onchange="changePageSize()" style="padding:4px 8px;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:0.82rem">
+      <option value="10">10</option><option value="20">20</option><option value="50">50</option>
+    </select> 条</span>
+  </div>
+
+  <!-- 基金表格 -->
+  <div class="table-wrapper">
+    <table class="fund-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable('code')">基金代码 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('name')">基金名称 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('sector')">行业 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('type')">类型</th>
+          <th onclick="sortTable('performance_1m')">近1月 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('performance_3m')">近3月 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('performance_6m')">近6月 <span class="sort-arrow">⇅</span></th>
+          <th onclick="sortTable('performance_1y')">近1年 <span class="sort-arrow">⇅</span></th>
+          <th>规模</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="fund-table-body"></tbody>
+    </table>
+  </div>
+
+  <!-- 分页 -->
+  <div class="pagination" id="pagination"></div>
+
+  <!-- 相似基金推荐 -->
+  <div class="recommend-section" id="recommend-section" style="display:none">
+    <h3>推荐基金 <span style="font-size:0.8rem;color:var(--text3);font-weight:400">（同类型、未加入自选）</span></h3>
+    <div class="recommend-grid" id="recommend-grid"></div>
+  </div>
+</div>
+
+<!-- 基金详情弹窗 -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2 id="modal-name"></h2>
+    <div class="modal-code" id="modal-code"></div>
+    <div class="modal-stats" id="modal-stats"></div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm" id="modal-watch-btn" onclick="toggleWatchlistFromModal()">加入自选</button>
+      <button class="btn btn-outline btn-sm" onclick="closeModal()">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div><p>2026 <a href="https://spacenetx.com">A股投研工具箱 spacenetx.com</a></p><p>AI Agent 自动运营 每日更新</p></div>
+    <div class="footer-nav">
+      <a href="/">首页</a>
+      <a href="/fund-screener.html">基金筛选器</a>
+      <a href="/watchlist.html">自选股</a>
+      <a href="/reports/weekly_report_w24_2026-06-14.html">周报</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ============================
+// 基金数据库
+// ============================
+var fundDatabase = [
+  { code:"012733", name:"南方东英AI主题ETF", sector:"AI/科技", type:"ETF", performance_1m:5.2, performance_3m:12.8, performance_6m:25.6, performance_1y:48.2, scale:"10亿-50亿" },
+  { code:"007300", name:"汇添富半导体ETF", sector:"半导体", type:"ETF", performance_1m:3.8, performance_3m:15.2, performance_6m:28.5, performance_1y:42.1, scale:"50亿以上" },
+  { code:"003095", name:"中欧医疗健康混合", sector:"医疗", type:"混合", performance_1m:-2.1, performance_3m:5.8, performance_6m:12.5, performance_1y:18.6, scale:"50亿以上" },
+  { code:"001410", name:"信澳新能源产业", sector:"新能源", type:"股票", performance_1m:1.5, performance_3m:8.2, performance_6m:15.8, performance_1y:22.5, scale:"10亿-50亿" },
+  { code:"163406", name:"兴全合润混合LOF", sector:"综合/成长", type:"混合", performance_1m:2.8, performance_3m:10.5, performance_6m:20.2, performance_1y:35.8, scale:"50亿以上" },
+  { code:"006771", name:"华夏半导体ETF", sector:"半导体", type:"ETF", performance_1m:3.5, performance_3m:14.2, performance_6m:26.8, performance_1y:38.5, scale:"50亿以上" },
+  { code:"005936", name:"工银医疗健康混合", sector:"医疗", type:"混合", performance_1m:-1.8, performance_3m:6.2, performance_6m:11.8, performance_1y:16.5, scale:"10亿-50亿" },
+  { code:"002190", name:"易方达新能源汽车", sector:"新能源", type:"混合", performance_1m:2.2, performance_3m:9.5, performance_6m:18.2, performance_1y:25.8, scale:"50亿以上" },
+  { code:"013833", name:"广发人工智能主题", sector:"AI/科技", type:"混合", performance_1m:4.8, performance_3m:11.5, performance_6m:22.8, performance_1y:45.2, scale:"10亿-50亿" },
+  { code:"001956", name:"景顺长城沪港深成长", sector:"综合/成长", type:"混合", performance_1m:3.2, performance_3m:12.8, performance_6m:24.5, performance_1y:38.2, scale:"10亿-50亿" },
+  { code:"515980", name:"鹏华中证电网ETF", sector:"电网设备", type:"ETF", performance_1m:2.5, performance_3m:9.8, performance_6m:18.5, performance_1y:28.6, scale:"50亿以上" },
+  { code:"011809", name:"易方达创业板ETF", sector:"综合/成长", type:"ETF", performance_1m:4.1, performance_3m:11.2, performance_6m:22.0, performance_1y:32.5, scale:"50亿以上" },
+  { code:"007697", name:"万家北智新产业", sector:"AI/科技", type:"混合", performance_1m:6.5, performance_3m:14.5, performance_6m:28.2, performance_1y:52.8, scale:"10亿-50亿" },
+  { code:"006786", name:"前海开源半导体主题", sector:"半导体", type:"混合", performance_1m:4.2, performance_3m:13.8, performance_6m:27.5, performance_1y:40.2, scale:"10亿-50亿" },
+  { code:"012221", name:"华泰柏瑞中证电网", sector:"电网设备", type:"ETF", performance_1m:3.0, performance_3m:10.5, performance_6m:19.8, performance_1y:30.2, scale:"10亿-50亿" },
+  { code:"001618", name:"农银新能源主题", sector:"新能源", type:"股票", performance_1m:1.8, performance_3m:7.5, performance_6m:14.2, performance_1y:20.8, scale:"50亿以上" },
+  { code:"010679", name:"中欧医疗健康C", sector:"医疗", type:"混合", performance_1m:-1.5, performance_3m:6.5, performance_6m:13.2, performance_1y:19.5, scale:"50亿以上" },
+  { code:"013400", name:"富国人工智能混合", sector:"AI/科技", type:"混合", performance_1m:5.5, performance_3m:13.2, performance_6m:26.5, performance_1y:47.8, scale:"10亿-50亿" }
+];
+
+// ============================
+// 全局状态
+// ============================
+var currentSort = '';
+var currentDirection = 1;
+var currentPage = 1;
+var pageSize = 10;
+var filteredFunds = [];
+var currentModalFund = null;
+
+// ============================
+// 筛选与排序
+// ============================
+function applyFilters() {
+  var sector = document.getElementById('filter-sector').value;
+  var type = document.getElementById('filter-type').value;
+  var scale = document.getElementById('filter-scale').value;
+
+  filteredFunds = fundDatabase.filter(function(f) {
+    if (sector && f.sector !== sector) return false;
+    if (type && f.type !== type) return false;
+    if (scale && f.scale !== scale) return false;
+    return true;
+  });
+
+  // 按选定字段排序
+  if (currentSort) {
+    filteredFunds.sort(function(a, b) {
+      return (a[currentSort] - b[currentSort]) * currentDirection;
+    });
+  }
+
+  currentPage = 1;
+  renderTable();
+  renderRecommendations();
+  updateCount();
+}
+
+function setSort(btn) {
+  document.querySelectorAll('.sort-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var sortField = btn.getAttribute('data-sort');
+  if (sortField && sortField !== currentSort) {
+    currentDirection = 1;
+  } else if (sortField === currentSort) {
+    currentDirection *= -1;
+  }
+  currentSort = sortField;
+  applyFilters();
+}
+
+function sortTable(field) {
+  if (field === currentSort) {
+    currentDirection *= -1;
+  } else {
+    currentSort = field;
+    currentDirection = 1;
+  }
+  // 清除按钮激活状态
+  document.querySelectorAll('.sort-btn').forEach(function(b) {
+    b.classList.remove('active');
+    if (b.getAttribute('data-sort') === currentSort) b.classList.add('active');
+  });
+  applyFilters();
+}
+
+function resetFilters() {
+  document.getElementById('filter-sector').value = '';
+  document.getElementById('filter-type').value = '';
+  document.getElementById('filter-scale').value = '';
+  currentSort = '';
+  currentDirection = 1;
+  document.querySelectorAll('.sort-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('.sort-btn[data-sort=""]').classList.add('active');
+  applyFilters();
+}
+
+function updateCount() {
+  document.getElementById('result-count').textContent = filteredFunds.length;
+}
+
+// ============================
+// 表格渲染
+// ============================
+function renderTable() {
+  var tbody = document.getElementById('fund-table-body');
+  var start = (currentPage - 1) * pageSize;
+  var end = start + pageSize;
+  var pageData = filteredFunds.slice(start, end);
+
+  tbody.innerHTML = pageData.map(function(f, i) {
+    var isWatched = isInWatchlist(f.code);
+    var sectorCls = getSectorClass(f.sector);
+    var perfCls = function(v) { return v >= 0 ? 'pos' : 'neg'; };
+    return '<tr>' +
+      '<td><span class="fund-code" onclick="showDetail(' + start + ')">' + f.code + '</span></td>' +
+      '<td><span class="fund-name">' + f.name + '</span></td>' +
+      '<td><span class="sector-tag ' + sectorCls + '">' + f.sector + '</span></td>' +
+      '<td><span class="type-tag">' + f.type + '</span></td>' +
+      '<td class="perf ' + perfCls(f.performance_1m) + '">' + (f.performance_1m >= 0 ? '+' : '') + f.performance_1m.toFixed(1) + '%</td>' +
+      '<td class="perf ' + perfCls(f.performance_3m) + '">' + (f.performance_3m >= 0 ? '+' : '') + f.performance_3m.toFixed(1) + '%</td>' +
+      '<td class="perf ' + perfCls(f.performance_6m) + '">' + (f.performance_6m >= 0 ? '+' : '') + f.performance_6m.toFixed(1) + '%</td>' +
+      '<td class="perf ' + perfCls(f.performance_1y) + '">' + (f.performance_1y >= 0 ? '+' : '') + f.performance_1y.toFixed(1) + '%</td>' +
+      '<td><span class="scale-tag">' + f.scale + '</span></td>' +
+      '<td>' +
+        '<button class="btn btn-sm ' + (isWatched ? 'btn-watch in-watchlist' : 'btn-watch') + '" onclick="toggleWatchlist(\'' + f.code + '\')">' + (isWatched ? '已加' : '加自选') + '</button> ' +
+        '<button class="btn btn-sm btn-outline" onclick="showDetail(' + start + ' + ' + i + ')">详情</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  renderPagination();
+}
+
+function getSectorClass(sector) {
+  if (sector.indexOf('AI') !== -1 || sector.indexOf('科技') !== -1) return 'ai';
+  if (sector === '半导体') return 'semi';
+  if (sector === '医疗') return 'med';
+  if (sector === '新能源') return 'ne';
+  if (sector === '综合/成长') return 'growth';
+  if (sector === '电网设备') return 'grid';
+  return '';
+}
+
+// ============================
+// 分页
+// ============================
+function renderPagination() {
+  var totalPages = Math.ceil(filteredFunds.length / pageSize);
+  var container = document.getElementById('pagination');
+  if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+  var html = '<button class="page-btn" ' + (currentPage <= 1 ? 'disabled' : '') + ' onclick="goPage(' + (currentPage - 1) + ')">上一页</button>';
+  for (var i = 1; i <= totalPages; i++) {
+    if (totalPages > 7 && i > 2 && i < totalPages - 1 && Math.abs(i - currentPage) > 1) {
+      if (i === 3 || i === totalPages - 2) html += '<span style="padding:6px 4px;color:var(--text3)">...</span>';
+      continue;
+    }
+    html += '<button class="page-btn ' + (i === currentPage ? 'active' : '') + '" onclick="goPage(' + i + ')">' + i + '</button>';
+  }
+  html += '<button class="page-btn" ' + (currentPage >= totalPages ? 'disabled' : '') + ' onclick="goPage(' + (currentPage + 1) + ')">下一页</button>';
+  container.innerHTML = html;
+}
+
+function goPage(p) {
+  currentPage = p;
+  renderTable();
+  window.scrollTo({ top: 300, behavior: 'smooth' });
+}
+
+function changePageSize() {
+  pageSize = parseInt(document.getElementById('page-size').value);
+  currentPage = 1;
+  renderTable();
+}
+
+// ============================
+// 基金详情弹窗
+// ============================
+function showDetail(index) {
+  var fund = filteredFunds[index];
+  if (!fund) return;
+  currentModalFund = fund;
+
+  document.getElementById('modal-name').textContent = fund.name;
+  document.getElementById('modal-code').textContent = '代码：' + fund.code + ' | ' + fund.sector + ' | ' + fund.type;
+  var perfCls = function(v) { return v >= 0 ? 'pos' : 'neg'; };
+  document.getElementById('modal-stats').innerHTML =
+    '<div class="modal-stat"><div class="modal-stat-label">近1月收益率</div><div class="modal-stat-val ' + perfCls(fund.performance_1m) + '">' + (fund.performance_1m >= 0 ? '+' : '') + fund.performance_1m.toFixed(1) + '%</div></div>' +
+    '<div class="modal-stat"><div class="modal-stat-label">近3月收益率</div><div class="modal-stat-val ' + perfCls(fund.performance_3m) + '">' + (fund.performance_3m >= 0 ? '+' : '') + fund.performance_3m.toFixed(1) + '%</div></div>' +
+    '<div class="modal-stat"><div class="modal-stat-label">近6月收益率</div><div class="modal-stat-val ' + perfCls(fund.performance_6m) + '">' + (fund.performance_6m >= 0 ? '+' : '') + fund.performance_6m.toFixed(1) + '%</div></div>' +
+    '<div class="modal-stat"><div class="modal-stat-label">近1年收益率</div><div class="modal-stat-val ' + perfCls(fund.performance_1y) + '">' + (fund.performance_1y >= 0 ? '+' : '') + fund.performance_1y.toFixed(1) + '%</div></div>' +
+    '<div class="modal-stat"><div class="modal-stat-label">基金规模</div><div class="modal-stat-val" style="color:var(--gold)">' + fund.scale + '</div></div>' +
+    '<div class="modal-stat"><div class="modal-stat-label">基金类型</div><div class="modal-stat-val">' + fund.type + '</div></div>';
+
+  var btn = document.getElementById('modal-watch-btn');
+  if (isInWatchlist(fund.code)) {
+    btn.textContent = '已加入自选';
+    btn.classList.add('in-watchlist');
+  } else {
+    btn.textContent = '加入自选';
+    btn.classList.remove('in-watchlist');
+  }
+
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('show');
+  currentModalFund = null;
+}
+
+function toggleWatchlistFromModal() {
+  if (!currentModalFund) return;
+  toggleWatchlist(currentModalFund.code);
+  var btn = document.getElementById('modal-watch-btn');
+  if (isInWatchlist(currentModalFund.code)) {
+    btn.textContent = '已加入自选';
+    btn.classList.add('in-watchlist');
+  } else {
+    btn.textContent = '加入自选';
+    btn.classList.remove('in-watchlist');
+  }
+  updateWatchlistBar();
+  renderTable();
+  renderRecommendations();
+}
+
+// ============================
+// 自选股管理 (localStorage)
+// ============================
+function getWatchlist() {
+  try { return JSON.parse(localStorage.getItem('fund_watchlist') || '[]'); } catch(e) { return []; }
+}
+
+function setWatchlist(list) {
+  localStorage.setItem('fund_watchlist', JSON.stringify(list));
+}
+
+function isInWatchlist(code) {
+  return getWatchlist().indexOf(code) !== -1;
+}
+
+function toggleWatchlist(code) {
+  var list = getWatchlist();
+  var idx = list.indexOf(code);
+  if (idx !== -1) {
+    list.splice(idx, 1);
+  } else {
+    list.push(code);
+  }
+  setWatchlist(list);
+}
+
+function removeFromWatchlist(code) {
+  var list = getWatchlist().filter(function(c) { return c !== code; });
+  setWatchlist(list);
+  updateWatchlistBar();
+  renderTable();
+  renderRecommendations();
+}
+
+function clearAllWatchlist() {
+  if (confirm('确定要清空全部自选基金吗？')) {
+    setWatchlist([]);
+    updateWatchlistBar();
+    renderTable();
+    renderRecommendations();
+  }
+}
+
+// ============================
+// 自选股悬浮栏渲染
+// ============================
+function updateWatchlistBar() {
+  var bar = document.getElementById('watchlist-bar');
+  var items = document.getElementById('watchlist-bar-items');
+  var list = getWatchlist();
+
+  if (list.length === 0) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  bar.style.display = 'block';
+  items.innerHTML = list.map(function(code) {
+    var fund = fundDatabase.find(function(f) { return f.code === code; });
+    if (!fund) return '';
+    return '<div class="watchlist-item">' +
+      '<span class="wi-code">' + fund.code + '</span>' +
+      '<span class="wi-name">' + fund.name.substring(0, 8) + '</span>' +
+      '<span class="wi-del" onclick="removeFromWatchlist(\'' + code + '\')" title="移除">&times;</span>' +
+    '</div>';
+  }).join('');
+}
+
+// ============================
+// 相似基金推荐
+// ============================
+function renderRecommendations() {
+  var list = getWatchlist();
+  if (list.length === 0) {
+    document.getElementById('recommend-section').style.display = 'none';
+    return;
+  }
+
+  var watchedSet = {};
+  list.forEach(function(c) { watchedSet[c] = true; });
+  var watchedFunds = list.map(function(c) { return fundDatabase.find(function(f) { return f.code === c; }); }).filter(Boolean);
+
+  var recommendations = [];
+  fundDatabase.forEach(function(f) {
+    if (watchedSet[f.code]) return;
+    var reasons = [];
+    watchedFunds.forEach(function(w) {
+      if (f.sector === w.sector && f.type === w.type) {
+        reasons.push('与持仓[' + w.name + ']同 sector + type');
+      } else if (f.sector === w.sector) {
+        reasons.push('与持仓[' + w.name + ']同行业');
+      } else if (f.type === w.type) {
+        reasons.push('与持仓[' + w.name + ']同基金类型');
+      }
+    });
+    if (reasons.length > 0) {
+      recommendations.push({ fund: f, reasons: reasons });
+    }
+  });
+
+  // 按推荐理由数量排序
+  recommendations.sort(function(a, b) { return b.reasons.length - a.reasons.length; });
+  recommendations = recommendations.slice(0, 6);
+
+  if (recommendations.length === 0) {
+    document.getElementById('recommend-section').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('recommend-section').style.display = 'block';
+  document.getElementById('recommend-grid').innerHTML = recommendations.map(function(r) {
+    var perfCls = function(v) { return v >= 0 ? 'pos' : 'neg'; };
+    return '<div class="recommend-card">' +
+      '<div class="rc-header"><span class="rc-code">' + r.fund.code + '</span><span class="type-tag">' + r.fund.type + '</span></div>' +
+      '<div class="rc-name">' + r.fund.name + '</div>' +
+      '<div class="rc-sector">' + r.fund.sector + '</div>' +
+      '<div class="rc-perfs">' +
+        '<span class="rc-perf">1月: <span class="' + perfCls(r.fund.performance_1m) + '">' + (r.fund.performance_1m >= 0 ? '+' : '') + r.fund.performance_1m.toFixed(1) + '%</span></span>' +
+        '<span class="rc-perf">1年: <span class="' + perfCls(r.fund.performance_1y) + '">' + (r.fund.performance_1y >= 0 ? '+' : '') + r.fund.performance_1y.toFixed(1) + '%</span></span>' +
+      '</div>' +
+      '<div class="rc-reason">' + r.reasons.slice(0, 2).join('<br>') + '</div>' +
+      '<div class="rc-actions">' +
+        '<button class="btn btn-sm btn-watch" onclick="toggleWatchlist(\'' + r.fund.code + '\'); updateWatchlistBar(); renderRecommendations();">' +
+        (isInWatchlist(r.fund.code) ? '已加入' : '加入自选') +
+        '</button></div></div>';
+  }).join('');
+}
+
+// ============================
+// 初始化
+// ============================
+document.addEventListener('DOMContentLoaded', function() {
+  applyFilters();
+  updateWatchlistBar();
+
+  // 绑定筛选事件
+  document.getElementById('filter-sector').addEventListener('change', applyFilters);
+  document.getElementById('filter-type').addEventListener('change', applyFilters);
+  document.getElementById('filter-scale').addEventListener('change', applyFilters);
+
+  // ESC 关闭弹窗
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+</script>
+</body>
+</html>

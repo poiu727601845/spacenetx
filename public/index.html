@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股基金持仓追踪 - AI全自动运营</title>
+    <meta name="description" content="A股基金持仓追踪，AI全自动运营，实时数据持仓动态，板块轮动分析。">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        :root {
+            --bg: #0d1117; --bg-card: #161b22; --bg-inner: #1c2128;
+            --border: #30363d; --text: #e6edf3; --muted: #8b949e;
+            --red: #f85149; --orange: #d29922; --green: #3fb950; --blue: #58a6ff;
+            --yellow: #e3b341; --radius: 8px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            min-height: 100vh; line-height: 1.5;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(180deg, #161b22 0%, var(--bg) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 24px 16px;
+            text-align: center;
+        }
+        .header-title {
+            font-size: 1.35rem; font-weight: 700; color: var(--text);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .header-subtitle {
+            font-size: 0.82rem; color: var(--muted); margin-top: 4px;
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-bar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden; height: 34px;
+            display: flex; align-items: center;
+        }
+        .marquee-track {
+            display: flex; animation: marquee-scroll 30s linear infinite;
+            white-space: nowrap; gap: 32px; padding-left: 50%;
+        }
+        .marquee-item {
+            font-size: 0.8rem; color: var(--muted); display: inline-flex; align-items: center; gap: 6px;
+        }
+        .marquee-item .up { color: var(--red); font-weight: 600; }
+        .marquee-item .down { color: var(--green); font-weight: 600; }
+        @keyframes marquee_scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main {
+            max-width: 1200px; margin: 0 auto; padding: 18px 20px;
+        }
+
+        /* ===== STATS PANEL ===== */
+        .stats-panel {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 16px 20px;
+            margin-bottom: 18px;
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+        }
+        @media (max-width: 800px) { .stats-panel { grid-template-columns: repeat(3, 1fr); } }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.76rem; color: var(--muted); margin-bottom: 4px; }
+        .stat-value { font-size: 1.15rem; font-weight: 700; color: var(--orange); }
+        .stat-value.red { color: var(--red); }
+        .stat-value.green { color: var(--green); }
+
+        /* ===== CARD COMMON ===== */
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
+        }
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .card-title {
+            font-size: 0.92rem; font-weight: 700; color: var(--text);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .card-badge {
+            font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
+            background: rgba(88,166,255,0.12); color: var(--blue);
+        }
+        .card-badge.orange { background: rgba(210,153,34,0.15); color: var(--orange); }
+
+        /* ===== MARKET OVERVIEW - 6 INDEX GRID ===== */
+        .index-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;
+        }
+        @media (max-width: 900px) { .index-grid { grid-template-columns: repeat(3, 1fr); } }
+        .idx-card {
+            background: var(--bg-inner); border-radius: 6px;
+            padding: 12px 8px; text-align: center;
+            border-top: 2px solid var(--orange);
+        }
+        .idx-name { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
+        .idx-val { font-size: 1.05rem; font-weight: 700; }
+        .idx-chg { font-size: 0.78rem; margin-top: 2px; }
+        .idx-chg.up { color: var(--red); }
+        .idx-chg.down { color: var(--green); }
+        .idx-loading { color: var(--muted); font-size: 0.78rem; }
+
+        /* ===== TWO COLUMN LAYOUT ===== */
+        .two-col {
+            display: grid; grid-template-columns: 1fr 320px; gap: 16px;
+        }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* ===== AI DIGEST CARD ===== */
+        .digest-loading {
+            display: flex; align-items: center; gap: 8px;
+            padding: 14px; background: rgba(88,166,255,0.06); border-radius: 6px;
+            border-left: 3px solid var(--blue);
+        }
+        .digest-tag {
+            display: inline-block; padding: 2px 10px; border-radius: 4px;
+            font-size: 0.72rem; font-weight: 600; background: var(--blue); color: #fff;
+        }
+
+        /* ===== WATCHLIST STOCKS ===== */
+        .watchlist-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+        .watchlist-table tr { border-bottom: 1px solid rgba(48,54,61,0.5); }
+        .watchlist-table tr:last-child { border-bottom: none; }
+        .watchlist-table td { padding: 9px 4px; }
+        .stock-name { font-weight: 500; }
+        .stock-code { font-size: 0.74rem; color: var(--muted); text-align: right; }
+        .stock-val { text-align: right; font-weight: 600; min-width: 50px; }
+
+        /* ===== ARTICLE LIST - ORIGINAL STYLE ===== */
+        .article-list { list-style: none; }
+        .article-card {
+            display: flex; align-items: center; gap: 14px;
+            padding: 13px 14px; margin-bottom: 10px;
+            background: var(--bg-inner); border-radius: var(--radius);
+            cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
+            text-decoration: none; color: inherit;
+        }
+        .article-card:hover {
+            border-color: var(--border); background: rgba(88,166,255,0.04);
+            transform: translateX(2px);
+        }
+        .article-icon {
+            width: 36px; height: 44px; flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(88,166,255,0.05));
+            border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; color: var(--muted);
+        }
+        .article-body { flex: 1; min-width: 0; }
+        .article-title {
+            font-size: 0.88rem; font-weight: 600; line-height: 1.4;
+            color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .article-meta {
+            display: flex; align-items: center; gap: 10px; margin-top: 4px;
+            font-size: 0.76rem; color: var(--muted);
+        }
+        .article-tag {
+            display: inline-block; padding: 1px 8px; border-radius: 4px;
+            font-size: 0.7rem; font-weight: 500;
+            background: rgba(210,153,34,0.15); color: var(--orange);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center; padding: 28px 20px;
+            border-top: 1px solid var(--border); color: var(--muted);
+            font-size: 0.82rem; margin-top: 20px;
+        }
+        .footer a { color: var(--blue); text-decoration: none; }
+
+        .loading-text { color: var(--muted); font-size: 0.84rem; padding: 16px; text-align: center; }
+        .error-text { color: var(--red); font-size: 0.84rem; padding: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <div class="header-title">📄 A股基金持仓追踪</div>
+    <div class="header-subtitle">AI全自动运营 · 实时数据持仓动态 · 板块轮动分析</div>
+</div>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee-bar" id="marquee-bar">
+    <div class="marquee-track" id="marquee-track">
+        <span class="marquee-item">正在加载市场数据...</span>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
+
+    <!-- STATS PANEL -->
+    <div class="stats-panel" id="stats-panel">
+        <div class="stat-item"><div class="stat-label">持仓基金</div><div class="stat-value">80只</div></div>
+        <div class="stat-item"><div class="stat-label">今日新增</div><div class="stat-value red">68</div></div>
+        <div class="stat-item"><div class="stat-label">资金流向</div><div class="stat-value green">+2.3亿</div></div>
+        <div class="stat-item"><div class="stat-label">持仓收益</div><div class="stat-value green">+5.2%</div></div>
+        <div class="stat-item"><div class="stat-label">板块信号</div><div class="stat-value" style="color:#58a6ff;font-size:1rem;">AI→半导体</div></div>
+    </div>
+
+    <!-- MARKET OVERVIEW -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">📊 今日市场概览</div>
+        </div>
+        <div class="index-grid" id="index-grid">
+            <div class="idx-card"><div class="idx-name">上证指数</div><div class="idx-val" id="idx-000001-val">--</div><div class="idx-chg idx-loading" id="idx-000001-chg">加载中...</div></div>
+            <div class="idx-card"><div class="idx-name">深证成指</div><div class="idx-val" id="idx-399001-val">--</div><div class="idx-chg idx-loading" id="idx-399001-chg">加载中...</div></div>
+            <div class="idx-card"><div class="idx-name">创业板指</div><div class="idx-val" id="idx-159915-val">--</div><div class="idx-chg idx-loading" id="idx-159915-chg">加载中...</div></div>
+            <div class="idx-card"><div class="idx-name">北向资金</div><div class="idx-val" id="idx-north-val">--</div><div class="idx-chg idx-loading" id="idx-north-chg">加载中...</div></div>
+            <div class="idx-card"><div class="idx-name">两市成交</div><div class="idx-val" id="idx-volume-val">--</div><div class="idx-chg idx-loading" id="idx-volume-chg">加载中...</div></div>
+            <div class="idx-card"><div class="idx-name">涨跌停停</div><div class="idx-val" id="idx-limit-val">--</div><div class="idx-chg idx-loading" id="idx-limit-chg">加载中...</div></div>
+        </div>
+    </div>
+
+    <!-- TWO COLUMNS: AI Digest + Watchlist | Articles -->
+    <div class="two-col">
+
+        <!-- LEFT COLUMN -->
+        <div style="min-width:0;">
+            <!-- AI Digest -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🤖 AI投研日报摘要</div>
+                    <a href="/articles/index.html" style="color:var(--muted);font-size:0.8rem;text-decoration:none;">查看历史 →</a>
+                </div>
+                <div class="digest-loading" id="digest-box">
+                    <span class="digest-tag">准备B</span>
+                    <span>正在加载最新AI分析...</span>
+                </div>
+            </div>
+
+            <!-- Latest Articles -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">📝 最新文章</div>
+                    <span class="card-badge orange">AI生成 · 每日更新</span>
+                </div>
+                <ul class="article-list" id="article-list">
+                    <li class="loading-text">正在加载文章列表...</li>
+                </ul>
+                <a href="/articles/index.html" style="
+                    display:block;text-align:center;padding:10px;margin-top:10px;
+                    background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.15);
+                    border-radius:var(--radius);color:var(--blue);text-decoration:none;
+                    font-size:0.84rem;font-weight:600;
+                ">浏览全部文章 →</a>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside>
+            <!-- Today's Watchlist -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">⭐ 今日关注的</div>
+                </div>
+                <table class="watchlist-table" id="watchlist-table">
+                    <tbody id="watchlist-body">
+                        <tr><td><div class="stock-name">紫金矿业</div><div class="stock-code">601899</div></td><td class="stock-val">--</td></tr>
+                        <tr><td><div class="stock-name">北方稀土</div><div class="stock-code">600111</div></td><td class="stock-val">--</td></tr>
+                        <tr><td><div class="stock-name">中芯国际</div><div class="stock-code">688981</div></td><td class="stock-val">--</td></tr>
+                        <tr><td><div class="stock-name">宁德时代</div><div class="stock-code">300750</div></td><td class="stock-val">--</td></tr>
+                        <tr><td><div class="stock-name">国电南瑞</div><div class="stock-code">600406</div></td><td class="stock-val">--</td></tr>
+                        <tr><td><div class="stock-name">迈瑞医疗</div><div class="stock-code">300760</div></td><td class="stock-val">--</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Fund Holdings -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">💼 持仓基金估值</div>
+                    <div style="display:flex;gap:6px;">
+                        <span class="card-badge" style="cursor:pointer;" onclick="loadFunds()">估净值</span>
+                        <span class="card-badge" style="cursor:pointer;" onclick="location.href='/fund-screener.html'">估算率</span>
+                    </div>
+                </div>
+                <div id="fund-body">
+                    <div class="loading-text">正在加载基金估值...</div>
+                </div>
+            </div>
+        </aside>
+
+    </div><!-- /two-col -->
+
+</div><!-- /main -->
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>© 2026 <a href="/">A股基金持仓追踪</a> · 由 AI Agent 全自动运营</p>
+    <p style="margin-top:4px;"><a href="/">spacenetx.com</a> · 数据仅供参考，不构成投资建议</p>
+</footer>
+
+<script>
+// === 自动生成的内嵌数据（每次部署时更新）===
+window.__EMBEDDED_DATA__ = [{"fundcode": "012733", "name": "易方达中证人工智能主题ETF联接A", "jzrq": "2026-06-18", "dwjz": "2.3982", "gsz": "2.4235", "gszzl": "1.06", "gztime": "2026-06-22 15:00"}, {"fundcode": "007300", "name": "国联安中证半导体ETF联接A", "jzrq": "2026-06-18", "dwjz": "4.7431", "gsz": "4.8754", "gszzl": "2.79", "gztime": "2026-06-22 15:00"}, {"fundcode": "025832", "name": "天弘电网设备特高压指数A", "jzrq": "2026-06-18", "dwjz": "1.4890", "gsz": "1.5565", "gszzl": "4.53", "gztime": "2026-06-22 15:00"}, {"fundcode": "001410", "name": "信澳新能源产业股票A", "jzrq": "2026-06-18", "dwjz": "8.5520", "gsz": "8.7241", "gszzl": "2.01", "gztime": "2026-06-22 15:00"}, {"fundcode": "003095", "name": "中欧医疗健康混合A", "jzrq": "2026-06-18", "dwjz": "1.5749", "gsz": "1.5992", "gszzl": "1.54", "gztime": "2026-06-22 15:00"}, {"fundcode": "163406", "name": "兴全合润混合A", "jzrq": "2026-06-18", "dwjz": "2.7116", "gsz": "2.7783", "gszzl": "2.46", "gztime": "2026-06-22 15:00"}, {"fundcode": "110020", "name": "易方达沪深300ETF联接A", "jzrq": "2026-06-18", "dwjz": "1.9940", "gsz": "2.0417", "gszzl": "2.39", "gztime": "2026-06-22 15:00"}, {"fundcode": "001990", "name": "中欧数据挖掘多因子混合A", "jzrq": "2026-06-18", "dwjz": "2.7103", "gsz": "2.7611", "gszzl": "1.87", "gztime": "2026-06-22 15:00"}];
+// === 内嵌数据结束 ===
+</script>
+
+<script>
+// === 自动生成的内嵌数据（每次部署时更新）===
+window.__EMBEDDED_DATA__ = [{"fundcode": "012733", "name": "易方达中证人工智能主题ETF联接A", "jzrq": "2026-06-18", "dwjz": "2.3982", "gsz": "2.4235", "gszzl": "1.06", "gztime": "2026-06-22 15:00"}, {"fundcode": "007300", "name": "国联安中证半导体ETF联接A", "jzrq": "2026-06-18", "dwjz": "4.7431", "gsz": "4.8754", "gszzl": "2.79", "gztime": "2026-06-22 15:00"}, {"fundcode": "025832", "name": "天弘电网设备特高压指数A", "jzrq": "2026-06-18", "dwjz": "1.4890", "gsz": "1.5565", "gszzl": "4.53", "gztime": "2026-06-22 15:00"}, {"fundcode": "001410", "name": "信澳新能源产业股票A", "jzrq": "2026-06-18", "dwjz": "8.5520", "gsz": "8.7241", "gszzl": "2.01", "gztime": "2026-06-22 15:00"}, {"fundcode": "003095", "name": "中欧医疗健康混合A", "jzrq": "2026-06-18", "dwjz": "1.5749", "gsz": "1.5992", "gszzl": "1.54", "gztime": "2026-06-22 15:00"}, {"fundcode": "163406", "name": "兴全合润混合A", "jzrq": "2026-06-18", "dwjz": "2.7116", "gsz": "2.7783", "gszzl": "2.46", "gztime": "2026-06-22 15:00"}, {"fundcode": "110020", "name": "易方达沪深300ETF联接A", "jzrq": "2026-06-18", "dwjz": "1.9940", "gsz": "2.0417", "gszzl": "2.39", "gztime": "2026-06-22 15:00"}, {"fundcode": "001990", "name": "中欧数据挖掘多因子混合A", "jzrq": "2026-06-18", "dwjz": "2.7103", "gsz": "2.7611", "gszzl": "1.87", "gztime": "2026-06-22 15:00"}];
+// === 内嵌数据结束 ===
+</script>
+
+<script>
+(function(){
+    var API = window.location.origin;
+    var FUND_CODES = '012733,007300,025832,001410,003095,163406,110020,001990';
+
+    /* ========== 文章列表（文档图标风格） ========== */
+    function loadArticles(){
+        fetch(API + '/data/articles.json?t=' + Date.now())
+            .then(function(r){ return r.ok ? r.json() : Promise.reject('HTTP '+r.status); })
+            .then(function(list){
+                var real = list.filter(function(a){ return a.file && a.file.indexOf('index.html') === -1; });
+                if (!real.length) {
+                    document.getElementById('article-list').innerHTML = '<li class="error-text">暂无文章</li>';
+                    return;
+                }
+                var html = '';
+                real.slice(0, 12).forEach(function(a){
+                    var d = a.date || '';
+                    html += '<li><a class="article-card" href="/' + escAttr(a.file) + '">' +
+                        '<div class="article-icon">📄</div>' +
+                        '<div class="article-body">' +
+                            '<div class="article-title">' + esc(a.title) + ' | A股投研工具箱</div>' +
+                            '<div class="article-meta">' +
+                                '<span class="article-tag">' + esc(a.tag||'AI/科技') + '</span>' +
+                                '<span>' + esc(d) + '</span>' +
+                            '</div>' +
+                        '</div></a></li>';
+                });
+                document.getElementById('article-list').innerHTML = html;
+            })
+            .catch(function(){ document.getElementById('article-list').innerHTML = '<li class="error-text">加载失败，请刷新重试</li>'; });
+    }
+
+    /* ========== 基金估值 ========== */
+    function loadFunds(){
+        if (window.__EMBEDDED_DATA__ && Array.isArray(window.__EMBEDDED_DATA__)) {
+            renderFunds(window.__EMBEDDED_DATA__);
+            return;
+        }
+        fetch(API + '/api/fund?code=' + FUND_CODES)
+            .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+            .then(function(arr){ renderFunds(arr); })
+            .catch(function(){ document.getElementById('fund-body').innerHTML = '<div class="error-text">加载失败</div>'; });
+    }
+
+    function renderFunds(arr){
+        if (!arr || !arr.length) return;
+        var html = '<table class="watchlist-table"><tbody>';
+        arr.forEach(function(f){
+            var chg = parseFloat(f.gszzl||0);
+            var cls = chg>=0 ? 'color:var(--red)' : 'color:var(--green)';
+            var sign = chg>0 ? '+' : '';
+            html += '<tr>' +
+                '<td><div class="stock-name">'+esc(f.name||f.fundcode)+'</div><div class="stock-code">'+esc(f.fundcode)+'</div></td>' +
+                '<td class="stock-val" style="'+cls+'">'+esc(f.gsz||'--')+'</td>' +
+                '<td class="stock-val" style="'+cls+';font-size:0.78rem;">'+sign+chg.toFixed(2)+'%</td></tr>';
+        });
+        html += '</tbody></table>';
+        document.getElementById('fund-body').innerHTML = html;
+    }
+
+    /* ========== 跑马灯 ========== */
+    function loadMarquee(){
+        if (window.__EMBEDDED_DATA__ && Array.isArray(window.__EMBEDDED_DATA__)) {
+            renderMarquee(window.__EMBEDDED_DATA__.concat(window.__EMBEDDED_DATA__));
+            return;
+        }
+        fetch(API + '/api/fund?code='+FUND_CODES)
+            .then(function(r){ return r.ok?r.json():Promise.reject(r.status); })
+            .then(function(arr){ renderMarquee(arr.concat(arr)); })
+            .catch(function(){});
+    }
+
+    function renderMarquee(items){
+        if (!items||!items.length) return;
+        var html = items.map(function(f){
+            var chg = parseFloat(f.gszzl||0);
+            var cls = chg>=0?'up':'down';
+            var sign = chg>0?'+':'';
+            return '<span class="marquee-item">'+
+                '<span>'+esc(f.name||f.fundcode)+'</span>'+
+                '<span>'+esc(f.fundcode)+'</span> '+
+                '<span style="margin-right:6px;color:var(--orange);">'+esc(f.gsz||'--')+'</span>'+
+                '<span class="'+cls+'">'+sign+chg.toFixed(2)+'%</span></span>';
+        }).join('');
+        document.getElementById('marquee-track').innerHTML = html;
+    }
+
+    /* ========== 指数概览 ========== */
+    function loadIndices(){
+        fetch(API + '/api/fund?code=000001,399001,159915')
+            .then(function(r){ return r.ok?r.json():null; })
+            .then(function(arr){
+                if (!arr||!arr.length) return;
+                arr.forEach(function(idx){
+                    var elV = document.getElementById('idx-'+idx.fundcode+'-val');
+                    var elC = document.getElementById('idx-'+idx.fundcode+'-chg');
+                    if (elV) elV.textContent = idx.gsz||'--';
+                    if (elC) {
+                        var chg = parseFloat(idx.gszzl||0);
+                        elC.textContent = (chg>=0?'+':'')+chg.toFixed(2)+'%';
+                        elC.className = 'idx-chg '+(chg>=0?'up':'down');
+                    }
+                });
+            }).catch(function(){});
+    }
+
+    /* ========== 工具函数 ========== */
+    function esc(s){
+        var d=document.createElement('div'); d.textContent=s||''; return d.innerHTML;
+    }
+    function escAttr(s){
+        return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    /* ========== 启动 ========== */
+    loadArticles();
+    loadFunds();
+    loadMarquee();
+    loadIndices();
+
+})();
+</script>
+
+</body>
+</html>
