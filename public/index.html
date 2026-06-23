@@ -1480,7 +1480,22 @@
         }
     }
 
-    ;
+
+    /* --- 文章列表 --- */
+    const TAG_COLORS = { '投研':'#4CAF50', 'ETF':'#2196F3', '医疗':'#9C27B0', '新能源':'#FF9800', 'AI':'#F44336', '市场':'#FF5722', 'default':'#607D8B' };
+
+    async function fetchArticles() {
+        try {
+            const resp = await fetch('/data/articles.json?t=' + Date.now());
+            const data = await resp.json();
+            const articles = Array.isArray(data) ? data : (data.articles || []);
+            const latest = articles.slice(0, 10);
+            const list = document.getElementById('articleList');
+            if (!list) return;
+
+            list.innerHTML = latest.map(a => {
+                const title = (a.title || '').trim();
+                if (!title) return '';
                 const date    = (a.date || '');
                 const parts   = date.split('-');
                 const month  = parts[1] || '--';
