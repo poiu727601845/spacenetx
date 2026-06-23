@@ -1104,13 +1104,14 @@
 <!-- ═════════════════════════════════════════════════
      📡 实时数据API模块
      ═════════════════════════════════════════════════ -->
-n    /* 预定义腾讯证券等第三方API所需的全局回调 */
-    window.gjsonp = function(){};
-    window.gcallback = function(){};
-
 <script>
 (function() {
     'use strict';
+
+    /* 预定义全局回调（必须在API加载前存在） */
+    window.gjsonp = function(){};
+    window.gcallback = function(){};
+    window.jsonpgz = function(){};
 
     /* ========================================
        配置区
@@ -1517,12 +1518,57 @@ n    /* 预定义腾讯证券等第三方API所需的全局回调 */
     }
 
     /* ========================================
+       静态默认数据（页面加载立即显示）
+    ======================================== */
+    const STATIC_DATA = {
+        indices: {
+            'sh000001': { name:'上证指数', price:4106.36, change:-56.74, pct:-1.36 },
+            'sz399001': { name:'深证成指', price:15988.20, change:-327.12, pct:-2.00 },
+            'sz399006': { name:'创业板指', price:4250.15, change:-108.43, pct:-2.49 },
+            'sz688000': { name:'科创50',   price:1428.32, change:-22.18, pct:-1.53 }
+        },
+        funds: {
+            '003095':{name:'中欧医疗健康A', estNav:'1.6211', estPct:1.50},
+            '001410':{name:'信澳新能源A',   estNav:'3.2156', estPct:-0.82},
+            '163406':{name:'兴全合润混合A',  estNav:'1.8923', estPct:0.35},
+            '001990':{name:'数据挖掘多因子A',estNav:'2.4567', estPct:1.12},
+            '025832':{name:'天弘中证电网A',  estNav:'1.4523', estPct:0.68},
+            '012733':{name:'易方达AI主题A',  estNav:'2.3890', estPct:-1.25},
+            '007300':{name:'国联安半导体A',  estNav:'4.5234', estPct:-2.08},
+            '110020':{name:'易方达沪深300A', estNav:'4.1234', estPct:-0.55}
+        },
+        stocks: {
+            'sh601899':{price:38.52, pct:-1.23},
+            'sz002371':{price:468.30, pct:-2.85},
+            'sz300308':{price:225.60, pct:-3.12},
+            'sz300750':{price:186.45, pct:-1.98},
+            'sh600406':{price:24.33, pct:0.56},
+            'sz300760':{price:298.70, pct:-0.85}
+        }
+    };
+
+    /* 立即渲染静态数据（不等API） */
+    function renderStaticData() {
+        renderMarquee(STATIC_DATA.indices);
+        renderIndexCards(STATIC_DATA.indices);
+        renderSectorGrid(null); // null触发备用静态数据
+        renderWatchList(STATIC_DATA.stocks);
+        renderFundList(STATIC_DATA.funds);
+        renderDigest(STATIC_DATA.indices);
+        renderHeroNorth();
+        console.log('[SpacenetX] Static data rendered');
+    }
+
+    /* ========================================
        初始化
     ======================================== */
-    // 页面加载后立即获取数据
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => fetchAllData());
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStaticData();
+            fetchAllData(); // 然后尝试获取实时数据
+        });
     } else {
+        renderStaticData();
         fetchAllData();
     }
 
