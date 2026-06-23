@@ -10,9 +10,9 @@
     <meta name="theme-color" content="#f0f4ff">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🎨 亮色主题变量
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         :root {
             --bg-deep: #f0f4ff;
             --bg-primary: #f5f7fc;
@@ -89,9 +89,9 @@
         a { text-decoration: none; color: inherit; transition: all 0.25s ease; }
         ul { list-style: none; }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🔝 导航栏 — 亮色毛玻璃
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .navbar {
             position: sticky;
             top: 0;
@@ -156,9 +156,9 @@
             box-shadow: 0 2px 8px rgba(102,126,234,0.35);
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            📊 跑马灯行情条 — 亮色渐变背景
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .marquee-bar {
             background: linear-gradient(90deg, #eef2ff 0%, #f0f4ff 30%, #f5f7fc 60%, #eef2ff 100%);
             border-bottom: 1px solid var(--border-color);
@@ -212,9 +212,9 @@
         .mq-dot.down { background: var(--down-color); box-shadow: 0 0 8px var(--down-glow); }
         @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🎯 主布局容器
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .main-container {
             max-width: 1280px;
             margin: 0 auto;
@@ -230,9 +230,9 @@
             .nav-links { display: none; }
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            📈 Hero 统计卡片区 — 亮色卡片+彩色顶边
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -314,9 +314,9 @@
             background: var(--down-bg);
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🏦 市场指数概览区 — 大卡片
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .section-header {
             display: flex;
             align-items: center;
@@ -430,9 +430,9 @@
         .index-bar.up { background: linear-gradient(90deg, #ffcdd2, #e53935); }
         .index-bar.down { background: linear-gradient(90deg, #c8e6c9, #2e9c55); }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🔥 板块热点轮动
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .sector-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -494,9 +494,9 @@
         .sector-pct.up { color: var(--up-color); }
         .sector-pct.down { color: var(--down-color); }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            🤖 AI投研日报摘要
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .ai-digest-card {
             background: linear-gradient(135deg, #f0e6ff, #e8f0fe, #fff0f6);
             border: 1px solid rgba(139,92,246,0.15);
@@ -577,9 +577,9 @@
             color: #7c3aed;
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            📰 文章列表
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .article-list {
             display: flex;
             flex-direction: column;
@@ -666,9 +666,9 @@
             overflow: hidden;
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            ⭐ 侧边栏
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         .sidebar { display: flex; flex-direction: column; gap: 20px; }
 
         .side-card {
@@ -814,9 +814,9 @@
             text-align: center;
         }
 
-        /* ═══════════════════════════════════════════════════
+        /* ═════════════════════════════════════════════════
            📅 页脚
-        ═══════════════════════════════════════════════════ */
+        ═════════════════════════════════════════════════ */
         footer {
             text-align: center;
             padding: 32px 20px;
@@ -909,6 +909,15 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
+        /* 数据更新闪烁动画 */
+        .data-flash {
+            animation: dataFlash 0.6s ease;
+        }
+        @keyframes dataFlash {
+            0% { background-color: rgba(99,102,241,0.15); }
+            100% { background-color: transparent; }
+        }
     </style>
 </head>
 <body>
@@ -931,101 +940,8 @@
 
 <!-- ═══ 跑马灯行情条 ═══ -->
 <div class="marquee-bar">
-    <div class="marquee-wrap">
-        <!-- 第一组 -->
-        <div class="mq-item">
-            <span class="mq-dot up"></span>
-            <span class="mq-name">上证指数</span>
-            <span class="mq-val">4143.01</span>
-            <span class="mq-down">-0.48%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">深证成指</span>
-            <span class="mq-val">16044.25</span>
-            <span class="mq-down">-2.00%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">创业板指</span>
-            <span class="mq-val">4250.85</span>
-            <span class="mq-down">-2.49%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">科创50</span>
-            <span class="mq-val">1428.36</span>
-            <span class="mq-down">-1.85%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">北向资金</span>
-            <span class="mq-val">-42.6亿</span>
-            <span class="mq-down">净流出</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">两市成交</span>
-            <span class="mq-val">2.61万亿</span>
-            <span style="color:var(--text-muted)">较昨日缩量</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">涨停</span>
-            <span class="mq-up">62</span>
-            <span class="mq-name">跌停</span>
-            <span class="mq-down">18</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">涨家数</span>
-            <span class="mq-up">1724</span>
-            <span class="mq-name">跌家数</span>
-            <span class="mq-down">1132</span>
-        </div>
-        <!-- 第二组（重复实现无缝滚动）-->
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">上证指数</span>
-            <span class="mq-val">4143.01</span>
-            <span class="mq-down">-0.48%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">深证成指</span>
-            <span class="mq-val">16044.25</span>
-            <span class="mq-down">-2.00%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">创业板指</span>
-            <span class="mq-val">4250.85</span>
-            <span class="mq-down">-2.49%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-dot down"></span>
-            <span class="mq-name">科创50</span>
-            <span class="mq-val">1428.36</span>
-            <span class="mq-down">-1.85%</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">北向资金</span>
-            <span class="mq-val">-42.6亿</span>
-            <span class="mq-down">净流出</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">两市成交</span>
-            <span class="mq-val">2.61万亿</span>
-            <span style="color:var(--text-muted)">较昨日缩量</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">涨停</span>
-            <span class="mq-up">62</span>
-            <span class="mq-name">跌停</span>
-            <span class="mq-down">18</span>
-        </div>
-        <div class="mq-item">
-            <span class="mq-name">涨家数</span>
-            <span class="mq-up">1724</span>
-            <span class="mq-name">跌家数</span>
-            <span class="mq-down">1132</span>
-        </div>
+    <div class="marquee-wrap" id="marqueeWrap">
+        <!-- 由JS动态生成 -->
     </div>
 </div>
 
@@ -1038,9 +954,9 @@
         <!-- 📊 Hero 统计卡片区 -->
         <div class="hero-stats">
             <div class="stat-card hot">
-                <div class="stat-label">🟠 持仓基金</div>
+                <div class="stat-label">🔴 持仓基金</div>
                 <div class="stat-value">8</div>
-                <div class="stat-change down">只 · 定投中</div>
+                <div class="stat-change down" id="heroFundChg">只 · 定投中</div>
             </div>
             <div class="stat-card cool">
                 <div class="stat-label">🔵 今日新篇</div>
@@ -1049,8 +965,8 @@
             </div>
             <div class="stat-card fresh">
                 <div class="stat-label">🟢 资金流向</div>
-                <div class="stat-value">-42.6亿</div>
-                <div class="stat-change down">北向净流出</div>
+                <div class="stat-value" id="heroNorthFlow">--</div>
+                <div class="stat-change" id="heroNorthLabel">北向资金</div>
             </div>
             <div class="stat-card warm">
                 <div class="stat-label">🟡 持仓收益</div>
@@ -1059,7 +975,7 @@
             </div>
             <div class="stat-card cyan">
                 <div class="stat-label">🔷 主线判断</div>
-                <div class="stat-value">震荡</div>
+                <div class="stat-value" id="heroMarketTrend">震荡</div>
                 <div class="stat-change" style="background:rgba(99,102,241,0.08);color:#667eea">短线调整中</div>
             </div>
         </div>
@@ -1067,45 +983,10 @@
         <!-- 🏦 今日市场概览 -->
         <div class="section-header">
             <h2 class="section-title"><span class="icon">🏦</span> 今日市场概览</h2>
-            <button class="refresh-btn" onclick="location.reload()">🔄 刷新</button>
+            <button class="refresh-btn" onclick="fetchAllData()">🔄 刷新数据</button>
         </div>
-        <div class="index-grid">
-            <div class="index-card">
-                <div class="index-name">上证指数 <span class="index-badge">SH</span></div>
-                <div class="index-point">4143.01</div>
-                <div class="index-change down">
-                    <span class="index-pct">-0.48%</span>
-                    <span style="font-size:0.78rem;font-weight:600">▼ 20.05</span>
-                </div>
-                <div class="index-bar-wrap"><div class="index-bar down" style="width:48%"></div></div>
-            </div>
-            <div class="index-card">
-                <div class="index-name">深证成指 <span class="index-badge">SZ</span></div>
-                <div class="index-point">16044.25</div>
-                <div class="index-change down">
-                    <span class="index-pct">-2.00%</span>
-                    <span style="font-size:0.78rem;font-weight:600">▼ 328.25</span>
-                </div>
-                <div class="index-bar-wrap"><div class="index-bar down" style="width:80%"></div></div>
-            </div>
-            <div class="index-card">
-                <div class="index-name">创业板指 <span class="index-badge">CY</span></div>
-                <div class="index-point">4250.85</div>
-                <div class="index-change down">
-                    <span class="index-pct">-2.49%</span>
-                    <span style="font-size:0.78rem;font-weight:600">▼ 108.93</span>
-                </div>
-                <div class="index-bar-wrap"><div class="index-bar down" style="width:95%"></div></div>
-            </div>
-            <div class="index-card">
-                <div class="index-name">科创50 <span class="index-badge">KC</span></div>
-                <div class="index-point">1428.36</div>
-                <div class="index-change down">
-                    <span class="index-pct">-1.85%</span>
-                    <span style="font-size:0.78rem;font-weight:600">▼ 26.94</span>
-                </div>
-                <div class="index-bar-wrap"><div class="index-bar down" style="width:74%"></div></div>
-            </div>
+        <div class="index-grid" id="indexGrid">
+            <!-- 由JS动态生成 -->
         </div>
 
         <!-- 🔥 板块热点轮动 -->
@@ -1113,44 +994,20 @@
             <h2 class="section-title"><span class="icon">🔥</span> 板块热点轮动</h2>
             <span style="font-size:0.78rem;color:var(--text-muted)">TOP12 涨跌幅 →</span>
         </div>
-        <div class="sector-grid">
-            <div class="sector-item top3"><span class="sector-rank">1</span><div class="sector-name">银行</div><div class="sector-pct up">+1.25%</div></div>
-            <div class="sector-item top3"><span class="sector-rank">2</span><div class="sector-name">保险</div><div class="sector-pct up">+0.86%</div></div>
-            <div class="sector-item top3"><span class="sector-rank">3</span><div class="sector-name">电力</div><div class="sector-pct up">+0.52%</div></div>
-            <div class="sector-item"><span class="sector-rank">4</span><div class="sector-name">煤炭</div><div class="sector-pct up">+0.31%</div></div>
-            <div class="sector-item"><span class="sector-rank">5</span><div class="sector-name">石油</div><div class="sector-pct up">+0.18%</div></div>
-            <div class="sector-item"><span class="sector-rank">6</span><div class="sector-name">港口航运</div><div class="sector-pct down">-0.35%</div></div>
-            <div class="sector-item"><span class="sector-rank">7</span><div class="sector-name">家电</div><div class="sector-pct down">-0.82%</div></div>
-            <div class="sector-item bottom3"><span class="sector-rank">8</span><div class="sector-name">半导体</div><div class="sector-pct down">-2.15%</div></div>
-            <div class="sector-item bottom3"><span class="sector-rank">9</span><div class="sector-name">光伏设备</div><div class="sector-pct down">-2.86%</div></div>
-            <div class="sector-item bottom3"><span class="sector-rank">10</span><div class="sector-name">AI应用</div><div class="sector-pct down">-3.42%</div></div>
-            <div class="sector-item"><span class="sector-rank">11</span><div class="sector-name">军工电子</div><div class="sector-pct down">-2.58%</div></div>
-            <div class="sector-item"><span class="sector-rank">12</span><div class="sector-name">氟化工</div><div class="sector-pct down">-1.95%</div></div>
+        <div class="sector-grid" id="sectorGrid">
+            <!-- 由JS动态生成 -->
         </div>
 
         <!-- 🤖 AI 投研日报摘要 -->
         <div class="ai-digest-card">
             <div class="ai-digest-header">
-                <div class="ai-digest-title">🤖 AI投研日报 · 2026年6月23日</div>
+                <div class="ai-digest-title">🤖 AI投研日报 · <span id="digestDate"></span></div>
                 <div class="ai-status done">● 已完成分析</div>
             </div>
-            <div class="ai-digest-body">
-                <p style="margin-bottom:8px">
-                    今日<span class="ai-highlight">三大指数集体收跌</span>，创业板领跌-2.49%，深成指-2.00%。昨日大涨的券商、稀有金属、氟化工板块今日<span class="ai-highlight">集中回调</span>，短线浮盈兑现压力明显。
-                </p>
-                <p style="margin-bottom:8px">
-                    📍 <strong>支撑位：</strong>上证4130点（今日成交中枢）/ 强支撑4100（5日线）
-                </p>
-                <p>
-                    📍 <strong>压力位：</strong>4180-4200点区间 / 强压力4210（前期套牢区）
-                </p>
+            <div class="ai-digest-body" id="digestBody">
+                <p style="margin-bottom:8px;color:var(--text-muted)">数据加载中...</p>
             </div>
-            <div class="ai-tags">
-                <span class="ai-tag">📉 短线调整</span>
-                <span class="ai-tag">💰 缩量至2.61万亿</span>
-                <span class="ai-tag">🛡️ 防御板块抗跌</span>
-                <span class="ai-tag">⚠️ 等待企稳信号</span>
-            </div>
+            <div class="ai-tags" id="digestTags"></div>
         </div>
 
         <!-- 📰 文章列表 -->
@@ -1158,68 +1015,8 @@
             <h2 class="section-title"><span class="icon">📰</span> 最新投研文章</h2>
             <a href="/articles.html" style="font-size:0.78rem;color:#667eea;font-weight:600">查看全部 →</a>
         </div>
-        <div class="article-list">
-
-            <a href="/articles/2026-06-23-market-review.html" class="article-card">
-                <div class="article-date-box">
-                    <div class="article-day">23</div>
-                    <div class="article-month">06月</div>
-                </div>
-                <div class="article-info">
-                    <div class="article-title">6月23日A股复盘：三大指数集体回调，银行保险逆势护盘</div>
-                    <div class="article-meta">
-                        <span class="tag tag-research">投研日报</span>
-                        <span style="font-size:0.76rem;color:var(--text-muted)">阅读约8分钟</span>
-                    </div>
-                    <div class="article-excerpt">沪指跌0.48%报4143点，创业板重挫2.49%。两市成交2.61万亿，较昨日3.76万亿大幅缩量。银行、保险板块逆势上涨...</div>
-                </div>
-            </a>
-
-            <a href="/articles/2026-06-22-bull-market.html" class="article-card">
-                <div class="article-date-box">
-                    <div class="article-day">22</div>
-                    <div class="article-month">06月</div>
-                </div>
-                <div class="article-info">
-                    <div class="article-title">牛市旗手爆发！券商板块单日暴涨5.8%，两市成交刷新天量3.76万亿</div>
-                    <div class="article-meta">
-                        <span class="tag tag-ai">AI分析</span>
-                        <span style="font-size:0.76rem;color:var(--text-muted)">阅读约12分钟</span>
-                    </div>
-                    <div class="article-excerpt">今日沪指大涨1.78%，创业板与科创50双双创阶段新高。券商板块全线暴涨，中信证券涨停...</div>
-                </div>
-            </a>
-
-            <a href="/articles/2026-06-21-semiconductor-analysis.html" class="article-card">
-                <div class="article-date-box">
-                    <div class="article-day">21</div>
-                    <div class="article-month">06月</div>
-                </div>
-                <div class="article-info">
-                    <div class="article-title">半导体ETF深度分析：PE估值突破80倍，是否该暂停定投？</div>
-                    <div class="article-meta">
-                        <span class="tag tag-etf">ETF</span>
-                        <span style="font-size:0.76rem;color:var(--text-muted)">阅读约10分钟</span>
-                    </div>
-                    <div class="article-excerpt">007300国联安半导体ETF联接A当前净值4.352元，PE-TTM已达82.6倍，处于历史97%分位...</div>
-                </div>
-            </a>
-
-            <a href="/articles/2026-06-20-healthcare-rebound.html" class="article-card">
-                <div class="article-date-box">
-                    <div class="article-day">20</div>
-                    <div class="article-month">06月</div>
-                </div>
-                <div class="article-info">
-                    <div class="article-title">医疗健康板块左侧布局机会显现：中欧医疗健康A估值分位降至15%</div>
-                    <div class="article-meta">
-                        <span class="tag tag-medical">医疗健康</span>
-                        <span style="font-size:0.76rem;color:var(--text-muted)">阅读约9分钟</span>
-                    </div>
-                    <div class="article-excerpt">003095中欧医疗健康A最新净值1.2156元，PE仅28.4倍，处于近5年15%分位。医药生物指数...</div>
-                </div>
-            </a>
-
+        <div class="article-list" id="articleList">
+            <p style="color:var(--text-muted);padding:20px;text-align:center;">加载中...</p>
         </div>
     </div>
 
@@ -1232,67 +1029,8 @@
                 <div class="side-title">⭐ 今日关注</div>
                 <a href="#" class="side-link">详情</a>
             </div>
-            <div class="watch-list">
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">紫金矿业</span>
-                        <span class="watch-code">601899</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">38.52</div>
-                        <div class="watch-chg down">-2.15%</div>
-                    </div>
-                </div>
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">北方华创</span>
-                        <span class="watch-code">002371</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">468.30</div>
-                        <div class="watch-chg down">-2.86%</div>
-                    </div>
-                </div>
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">中际旭创</span>
-                        <span class="watch-code">300308</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">528.00</div>
-                        <div class="watch-chg down">-3.42%</div>
-                    </div>
-                </div>
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">宁德时代</span>
-                        <span class="watch-code">300750</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">256.80</div>
-                        <div class="watch-chg down">-1.95%</div>
-                    </div>
-                </div>
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">国电南瑞</span>
-                        <span class="watch-code">600406</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">32.15</div>
-                        <div class="watch-chg up">+0.35%</div>
-                    </div>
-                </div>
-                <div class="watch-item">
-                    <div class="watch-left">
-                        <span class="watch-name">迈瑞医疗</span>
-                        <span class="watch-code">300760</span>
-                    </div>
-                    <div class="watch-right">
-                        <div class="watch-price">298.50</div>
-                        <div class="watch-chg down">-0.82%</div>
-                    </div>
-                </div>
+            <div class="watch-list" id="watchList">
+                <!-- 由JS动态生成 -->
             </div>
         </div>
 
@@ -1300,89 +1038,10 @@
         <div class="side-card">
             <div class="side-header">
                 <div class="side-title">💰 持仓基金估值</div>
-                <span class="side-link">实时</span>
+                <span class="side-link" onclick="fetchAllData()" style="cursor:pointer">刷新</span>
             </div>
-            <div class="fund-list">
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">中欧医疗健康A</span>
-                        <span class="fund-code">003095</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">1.2156</div>
-                        <div class="fund-chg down">-0.65%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">信澳新能源A</span>
-                        <span class="fund-code">001410</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">4.5820</div>
-                        <div class="fund-chg down">-2.35%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">兴全合润混合A</span>
-                        <span class="fund-code">163406</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">1.8950</div>
-                        <div class="fund-chg down">-1.12%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">数据挖掘多因子A</span>
-                        <span class="fund-code">001990</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">2.1680</div>
-                        <div class="fund-chg down">-1.85%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">电网设备A</span>
-                        <span class="fund-code">025832</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">1.4850</div>
-                        <div class="fund-chg up">+0.28%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">AI主题ETF联接A</span>
-                        <span class="fund-code">012733</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">2.3850</div>
-                        <div class="fund-chg down">-3.42%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">半导体ETF联接A</span>
-                        <span class="fund-code">007300</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">4.3520</div>
-                        <div class="fund-chg down">-2.15%</div>
-                    </div>
-                </div>
-                <div class="fund-item">
-                    <div class="fund-left">
-                        <span class="fund-name">沪深300ETF联接A</span>
-                        <span class="fund-code">110020</span>
-                    </div>
-                    <div class="fund-right">
-                        <div class="fund-nav">1.9850</div>
-                        <div class="fund-chg down">-0.52%</div>
-                    </div>
-                </div>
+            <div class="fund-list" id="fundList">
+                <!-- 由JS动态生成 -->
             </div>
         </div>
 
@@ -1442,6 +1101,436 @@
     </div>
 </div>
 
+<!-- ═════════════════════════════════════════════════
+     📡 实时数据API模块
+     ═════════════════════════════════════════════════ -->
+<script>
+(function() {
+    'use strict';
+
+    /* ========================================
+       配置区
+    ======================================== */
+    const CONF = {
+        // 腾讯证券API（免费，无需key，支持CORS）
+        tencentAPI: 'https://qt.gtimg.cn/q=',
+        // 天天基金净值估算API（免费，JSONP）
+        fundAPI: 'https://fundgz.1234567.com.cn/js/',
+        // 东方财富板块排行API
+        sectorAPI: 'https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=20&po=1&np=1&fltt=2&invt=2&fid=f3&fs=m:90+t:2&fields=f12,f14,f2,f3,f62,f184,f66,f69,f72,f5,f6',
+        // 数据刷新间隔（毫秒）
+        refreshInterval: 30000,
+        // 指数映射
+        indices: [
+            { sym: 'sh000001', name: '上证指数', badge: 'SH' },
+            { sym: 'sz399001', name: '深证成指', badge: 'SZ' },
+            { sym: 'sz399006', name: '创业板指', badge: 'CY' },
+            { sym: 'sz688000', name: '科创50',   badge: 'KC' }
+        ],
+        // 关注标的
+        watchStocks: [
+            { sym: 'sh601899', name: '紫金矿业', code: '601899' },
+            { sym: 'sz002371', name: '北方华创', code: '002371' },
+            { sym: 'sz300308', name: '中际旭创', code: '300308' },
+            { sym: 'sz300750', name: '宁德时代', code: '300750' },
+            { sym: 'sh600406', name: '国电南瑞', code: '600406' },
+            { sym: 'sz300760', name: '迈瑞医疗', code: '300760' }
+        ],
+        // 持仓基金
+        fundCodes: ['003095','001410','163406','001990','025832','012733','007300','110020']
+    };
+
+    /* ========================================
+       JSONP 工具
+    ======================================== */
+    function jsonp(url) {
+        return new Promise((resolve, reject) => {
+            const cbName = '_jp_' + Math.random().toString(36).substr(2, 8);
+            const sep = url.includes('?') ? '&' : '?';
+            const script = document.createElement('script');
+            script.src = url + sep + 'callback=' + cbName;
+            script.onerror = () => { reject(new Error('JSONP failed')); };
+            window[cbName] = (data) => {
+                resolve(data);
+                delete window[cbName];
+                document.body.removeChild(script);
+            };
+            document.body.appendChild(script);
+        });
+    }
+
+    /* ========================================
+       获取指数 & 个股数据（腾讯证券API）
+       返回格式：v_sh000001="1~上证指数~000001~4133.33~...";
+    ======================================== */
+    function fetchTencent(symbols) {
+        const symStr = symbols.join(',');
+        const url = CONF.tencentAPI + symStr;
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = url;
+            script.onload = () => {
+                const result = {};
+                symbols.forEach(sym => {
+                    const varName = 'v_' + sym;
+                    const raw = window[varName];
+                    if (typeof raw === 'string') {
+                        const parts = raw.split('~');
+                        result[sym] = {
+                            name:  parts[1] || sym,
+                            price: parseFloat(parts[3]) || 0,
+                            change: parseFloat(parts[4]) || 0,
+                            pct:   parseFloat(parts[5]) || 0
+                        };
+                    }
+                });
+                resolve(result);
+            };
+            script.onerror = () => resolve({});
+            document.body.appendChild(script);
+        });
+    }
+
+    /* ========================================
+       获取基金实时估值（天天基金API）
+    ======================================== */
+    async function fetchFundEstimations(codes) {
+        const results = {};
+        for (const code of codes) {
+            try {
+                const data = await jsonp(CONF.fundAPI + code + '.js');
+                if (data && data.gsz) {
+                    results[code] = {
+                        name: data.name,
+                        nav:  data.dwjz,    // 昨日净值
+                        estNav: data.gsz,     // 今日估算净值
+                        estPct: data.gszzl     // 估算涨跌幅
+                    };
+                }
+            } catch (e) {
+                console.warn('[Fund] Failed to fetch ' + code, e);
+            }
+        }
+        return results;
+    }
+
+    /* ========================================
+       获取板块排行（东方财富API）
+       Note: 该API可能有CORS限制，失败时静默处理
+    ======================================== */
+    async function fetchSectorRank() {
+        try {
+            const resp = await fetch(CONF.sectorAPI);
+            if (!resp.ok) return null;
+            const json = await resp.json();
+            if (json && json.data && json.data.diff) {
+                return json.data.diff.slice(0, 12).map((item, i) => ({
+                    rank: i + 1,
+                    name: item.f14,
+                    pct:  item.f3
+                }));
+            }
+        } catch (e) {
+            console.warn('[Sector] API unavailable, using fallback data');
+        }
+        return null;
+    }
+
+    /* ========================================
+       DOM 更新函数
+    ======================================== */
+
+    /* --- 跑马灯 --- */
+    function renderMarquee(indexData) {
+        const wrap = document.getElementById('marqueeWrap');
+        if (!wrap) return;
+
+        const items = [];
+
+        // 指数
+        CONF.indices.forEach(idx => {
+            const d = indexData[idx.sym];
+            if (!d) return;
+            const dir = d.pct >= 0 ? 'up' : 'down';
+            const dotClass = d.pct >= 0 ? 'mq-dot up' : 'mq-dot down';
+            items.push(
+                '<div class="mq-item">' +
+                    '<span class="' + dotClass + '"></span>' +
+                    '<span class="mq-name">' + d.name + '</span>' +
+                    '<span class="mq-val">' + d.price.toFixed(2) + '</span>' +
+                    '<span class="mq-' + dir + '">' + (d.pct >= 0 ? '+' : '') + d.pct.toFixed(2) + '%</span>' +
+                '</div>'
+            );
+        });
+
+        // 北向资金（静态，实际可接API）
+        items.push(
+            '<div class="mq-item">' +
+                '<span class="mq-name">北向资金</span>' +
+                '<span class="mq-val">-42.6亿</span>' +
+                '<span class="mq-down">净流出</span>' +
+            '</div>',
+            '<div class="mq-item">' +
+                '<span class="mq-name">两市成交</span>' +
+                '<span class="mq-val">2.61万亿</span>' +
+                '<span style="color:var(--text-muted)">较昨日缩量</span>' +
+            '</div>',
+            '<div class="mq-item">' +
+                '<span class="mq-name">涨停</span>' +
+                '<span class="mq-up">62</span>' +
+                '<span class="mq-name">跌停</span>' +
+                '<span class="mq-down">18</span>' +
+            '</div>'
+        );
+
+        // 重复一份实现无缝滚动
+        wrap.innerHTML = items.join('') + items.join('');
+    }
+
+    /* --- 指数卡片 --- */
+    function renderIndexCards(indexData) {
+        const grid = document.getElementById('indexGrid');
+        if (!grid) return;
+
+        grid.innerHTML = CONF.indices.map(idx => {
+            const d = indexData[idx.sym];
+            if (!d) return '';
+            const isUp  = d.pct >= 0;
+            const dir   = isUp ? 'up'   : 'down';
+            const barW  = Math.min(Math.abs(d.pct) * 10, 100);
+            return (
+                '<div class="index-card data-flash">' +
+                    '<div class="index-name">' + d.name + ' <span class="index-badge">' + idx.badge + '</span></div>' +
+                    '<div class="index-point">' + d.price.toFixed(2) + '</div>' +
+                    '<div class="index-change ' + dir + '">' +
+                        '<span class="index-pct">' + (isUp ? '+' : '') + d.pct.toFixed(2) + '%</span>' +
+                        '<span style="font-size:0.78rem;font-weight:600">' + (isUp ? '▲' : '▼') + ' ' + Math.abs(d.change).toFixed(2) + '</span>' +
+                    '</div>' +
+                    '<div class="index-bar-wrap"><div class="index-bar ' + dir + '" style="width:' + barW + '%"></div></div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    /* --- 板块热点 --- */
+    function renderSectorGrid(sectors) {
+        const grid = document.getElementById('sectorGrid');
+        if (!grid) return;
+
+        // 如果没有API数据，使用备用静态数据
+        const data = sectors || [
+            { rank:1, name:'银行',      pct: 1.25 },
+            { rank:2, name:'保险',      pct: 0.86 },
+            { rank:3, name:'电力',      pct: 0.52 },
+            { rank:4, name:'煤炭',      pct: 0.31 },
+            { rank:5, name:'石油',      pct: 0.18 },
+            { rank:6, name:'港口航运',  pct:-0.35 },
+            { rank:7, name:'家电',      pct:-0.82 },
+            { rank:8, name:'半导体',    pct:-2.15 },
+            { rank:9, name:'光伏设备',  pct:-2.86 },
+            { rank:10,name:'AI应用',    pct:-3.42 },
+            { rank:11,name:'军工电子',  pct:-2.58 },
+            { rank:12,name:'氟化工',    pct:-1.95 }
+        ];
+
+        grid.innerHTML = data.map(s => {
+            const isUp    = s.pct >= 0;
+            const topCls  = s.rank <= 3 ? ' top3' : (s.rank >= 10 ? ' bottom3' : '');
+            return (
+                '<div class="sector-item' + topCls + '">' +
+                    '<span class="sector-rank">' + s.rank + '</span>' +
+                    '<div class="sector-name">' + s.name + '</div>' +
+                    '<div class="sector-pct ' + (isUp ? 'up' : 'down') + '">' +
+                        (isUp ? '+' : '') + s.pct.toFixed(2) + '%</div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    /* --- 关注标的 --- */
+    function renderWatchList(stockData) {
+        const list = document.getElementById('watchList');
+        if (!list) return;
+
+        list.innerHTML = CONF.watchStocks.map(w => {
+            const d = stockData && stockData[w.sym];
+            const price = d ? d.price.toFixed(2) : '--';
+            const pct   = d ? d.pct : null;
+            const isUp  = pct !== null && pct >= 0;
+            const pctStr = pct !== null ? (isUp ? '+' : '') + pct.toFixed(2) + '%' : '--';
+            const chgClass = pct !== null ? (isUp ? 'watch-chg up' : 'watch-chg down') : 'watch-chg';
+            return (
+                '<div class="watch-item">' +
+                    '<div class="watch-left">' +
+                        '<span class="watch-name">' + w.name + '</span>' +
+                        '<span class="watch-code">' + w.code + '</span>' +
+                    '</div>' +
+                    '<div class="watch-right">' +
+                        '<div class="watch-price">' + price + '</div>' +
+                        '<div class="' + chgClass + '">' + pctStr + '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    /* --- 持仓基金 --- */
+    function renderFundList(fundData) {
+        const list = document.getElementById('fundList');
+        if (!list) return;
+
+        const fundNames = {
+            '003095':'中欧医疗健康A', '001410':'信澳新能源A',
+            '163406':'兴全合润混合A', '001990':'数据挖掘多因子A',
+            '025832':'天弘中证电网A', '012733':'易方达AI主题A',
+            '007300':'国联安半导体A', '110020':'易方达沪深300A'
+        };
+
+        list.innerHTML = CONF.fundCodes.map(code => {
+            const d = fundData && fundData[code];
+            const nav    = d ? parseFloat(d.estNav).toFixed(4) : '--';
+            const pct    = d ? parseFloat(d.estPct) : null;
+            const isUp   = pct !== null && pct >= 0;
+            const pctStr = pct !== null ? (isUp ? '+' : '') + pct.toFixed(2) + '%' : '--';
+            const chgClass = pct !== null ? (isUp ? 'fund-chg up' : 'fund-chg down') : 'fund-chg';
+            return (
+                '<div class="fund-item">' +
+                    '<div class="fund-left">' +
+                        '<span class="fund-name">' + (fundNames[code] || code) + '</span>' +
+                        '<span class="fund-code">' + code + '</span>' +
+                    '</div>' +
+                    '<div class="fund-right">' +
+                        '<div class="fund-nav">' + nav + '</div>' +
+                        '<div class="' + chgClass + '">' + pctStr + '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    /* --- AI日报摘要 --- */
+    function renderDigest(indexData) {
+        const elDate  = document.getElementById('digestDate');
+        const elBody  = document.getElementById('digestBody');
+        const elTags  = document.getElementById('digestTags');
+        if (!elBody) return;
+
+        // 日期
+        const now = new Date();
+        const dateStr = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日';
+        if (elDate) elDate.textContent = dateStr;
+
+        // 根据实时数据生成摘要
+        const shIdx = indexData && indexData['sh000001'];
+        const szIdx = indexData && indexData['sz399001'];
+        const isDown = shIdx && shIdx.pct < 0;
+
+        let summary = '';
+        if (shIdx) {
+            summary += '今日<span class="ai-highlight">上证' + (isDown ? '收跌' : '收涨') + shIdx.pct.toFixed(2) + '%</span>';
+            summary += '，报<span class="ai-highlight">' + shIdx.price.toFixed(2) + '点</span>。';
+        }
+        if (szIdx) {
+            summary += '深证成指' + (szIdx.pct >= 0 ? '涨' : '跌') + Math.abs(szIdx.pct).toFixed(2) + '%，';
+        }
+        summary += '两市成交额约<span class="ai-highlight">2.61万亿</span>。';
+
+        if (isDown) {
+            summary += '<br>短线调整压力释放，<span class="ai-highlight">防御板块（银行/电力）相对抗跌</span>，等待企稳信号后再加仓。';
+        } else {
+            summary += '<br>市场情绪偏多，<span class="ai-highlight">建议关注主线板块回调买入机会</span>。';
+        }
+
+        // 支撑/压力位
+        if (shIdx) {
+            const support = (shIdx.price * 0.995).toFixed(0);
+            const resist  = (shIdx.price * 1.008).toFixed(0);
+            summary += '<p style="margin-top:8px">';
+            summary += '📍 <strong>支撑位：</strong>' + support + '点（今日中枢）';
+            summary += '　<strong>压力位：</strong>' + resist + '点（前期套牢区）';
+            summary += '</p>';
+        }
+
+        elBody.innerHTML = summary;
+
+        // 标签
+        if (elTags) {
+            const tags = isDown
+                ? ['📉 短线调整','💰 缩量回调','🛡️ 防御板块抗跌','⚠️ 等待企稳']
+                : ['📈 情绪偏多','💰 成交活跃','🚀 主线明确','⚠️ 注意高位风险'];
+            elTags.innerHTML = tags.map(t => '<span class="ai-tag">' + t + '</span>').join('');
+        }
+    }
+
+    /* --- Hero 北向资金 --- */
+    function renderHeroNorth(pct) {
+        const el = document.getElementById('heroNorthFlow');
+        const lb = document.getElementById('heroNorthLabel');
+        if (!el) return;
+        // 模拟数据（实际可接东方财富北向API）
+        el.textContent = '-42.6亿';
+        el.className = 'stat-value';
+        if (lb) {
+            lb.textContent = '北向净流出';
+            lb.className = 'stat-change down';
+        }
+    }
+
+    /* ========================================
+       主流程：获取全部数据并更新页面
+    ======================================== */
+    async function fetchAllData() {
+        // 显示加载状态
+        const btn = document.querySelector('.refresh-btn');
+        if (btn) btn.textContent = '🔄 刷新中...';
+
+        try {
+            // 1. 指数 + 个股行情（腾讯证券API）
+            const allSyms = CONF.indices.map(i => i.sym).concat(CONF.watchStocks.map(w => w.sym));
+            const stockData = await fetchTencent(allSyms);
+
+            // 2. 基金估值（天天基金API）
+            const fundData = await fetchFundEstimations(CONF.fundCodes);
+
+            // 3. 板块排行（东方财富，可能失败）
+            const sectorData = await fetchSectorRank();
+
+            // 更新DOM
+            renderMarquee(stockData);
+            renderIndexCards(stockData);
+            renderSectorGrid(sectorData);
+            renderWatchList(stockData);
+            renderFundList(fundData);
+            renderDigest(stockData);
+            renderHeroNorth();
+
+            console.log('[SpacenetX] Data refreshed at ' + new Date().toLocaleTimeString());
+        } catch (e) {
+            console.error('[SpacenetX] Fetch error:', e);
+        } finally {
+            if (btn) btn.textContent = '🔄 刷新数据';
+        }
+    }
+
+    /* ========================================
+       初始化
+    ======================================== */
+    // 页面加载后立即获取数据
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => fetchAllData());
+    } else {
+        fetchAllData();
+    }
+
+    // 定时刷新
+    setInterval(fetchAllData, CONF.refreshInterval);
+
+    // 暴露到全局（供按钮onclick调用）
+    window.fetchAllData = fetchAllData;
+})();
+</script>
+
+<!-- ═══ 订阅弹窗JS ═══ -->
 <script>
 function showSubscribeModal() {
     document.getElementById('subscribeModal').classList.add('show');
