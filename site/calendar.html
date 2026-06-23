@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>事件日历 - A股投研工具箱</title>
+<link rel="icon" href="/favicon.svg"/>
+<style>
+:root{--primary:#e11d48;--primary-light:#fce7f3;--blue:#2563eb;--green:#16a34a;--orange:#ea580c;--purple:#9333ea;--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#1e293b;--text2:#64748b;--radius:12px;--font:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;--shadow:0 1px 3px rgba(0,0,0,0.08);--red:#dc2626;--green-up:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+a{text-decoration:none;color:inherit}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.logo{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),#f59e0b);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{color:var(--text2);padding:6px 14px;border-radius:8px;font-size:0.85rem;font-weight:500;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary)}
+.page-wrap{max-width:1200px;margin:0 auto;padding:24px}
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:1.6rem;font-weight:800;margin-bottom:6px}
+.page-header p{color:var(--text2);font-size:0.92rem}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.stat-value{font-size:1.5rem;font-weight:800}
+.stat-label{font-size:0.78rem;color:var(--text2);margin-top:4px}
+.stat-change.up{color:var(--green-up)}.stat-change.down{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:600;color:var(--text2);border-bottom:2px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--bg3)}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.72rem;font-weight:600}
+.tag.red{background:#fef2f2;color:var(--red)}.tag.green{background:#f0fdf4;color:var(--green)}.tag.blue{background:#eff6ff;color:var(--blue)}.tag.orange{background:#fff7ed;color:var(--orange)}
+.btn{display:inline-block;padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{opacity:0.9}
+.search-bar{display:flex;gap:8px;margin-bottom:16px}
+.search-bar input{flex:1;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:0.88rem;outline:none;transition:.2s}
+.search-bar input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,29,72,0.1)}
+.progress-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:6px}.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<nav><div class="nav-inner"><a class="logo" href="/"><div class="logo-icon">📈</div>A股投研工具箱</a><ul class="nav-links"><li><a href="/">首页</a></li></ul></div></nav>
+<div class="page-wrap">
+<div class="page-header">
+<h1>📅 事件日历</h1>
+<p>宏观政策、财报季、重要经济事件一键掌握</p>
+</div>
+<!-- 顶部统计卡片 -->
+<div class="grid-3" style="margin-bottom:20px;">
+  <div class="stat-card" style="border-left:4px solid var(--red);">
+    <div class="stat-value" style="font-size:1.1rem;color:var(--red);">06-25</div>
+    <div class="stat-label">美联储利率决议</div>
+    <div style="font-size:0.72rem;color:var(--text2);margin-top:6px;">FOMC议息会议结果公布</div>
+  </div>
+  <div class="stat-card" style="border-left:4px solid var(--blue);">
+    <div class="stat-value" style="font-size:1.1rem;color:var(--blue);">07-15</div>
+    <div class="stat-label">中国Q2 GDP</div>
+    <div style="font-size:0.72rem;color:var(--text2);margin-top:6px;">二季度GDP增速数据发布</div>
+  </div>
+  <div class="stat-card" style="border-left:4px solid var(--green);">
+    <div class="stat-value" style="font-size:1.1rem;color:var(--green);">每周五</div>
+    <div class="stat-label">北向资金数据</div>
+    <div style="font-size:0.72rem;color:var(--text2);margin-top:6px;">外资流向每周五例行更新</div>
+  </div>
+</div>
+
+<!-- 本周重要事件表格 -->
+<div class="card">
+  <div class="card-title">📋 本周重要事件（06/23 - 06/29）</div>
+  <table>
+    <thead>
+      <tr>
+        <th>日期</th>
+        <th>事件</th>
+        <th>重要性</th>
+        <th>影响板块</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>06-23（周一）</td>
+        <td>中国6月LPR报价公布</td>
+        <td><span class="tag orange">重要</span></td>
+        <td>银行、地产、基建</td>
+      </tr>
+      <tr>
+        <td>06-24（周二）</td>
+        <td>苹果WWDC 2026开发者大会</td>
+        <td><span class="tag blue">关注</span></td>
+        <td>消费电子、AI算力</td>
+      </tr>
+      <tr>
+        <td>06-25（周三）</td>
+        <td>美联储FOMC利率决议</td>
+        <td><span class="tag red">非常重要</span></td>
+        <td>全市场、黄金、汇率</td>
+      </tr>
+      <tr>
+        <td>06-26（周四）</td>
+        <td>美国第一季度GDP终值</td>
+        <td><span class="tag blue">关注</span></td>
+        <td>出口链、外贸</td>
+      </tr>
+      <tr>
+        <td>06-27（周五）</td>
+        <td>北向资金周度数据发布</td>
+        <td><span class="tag orange">重要</span></td>
+        <td>外资重仓股</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 近期国际大事卡片网格 -->
+<div class="card" style="margin-top:20px;">
+  <div class="card-title">🌍 近期国际大事</div>
+  <div class="grid-2">
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--bg3);">
+      <div style="font-weight:700;font-size:0.95rem;margin-bottom:6px;">🇺🇸 美联储6月议息会议</div>
+      <div style="font-size:0.82rem;color:var(--text2);margin-bottom:8px;">06-25 北京时间凌晨02:00公布结果</div>
+      <div style="font-size:0.82rem;color:var(--text);">市场预期维持利率不变（5.25%-5.50%），关注鲍威尔新闻发布会表态，若释放鸽派信号将利好A股外资流入。</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--bg3);">
+      <div style="font-weight:700;font-size:0.95rem;margin-bottom:6px;">🇪🇺 欧盟对华电动汽车关税落地</div>
+      <div style="font-size:0.82rem;color:var(--text2);margin-bottom:8px;">07-01 正式生效</div>
+      <div style="font-size:0.82rem;color:var(--text);">欧盟对华电动汽车最终关税税率确定，短期对新能源出口链有压制，但市场已提前消化，关注超跌反弹机会。</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--bg3);">
+      <div style="font-weight:700;font-size:0.95rem;margin-bottom:6px;">🤖 苹果WWDC 2026 AI战略发布</div>
+      <div style="font-size:0.82rem;color:var(--text2);margin-bottom:8px;">06-24 美国加州</div>
+      <div style="font-size:0.82rem;color:var(--text);">苹果将发布AI生态最新进展，关注对A股苹果产业链及AI算力链的催化作用，立讯精密、工业富联等有望受益。</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--bg3);">
+      <div style="font-weight:700;font-size:0.95rem;margin-bottom:6px;">📊 美国5月CPI数据超预期</div>
+      <div style="font-size:0.82rem;color:var(--text2);margin-bottom:8px;">已发布 06-11</div>
+      <div style="font-size:0.82rem;color:var(--text);">美国5月CPI同比+3.1%（预期+2.9%），核心CPI +3.4%，通胀粘性较强，美联储降息预期推迟至Q4，对全球流动性偏负面。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 国内政策日历 -->
+<div class="card" style="margin-top:20px;">
+  <div class="card-title">🏛️ 国内政策日历</div>
+  <table>
+    <thead>
+      <tr>
+        <th>日期</th>
+        <th>政策事件</th>
+        <th>部门</th>
+        <th>影响方向</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>06-30</td>
+        <td>新能源汽车购置税减免政策细则</td>
+        <td>工信部/财政部</td>
+        <td><span class="tag green">利好新能源</span></td>
+      </tr>
+      <tr>
+        <td>07-01</td>
+        <td>半导体设备进口税收优惠延期</td>
+        <td>海关总署</td>
+        <td><span class="tag green">利好半导体</span></td>
+      </tr>
+      <tr>
+        <td>07-15</td>
+        <td>Q2 GDP及6月宏观经济数据</td>
+        <td>国家统计局</td>
+        <td><span class="tag blue">全市场关注</span></td>
+      </tr>
+      <tr>
+        <td>07-20</td>
+        <td>中央政治局会议（经济工作）</td>
+        <td>中共中央</td>
+        <td><span class="tag orange">重要政策窗口</span></td>
+      </tr>
+      <tr>
+        <td>08-01</td>
+        <td>数据要素×行动计划推进</td>
+        <td>国家数据局</td>
+        <td><span class="tag green">利好数字经济</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</body>
+</html>

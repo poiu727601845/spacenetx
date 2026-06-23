@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>风险监控 - A股投研工具箱</title>
+<link rel="icon" href="/favicon.svg"/>
+<style>
+:root{--primary:#e11d48;--primary-light:#fce7f3;--blue:#2563eb;--green:#16a34a;--orange:#ea580c;--purple:#9333ea;--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#1e293b;--text2:#64748b;--radius:12px;--font:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;--shadow:0 1px 3px rgba(0,0,0,0.08);--red:#dc2626;--green-up:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+a{text-decoration:none;color:inherit}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.logo{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),#f59e0b);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{color:var(--text2);padding:6px 14px;border-radius:8px;font-size:0.85rem;font-weight:500;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary)}
+.page-wrap{max-width:1200px;margin:0 auto;padding:24px}
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:1.6rem;font-weight:800;margin-bottom:6px}
+.page-header p{color:var(--text2);font-size:0.92rem}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.stat-value{font-size:1.5rem;font-weight:800}
+.stat-label{font-size:0.78rem;color:var(--text2);margin-top:4px}
+.stat-change.up{color:var(--green-up)}.stat-change.down{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:600;color:var(--text2);border-bottom:2px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--bg3)}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.72rem;font-weight:600}
+.tag.red{background:#fef2f2;color:var(--red)}.tag.green{background:#f0fdf4;color:var(--green)}.tag.blue{background:#eff6ff;color:var(--blue)}.tag.orange{background:#fff7ed;color:var(--orange)}
+.btn{display:inline-block;padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{opacity:0.9}
+.search-bar{display:flex;gap:8px;margin-bottom:16px}
+.search-bar input{flex:1;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:0.88rem;outline:none;transition:.2s}
+.search-bar input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,29,72,0.1)}
+.progress-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:6px}.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<nav><div class="nav-inner"><a class="logo" href="/"><div class="logo-icon">📈</div>A股投研工具箱</a><ul class="nav-links"><li><a href="/">首页</a></li></ul></div></nav>
+<div class="page-wrap">
+<div class="page-header">
+<h1>⚠️ 风险监控</h1>
+<p>组合风险体检、市场情绪指标与个股预警</p>
+</div>
+<!-- 顶部统计卡片 -->
+<div class="grid-4" style="margin-bottom:20px;">
+  <div class="stat-card" style="border-left:4px solid var(--orange);">
+    <div style="font-size:1.8rem;margin-bottom:4px;">⚠️</div>
+    <div class="stat-value" style="color:var(--orange);">中等</div>
+    <div class="stat-label">风险等级</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">18.5</div>
+    <div class="stat-label">VIX波动率</div>
+    <div style="font-size:0.72rem;color:var(--text2);margin-top:4px;">偏低区间</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value" style="color:var(--red);">-42.6亿</div>
+    <div class="stat-label">北向净流出(今日)</div>
+    <div style="font-size:0.72rem;color:var(--red);margin-top:4px;">连续3日流出</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value"><span style="color:var(--green-up);">62</span> : <span style="color:var(--red);">18</span></div>
+    <div class="stat-label">涨停 : 跌停</div>
+    <div style="font-size:0.72rem;color:var(--text2);margin-top:4px;">情绪偏暖</div>
+  </div>
+</div>
+
+<!-- 组合风险体检表格 -->
+<div class="card">
+  <div class="card-title">🩺 组合风险体检</div>
+  <table>
+    <thead>
+      <tr>
+        <th>风险维度</th>
+        <th>当前值</th>
+        <th>阈值</th>
+        <th>状态</th>
+        <th>建议</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>集中度风险</td>
+        <td>前三大持仓 58%</td>
+        <td>&lt;40%</td>
+        <td><span class="tag red">超标</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">建议减持半导体仓位，分散至红利/消费</td>
+      </tr>
+      <tr>
+        <td>波动率</td>
+        <td>年化18.5%</td>
+        <td>&lt;15%</td>
+        <td><span class="tag orange">偏高</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">组合波动较大，可考虑配置固收+产品对冲</td>
+      </tr>
+      <tr>
+        <td>最大回撤</td>
+        <td>-12.3%</td>
+        <td>&lt;-10%</td>
+        <td><span class="tag orange">预警</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">回撤接近预警线，建议关注止损位</td>
+      </tr>
+      <tr>
+        <td>流动性风险</td>
+        <td>小市值占比 22%</td>
+        <td>&lt;30%</td>
+        <td><span class="tag green">正常</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">流动性风险可控，维持现有配置</td>
+      </tr>
+      <tr>
+        <td>行业偏离</td>
+        <td>科技超配 +25%</td>
+        <td>&lt;+15%</td>
+        <td><span class="tag red">超标</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">科技板块超配过多，建议减仓至基准权重</td>
+      </tr>
+      <tr>
+        <td>外汇风险</td>
+        <td>QDII占比 8%</td>
+        <td>&lt;20%</td>
+        <td><span class="tag green">正常</span></td>
+        <td style="font-size:0.82rem;color:var(--text2);">汇率敞口较小，无需特殊处理</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 市场风险指标双栏 -->
+<div class="grid-2" style="margin-top:20px;">
+  <!-- 情绪指标 -->
+  <div class="card">
+    <div class="card-title">📊 情绪指标</div>
+    <table>
+      <tbody>
+        <tr>
+          <td>融资余额</td>
+          <td style="font-weight:600;">15,286亿</td>
+          <td><span class="tag green">+82亿</span></td>
+        </tr>
+        <tr>
+          <td>股指期货升贴水</td>
+          <td style="font-weight:600;">升水 +0.12%</td>
+          <td><span class="tag green">偏多</span></td>
+        </tr>
+        <tr>
+          <td>恐慌指数(GVIX)</td>
+          <td style="font-weight:600;">22.3</td>
+          <td><span class="tag orange">谨慎</span></td>
+        </tr>
+        <tr>
+          <td>新股破发率</td>
+          <td style="font-weight:600;">18.5%</td>
+          <td><span class="tag orange">偏高</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 外部风险 -->
+  <div class="card">
+    <div class="card-title">🌐 外部风险</div>
+    <table>
+      <tbody>
+        <tr>
+          <td>美债10年期收益率</td>
+          <td style="font-weight:600;">4.28%</td>
+          <td><span class="tag red">高位</span></td>
+        </tr>
+        <tr>
+          <td>美元指数(DXY)</td>
+          <td style="font-weight:600;">105.8</td>
+          <td><span class="tag orange">偏强</span></td>
+        </tr>
+        <tr>
+          <td>人民币汇率(USD/CNY)</td>
+          <td style="font-weight:600;">7.23</td>
+          <td><span class="tag green">稳定</span></td>
+        </tr>
+        <tr>
+          <td>布伦特原油</td>
+          <td style="font-weight:600;">$78.5/桶</td>
+          <td><span class="tag orange">震荡</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 个股黑名单预警 -->
+<div class="card" style="margin-top:20px;">
+  <div class="card-title">🚫 个股黑名单预警</div>
+  <table>
+    <thead>
+      <tr>
+        <th>股票名称</th>
+        <th>代码</th>
+        <th>风险提示</th>
+        <th>触发条件</th>
+        <th>建议操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>某光伏龙头</td>
+        <td>688XXX</td>
+        <td><span class="tag red">⛔ 高风险</span></td>
+        <td>连续亏损+高管减持</td>
+        <td style="color:var(--red);font-weight:600;">建议清仓</td>
+      </tr>
+      <tr>
+        <td>某地产房企</td>
+        <td>000XXX</td>
+        <td><span class="tag red">⛔ 高风险</span></td>
+        <td>债务违约风险+评级下调</td>
+        <td style="color:var(--red);font-weight:600;">回避</td>
+      </tr>
+      <tr>
+        <td>某ST公司</td>
+        <td>002XXX</td>
+        <td><span class="tag orange">⚠️ 中等风险</span></td>
+        <td>财务造假调查+退市风险</td>
+        <td style="color:var(--orange);font-weight:600;">减仓观望</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 持仓基金风险提示 -->
+<div class="card" style="margin-top:20px;">
+  <div class="card-title">💼 持仓基金风险提示</div>
+  <div class="grid-3">
+    <div style="padding:16px;border:1px solid var(--red);border-radius:10px;background:#fef2f2;">
+      <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">007300 半导体ETF联接</div>
+      <div style="font-size:0.82rem;color:var(--red);font-weight:600;margin-bottom:8px;">⛔ 高风险预警</div>
+      <div style="font-size:0.82rem;color:var(--text2);">半导体板块估值处于72%分位，短期回调压力较大。近1月回撤-8.5%，建议减仓至10%以下。</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--red);border-radius:10px;background:#fef2f2;">
+      <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">012733 AI主题混合</div>
+      <div style="font-size:0.82rem;color:var(--red);font-weight:600;margin-bottom:8px;">⛔ 高风险预警</div>
+      <div style="font-size:0.82rem;color:var(--text2);">AI板块资金连续流出，基金经理近期频繁换仓，换手率偏高。建议止损或转换至稳健品种。</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--green);border-radius:10px;background:#f0fdf4;">
+      <div style="font-weight:700;font-size:1rem;margin-bottom:4px;">003095 医疗健康混合</div>
+      <div style="font-size:0.82rem;color:var(--green);font-weight:600;margin-bottom:8px;">✅ 风险可控</div>
+      <div style="font-size:0.82rem;color:var(--text2);">医药板块估值处于35%分位（低估），政策边际改善。基金近3月超额收益+2.3%，可继续持有。</div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>估值查询 - A股投研工具箱</title>
+<link rel="icon" href="/favicon.svg"/>
+<style>
+:root{--primary:#e11d48;--primary-light:#fce7f3;--blue:#2563eb;--green:#16a34a;--orange:#ea580c;--purple:#9333ea;--bg:#f8fafc;--bg2:#ffffff;--bg3:#f1f5f9;--border:#e2e8f0;--text:#1e293b;--text2:#64748b;--radius:12px;--font:'PingFang SC','Microsoft YaHei',system-ui,sans-serif;--shadow:0 1px 3px rgba(0,0,0,0.08);--red:#dc2626;--green-up:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6}
+a{text-decoration:none;color:inherit}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+.logo{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--primary),#f59e0b);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff}
+.nav-links{display:flex;gap:4px;list-style:none}
+.nav-links a{color:var(--text2);padding:6px 14px;border-radius:8px;font-size:0.85rem;font-weight:500;transition:.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary)}
+.page-wrap{max-width:1200px;margin:0 auto;padding:24px}
+.page-header{margin-bottom:24px}
+.page-header h1{font-size:1.6rem;font-weight:800;margin-bottom:6px}
+.page-header p{color:var(--text2);font-size:0.92rem}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.stat-value{font-size:1.5rem;font-weight:800}
+.stat-label{font-size:0.78rem;color:var(--text2);margin-top:4px}
+.stat-change.up{color:var(--green-up)}.stat-change.down{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:0.85rem}
+th{background:var(--bg3);padding:10px 12px;text-align:left;font-weight:600;color:var(--text2);border-bottom:2px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--bg3)}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.72rem;font-weight:600}
+.tag.red{background:#fef2f2;color:var(--red)}.tag.green{background:#f0fdf4;color:var(--green)}.tag.blue{background:#eff6ff;color:var(--blue)}.tag.orange{background:#fff7ed;color:var(--orange)}
+.btn{display:inline-block;padding:8px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{opacity:0.9}
+.search-bar{display:flex;gap:8px;margin-bottom:16px}
+.search-bar input{flex:1;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:0.88rem;outline:none;transition:.2s}
+.search-bar input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(225,29,72,0.1)}
+.progress-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:6px}.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<nav><div class="nav-inner"><a class="logo" href="/"><div class="logo-icon">📈</div>A股投研工具箱</a><ul class="nav-links"><li><a href="/">首页</a></li></ul></div></nav>
+<div class="page-wrap">
+<div class="page-header">
+<h1>📐 估值查询</h1>
+<p>A股主要指数与行业PE/PB估值及历史分位数据</p>
+</div>
+<!-- 顶部统计卡片 -->
+<div class="grid-4" style="margin-bottom:20px;">
+  <div class="stat-card">
+    <div class="stat-value">14.2x</div>
+    <div class="stat-label">上证PE</div>
+    <div style="font-size:0.78rem;color:var(--green);margin-top:4px;">合理 ✅</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">25.8x</div>
+    <div class="stat-label">深证PE</div>
+    <div style="font-size:0.78rem;color:var(--orange);margin-top:4px;">偏高 ⚠️</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">32.1x</div>
+    <div class="stat-label">创业板PE</div>
+    <div style="font-size:0.78rem;color:var(--blue);margin-top:4px;">68%分位</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">58.6x</div>
+    <div class="stat-label">科创50 PE</div>
+    <div style="font-size:0.78rem;color:var(--orange);margin-top:4px;">75%分位 ⚠️</div>
+  </div>
+</div>
+
+<!-- 主要指数估值表格 -->
+<div class="card">
+  <div class="card-title">📊 主要指数估值</div>
+  <table>
+    <thead>
+      <tr>
+        <th>指数</th>
+        <th>PE-TTM</th>
+        <th>历史分位</th>
+        <th>PB</th>
+        <th>股息率</th>
+        <th>评级</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>上证指数</td>
+        <td>14.2x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:42%;background:var(--green);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">42%</span>
+          </div>
+        </td>
+        <td>1.38x</td>
+        <td>2.85%</td>
+        <td><span class="tag green">低估</span></td>
+      </tr>
+      <tr>
+        <td>深证成指</td>
+        <td>25.8x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:68%;background:var(--orange);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">68%</span>
+          </div>
+        </td>
+        <td>2.45x</td>
+        <td>1.52%</td>
+        <td><span class="tag orange">偏高</span></td>
+      </tr>
+      <tr>
+        <td>创业板指</td>
+        <td>32.1x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:68%;background:var(--orange);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">68%</span>
+          </div>
+        </td>
+        <td>3.82x</td>
+        <td>0.85%</td>
+        <td><span class="tag orange">偏高</span></td>
+      </tr>
+      <tr>
+        <td>科创50</td>
+        <td>58.6x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:75%;background:var(--red);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">75%</span>
+          </div>
+        </td>
+        <td>4.25x</td>
+        <td>0.42%</td>
+        <td><span class="tag red">高估</span></td>
+      </tr>
+      <tr>
+        <td>沪深300</td>
+        <td>13.5x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:38%;background:var(--green);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">38%</span>
+          </div>
+        </td>
+        <td>1.52x</td>
+        <td>3.12%</td>
+        <td><span class="tag green">低估</span></td>
+      </tr>
+      <tr>
+        <td>中证500</td>
+        <td>22.3x</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar" style="flex:1;"><div class="progress-fill" style="width:45%;background:var(--green);"></div></div>
+            <span style="font-size:0.82rem;color:var(--text2);">45%</span>
+          </div>
+        </td>
+        <td>1.85x</td>
+        <td>1.95%</td>
+        <td><span class="tag green">合理</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 行业PE分位双栏 -->
+<div class="grid-2" style="margin-top:20px;">
+  <div class="card">
+    <div class="card-title">🏭 行业PE分位（左栏）</div>
+    <table>
+      <thead>
+        <tr>
+          <th>行业</th>
+          <th>PE-TTM</th>
+          <th>分位</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>银行</td>
+          <td>5.8x</td>
+          <td>18%</td>
+          <td><span class="tag green">严重低估</span></td>
+        </tr>
+        <tr>
+          <td>煤炭</td>
+          <td>8.2x</td>
+          <td>25%</td>
+          <td><span class="tag green">低估</span></td>
+        </tr>
+        <tr>
+          <td>建筑</td>
+          <td>9.5x</td>
+          <td>32%</td>
+          <td><span class="tag green">低估</span></td>
+        </tr>
+        <tr>
+          <td>石油石化</td>
+          <td>12.3x</td>
+          <td>40%</td>
+          <td><span class="tag green">合理</span></td>
+        </tr>
+        <tr>
+          <td>电力</td>
+          <td>15.6x</td>
+          <td>48%</td>
+          <td><span class="tag green">合理</span></td>
+        </tr>
+        <tr>
+          <td>保险</td>
+          <td>16.8x</td>
+          <td>52%</td>
+          <td><span class="tag blue">合理</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏭 行业PE分位（右栏）</div>
+    <table>
+      <thead>
+        <tr>
+          <th>行业</th>
+          <th>PE-TTM</th>
+          <th>分位</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>医药生物</td>
+          <td>28.5x</td>
+          <td>35%</td>
+          <td><span class="tag green">低估</span></td>
+        </tr>
+        <tr>
+          <td>食品饮料</td>
+          <td>32.1x</td>
+          <td>58%</td>
+          <td><span class="tag blue">合理</span></td>
+        </tr>
+        <tr>
+          <td>半导体</td>
+          <td>65.3x</td>
+          <td>72%</td>
+          <td><span class="tag orange">偏高</span></td>
+        </tr>
+        <tr>
+          <td>新能源</td>
+          <td>38.2x</td>
+          <td>62%</td>
+          <td><span class="tag orange">偏高</span></td>
+        </tr>
+        <tr>
+          <td>军工</td>
+          <td>58.6x</td>
+          <td>78%</td>
+          <td><span class="tag red">高估</span></td>
+        </tr>
+        <tr>
+          <td>AI/算力</td>
+          <td>82.5x</td>
+          <td>85%</td>
+          <td><span class="tag red">高估</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 投资建议 -->
+<div class="card" style="margin-top:20px;">
+  <div class="card-title">💡 投资建议</div>
+  <div style="display:grid;gap:12px;">
+    <div style="padding:12px;background:var(--bg3);border-radius:8px;border-left:4px solid var(--green);">
+      <div style="font-weight:700;color:var(--green);margin-bottom:4px;">✅ 推荐关注（低估值高股息）</div>
+      <div style="font-size:0.88rem;color:var(--text2);">银行（PE 5.8x，股息率5.2%）、煤炭（PE 8.2x）、建筑（PE 9.5x）——适合稳健型资金配置</div>
+    </div>
+    <div style="padding:12px;background:var(--bg3);border-radius:8px;border-left:4px solid var(--orange);">
+      <div style="font-weight:700;color:var(--orange);margin-bottom:4px;">⚠️ 谨慎持有（估值偏高）</div>
+      <div style="font-size:0.88rem;color:var(--text2);">半导体（72%分位）、新能源（62%分位）——短期涨幅较大，建议逢高减仓，等待回调后再介入</div>
+    </div>
+    <div style="padding:12px;background:var(--bg3);border-radius:8px;border-left:4px solid var(--red);">
+      <div style="font-weight:700;color:var(--red);margin-bottom:4px;">🚫 建议回避（严重高估）</div>
+      <div style="font-size:0.88rem;color:var(--text2);">AI/算力（85%分位）、军工（78%分位）、科创50（75%分位）——估值处于历史高位，回调风险较大</div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
