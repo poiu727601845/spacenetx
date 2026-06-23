@@ -1500,15 +1500,20 @@
 
             list.innerHTML = latest.map(a => {
                 const title   = a.title || '无标题';
-                const date    = (a.date || '').replace(/-/g, '-');
-                const month  = date.split('-')[1] || '--';
-                const day     = date.split('-')[2] || '--';
+                const date    = (a.date || '');
+                const parts   = date.split('-');
+                const month  = parts[1] || '--';
+                const day     = parts[2] || '--';
                 const tag     = a.tag || a.category || '投研';
                 const tagColor = TAG_COLORS[tag] || TAG_COLORS['default'];
-                const excerpt = (a.excerpt || a.summary || '点击阅读全文').substring(0, 80);
-                const url     = a.url || a.link || '/articles.html';
+                // 摘要：优先summary > 用title截断（因为实际summary大多为空）
+                let excerpt = (a.summary || '').trim();
+                if (!excerpt) excerpt = title.length > 50 ? title.substring(0, 50) + '...' : title;
+                else if (excerpt.length > 80) excerpt = excerpt.substring(0, 80) + '...';
+                // URL：articles.json中字段名为 file
+                const url     = '/' + (a.file || a.url || '');
 
-                return '<div class="article-card" onclick="location.href=\\'' + url + '\\'" style="cursor:pointer">' +
+                return '<div class="article-card" onclick="location.href=\'' + url + '\'" style="cursor:pointer">' +
                     '<div class="article-date-box"><div class="article-day">' + day + '</div><div class="article-month">' + month + '月</div></div>' +
                     '<div class="article-info">' +
                         '<h3 class="article-title">' + title + '</h3>' +
