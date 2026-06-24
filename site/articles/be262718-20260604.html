@@ -1,415 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>电网爆发在即：绿电ETF评测与策略 | A股投研工具箱</title>
-  <meta name="description" content="深入分析电网设备板块政策催化，评测绿电ETF（159996）的投资价值，给出当前市场环境下的配置策略。" />
-  <meta name="keywords" content="电网设备,绿电ETF,159996,政策催化,投资策略" />
-  <meta property="og:title" content="电网爆发在即：绿电ETF评测与策略" />
-  <meta property="og:description" content="深入分析电网设备板块政策催化，评测绿电ETF（159996）的投资价值，给出当前市场环境下的配置策略。" />
-  <meta property="og:image" content="https://spacenetx.com/favicon-og.png" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://spacenetx.com/articles/电网爆发在即绿电etf评测与策略-20260604.html" />
-  <link rel="canonical" href="https://spacenetx.com/articles/电网爆发在即绿电etf评测与策略-20260604.html" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "电网爆发在即：绿电ETF评测与策略",
-    "description": "深入分析电网设备板块政策催化，评测绿电ETF（159996）的投资价值，给出当前市场环境下的配置策略。",
-    "datePublished": "2026-06-04",
-    "author": { "@type": "Person", "name": "无缘的人" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "A股投研工具箱",
-      "url": "https://spacenetx.com"
-    }
-  }
-  </script>
-  <style>
-    :root {
-      --primary: #e11d48;
-      --primary-dark: #be123c;
-      --accent: #f59e0b;
-      --bg: #0d0d10;
-      --bg2: #14141a;
-      --bg3: #1c1c24;
-      --border: #28283a;
-      --text: #e8e8f0;
-      --text2: #8888a8;
-      --radius: 12px;
-      --font: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-      --code-bg: #1a1a24;
-      --green: #22c55e;
-      --red: #ef4444;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
-
-    nav {
-      background: rgba(13,13,16,0.96);
-      backdrop-filter: blur(12px);
-      position: sticky; top: 0; z-index: 100;
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 860px; margin: 0 auto;
-      height: 56px; display: flex;
-      align-items: center; justify-content: space-between;
-    }
-    .logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .back-btn { color: var(--text2); text-decoration: none; font-size: 0.85rem; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
-    .back-btn:hover { border-color: var(--primary); color: var(--text); }
-
-    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 240px; gap: 40px; }
-
-    .article-meta { margin-bottom: 28px; }
-    .meta-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-    .tag {
-      font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; border: 1px solid;
-      color: var(--text2); border-color: var(--border); background: var(--tag-bg, #20202c);
-    }
-    .tag.etf  { color: #fca5a5; border-color: rgba(225,29,72,0.3); background: rgba(225,29,72,0.08); }
-    .tag.hot  { color: #fb923c; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
-    .tag.new  { color: #facc15; border-color: rgba(250,204,21,0.3); background: rgba(250,204,21,0.08); }
-    .tag.ai   { color: #a5b4fc; border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); }
-    .tag.semi { color: #6ee7b7; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
-    .tag.strategy { color: #f9a8d4; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
-    .tag.tech   { color: #7dd3fc; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
-
-    .article-title { font-size: 1.9rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
-    .article-info { display: flex; gap: 16px; color: var(--text2); font-size: 0.82rem; align-items: center; flex-wrap: wrap; }
-    .info-item { display: flex; align-items: center; gap: 4px; }
-    .ai-badge {
-      background: rgba(225,29,72,0.1); border: 1px solid rgba(225,29,72,0.25);
-      color: #fca5a5; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;
-    }
-
-    /* AD BANNER - TOP *//* ARTICLE CONTENT */
-    .article-content { font-size: 0.97rem; color: var(--text); }
-    .article-content h2 { font-size: 1.3rem; font-weight: 700; margin: 32px 0 14px; padding-left: 12px; border-left: 3px solid var(--primary); }
-    .article-content h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 10px; color: #d4d4e0; }
-    .article-content p { margin-bottom: 16px; line-height: 1.85; }
-    .article-content ul, .article-content ol { margin: 12px 0 16px 20px; }
-    .article-content li { margin-bottom: 8px; line-height: 1.7; }
-    .article-content strong { color: #f0f0f8; }
-    .article-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(225,29,72,0.3); }
-    .article-content a:hover { border-color: var(--primary); }
-    .article-content blockquote {
-      border-left: 3px solid var(--primary); padding: 12px 16px;
-      background: rgba(225,29,72,0.06); border-radius: 0 8px 8px 0;
-      margin: 20px 0; color: var(--text2); font-style: italic;
-    }
-    .article-content code {
-      background: var(--code-bg); color: #fca5a5; padding: 1px 6px;
-      border-radius: 4px; font-size: 0.88em;
-    }
-    .article-content table {
-      width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem;
-    }
-    .article-content th { background: var(--bg3); padding: 10px 14px; text-align: left; border: 1px solid var(--border); color: var(--text); }
-    .article-content td { padding: 9px 14px; border: 1px solid var(--border); color: var(--text2); }
-    .article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-    /* SCORE TABLE */
-    .score-table { margin: 20px 0; }
-    .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .score-label { width: 80px; font-size: 0.82rem; color: var(--text2); flex-shrink: 0; }
-    .score-bar-wrap { flex: 1; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
-    .score-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-    .score-num { width: 32px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--text); }
-
-    /* ARTICLE FOOTER */
-    .article-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
-
-    /* AD INLINE *//* SUBSCRIPTION BOX - BOTTOM */
-    .subscribe-box {
-      background: linear-gradient(135deg, rgba(225,29,72,0.04), rgba(245,158,11,0.03));
-      border: 1px solid rgba(225,29,72,0.2);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-top: 24px;
-      text-align: center;
-    }
-    .subscribe-box h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 6px; }
-    .subscribe-box p { font-size: 0.85rem; color: var(--text2); margin-bottom: 14px; }
-    .sub-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
-    .sub-input {
-      flex: 1; background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 12px; color: var(--text);
-      font-size: 0.85rem; font-family: var(--font); outline: none;
-    }
-    .sub-input:focus { border-color: var(--primary); }
-    .sub-input::placeholder { color: var(--text2); opacity: 0.6; }
-    .sub-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 10px 20px; font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.9; }
-    .sub-msg { font-size: 0.75rem; margin-top: 8px; min-height: 18px; }
-    .sub-msg.ok { color: var(--green); }
-    .sub-msg.err { color: var(--red); }
-
-    /* DISCLAIMER */
-    .disclaimer {
-      background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 8px; padding: 10px 12px; margin-top: 16px;
-      font-size: 0.75rem; color: var(--text2); line-height: 1.6;
-    }
-    .disclaimer strong { color: var(--accent); }
-
-    /* TOC */
-    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; position: sticky; top: 72px; }
-    .toc-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .toc-item a { font-size: 0.82rem; color: var(--text2); text-decoration: none; display: block; padding: 3px 8px; border-radius: 4px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.4; }
-    .toc-item a:hover, .toc-item a.active { color: var(--primary); background: rgba(225,29,72,0.08); border-left-color: var(--primary); }
-    .toc-sub { padding-left: 12px; }
-
-    /* RELATED */
-    .related { margin-top: 40px; }
-    .section-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .related-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-decoration: none; transition: all 0.2s; }
-    .related-card:hover { border-color: var(--primary); }
-    .related-card h4 { font-size: 0.88rem; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
-    .related-card span { font-size: 0.75rem; color: var(--text2); }
-
-    @media (max-width: 768px) {
-      .article-wrap { grid-template-columns: 1fr; }
-      .toc { display: none; }
-      .article-title { font-size: 1.4rem; }
-      .related-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电网爆发在即：绿电ETF评测与策略 | A股投研工具箱</title>
+    <meta name="description" content="深入分析电网设备板块政策催化，评测绿电ETF（159996）的投资价值，给出当前市场环境下的配置策略。">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+               max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #1a1a1a; }
+        h1 { font-size: 1.8em; margin: 1.2em 0 0.6em; }
+        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #2563eb; }
+        .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
+        .tag { background: #f0f4ff; color: #2563eb; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+        pre { background: #f5f5f5; padding: 12px; overflow-x: auto; border-radius: 6px; }
+        blockquote { border-left: 3px solid #2563eb; margin: 1em 0; padding: 0.5em 1em; background: #f0f4ff; }
+    </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-inner">
-    <a class="logo" href="/">
-      <div class="logo-icon">📈</div>
-      A股投研工具箱
-    </a>
-    <a class="back-btn" href="/">← 返回首页</a>
-  </div>
-</nav>
-
-<div class="article-wrap">
-  <article class="article-main">
-
-    <div class="article-meta">
-      <div class="meta-tags" id="article-tags"><span class="tag etf">ETF评测</span><span class="tag new">电网设备</span></div>
-      <h1 class="article-title" id="article-title">电网爆发在即：绿电ETF评测与策略</h1>
-      <div class="article-info">
-        <span class="info-item">📅 <span id="article-date">2026-06-04</span></span>
-        <span class="info-item">⏱ <span id="read-time">5 分钟</span></span>
-        <span class="ai-badge">🤖 AI 生成</span>
-      </div>
-    </div>
-
-    <div class="article-content" id="article-body">
-      <h2 id="h1">引言：政策催化下的电网投资新周期</h2>
-<p>进入2025年三季度，A股电网设备板块迎来密集的政策催化信号。国家能源局近期发布的《新型电力系统建设行动方案》明确要求加快特高压、配电网智能化改造，叠加南方五省、国网2025年投资计划均超预期增长，电网设备行业进入“十四五”末的抢装冲刺期。对于投资者而言，如何通过ETF工具高效捕捉这一结构性机会？本文聚焦<strong>绿电ETF（159996）</strong>，从板块政策逻辑、基金持仓、估值水位及操作策略四个维度进行深度评测，并给出当前市场环境下的配置建议。需注意，本文不涉及任何买卖指令，所有分析仅供参考。</p>
-
-<h2 id="h1">维度一：政策逻辑与电网设备板块的“双击”预期</h2>
+    <p><a href="/">Back to Home</a></p>
+    <h1>电网爆发在即：绿电ETF评测与策略 | A股投研工具箱</h1>
+    <div class="meta">Date: 2026-06-04</div>
+    <div class="content">class="article-title" id="article-title">电网爆发在即：绿电ETF评测与策略</h1> <div class="article-info"> <span class="info-item">📅 <span id="article-date">2026-06-04</span></span> <span class="info-item">⏱ <span id="read-time">5 分钟</span></span> <span class="ai-badge">🤖 AI 生成</span> </div> </div> <div class="article-content" id="article-body"> <h2 id="h1">引言：政策催化下的电网投资新周期</h2>
+<p>进入2025年三季度，A股电网设备板块迎来密集的政策催化信号。国家能源局近期发布的《新型电力系统建设行动方案》明确要求加快特高压、配电网智能化改造，叠加南方五省、国网2025年投资计划均超预期增长，电网设备行业进入“十四五”末的抢装冲刺期。对于投资者而言，如何通过ETF工具高效捕捉这一结构性机会？本文聚焦<strong>绿电ETF（159996）</strong>，从板块政策逻辑、基金持仓、估值水位及操作策略四个维度进行深度评测，并给出当前市场环境下的配置建议。需注意，本文不涉及任何买卖指令，所有分析仅供参考。</p> <h2 id="h1">维度一：政策逻辑与电网设备板块的“双击”预期</h2>
 <p>电网设备板块的爆发逻辑并非孤立。当前驱动因素可归纳为三方面：</p>
-<ul>
-  <li><strong>特高压建设提速</strong>：2025年国网计划开工“四交六直”10项特高压工程，较2024年增长40%，直接利好变压器、GIS、换流阀等核心设备商。</li>
-  <li><strong>配电网智能化改造</strong>：分布式光伏并网压力倒逼配电网升级，2025年配网投资同比增长约20%，智能电表、一二次融合设备需求旺盛。</li>
-  <li><strong>电力市场化改革</strong>：现货市场试点扩围，储能、虚拟电厂等新业态催生增量设备采购，龙头公司订单排产已至2026年。</li>
+<ul> <li><strong>特高压建设提速</strong>：2025年国网计划开工“四交六直”10项特高压工程，较2024年增长40%，直接利好变压器、GIS、换流阀等核心设备商。</li> <li><strong>配电网智能化改造</strong>：分布式光伏并网压力倒逼配电网升级，2025年配网投资同比增长约20%，智能电表、一二次融合设备需求旺盛。</li> <li><strong>电力市场化改革</strong>：现货市场试点扩围，储能、虚拟电厂等新业态催生增量设备采购，龙头公司订单排产已至2026年。</li>
 </ul>
-<p>从历史复盘看，电网设备板块的行情往往与政策文件发布高度同步。例如2023年5月《新型电力系统蓝皮书》发布后，中证电网指数在随后30个交易日上涨12.7%。本次政策力度与落地节奏均超预期，板块存在业绩与估值的“双击”可能。</p>
-
-<h2 id="h2">维度二：绿电ETF（159996）的持仓结构与核心指标</h2>
+<p>从历史复盘看，电网设备板块的行情往往与政策文件发布高度同步。例如2023年5月《新型电力系统蓝皮书》发布后，中证电网指数在随后30个交易日上涨12.7%。本次政策力度与落地节奏均超预期，板块存在业绩与估值的“双击”可能。</p> <h2 id="h2">维度二：绿电ETF（159996）的持仓结构与核心指标</h2>
 <p>绿电ETF（159996）跟踪的是<strong>中证绿色电力指数</strong>，该指数成分股覆盖水电、风电、光伏发电及电网设备领域，其中电网设备权重占比约35%，是当前板块配置的优质工具之一。我们将其与同类产品进行对比：</p>
-<table>
-  <tr>
-    <th>指标</th>
-    <th>绿电ETF（159996）</th>
-    <th>电网ETF（025832）</th>
-    <th>新能源ETF（007300）</th>
-  </tr>
-  <tr>
-    <td>跟踪指数</td>
-    <td>中证绿色电力</td>
-    <td>中证电网设备</td>
-    <td>中证新能源</td>
-  </tr>
-  <tr>
-    <td>电网设备权重</td>
-    <td>35%</td>
-    <td>75%</td>
-    <td>20%</td>
-  </tr>
-  <tr>
-    <td>前三大重仓股</td>
-    <td>长江电力、国电南瑞、三峡能源</td>
-    <td>国电南瑞、许继电气、特变电工</td>
-    <td>宁德时代、隆基绿能、通威股份</td>
-  </tr>
-  <tr>
-    <td>管理费率</td>
-    <td>0.50%</td>
-    <td>0.50%</td>
-    <td>0.55%</td>
-  </tr>
-  <tr>
-    <td>成立以来年化收益</td>
-    <td>8.2%</td>
-    <td>10.1%</td>
-    <td>3.5%</td>
-  </tr>
+<table> <tr> <th>指标</th> <th>绿电ETF（159996）</th> <th>电网ETF（025832）</th> <th>新能源ETF（007300）</th> </tr> <tr> <td>跟踪指数</td> <td>中证绿色电力</td> <td>中证电网设备</td> <td>中证新能源</td> </tr> <tr> <td>电网设备权重</td> <td>35%</td> <td>75%</td> <td>20%</td> </tr> <tr> <td>前三大重仓股</td> <td>长江电力、国电南瑞、三峡能源</td> <td>国电南瑞、许继电气、特变电工</td> <td>宁德时代、隆基绿能、通威股份</td> </tr> <tr> <td>管理费率</td> <td>0.50%</td> <td>0.50%</td> <td>0.55%</td> </tr> <tr> <td>成立以来年化收益</td> <td>8.2%</td> <td>10.1%</td> <td>3.5%</td> </tr>
 </table>
-<p>从数据可以看出：<strong>绿电ETF（159996）并非纯电网工具</strong>，其重仓水电股（如长江电力）提供了防御性，而电网设备部分则贡献弹性。对于希望在电网行情中同时获取高股息安全垫的投资者，该基金是平衡型选择；若追求极致弹性，则需关注更纯粹的电网ETF（025832）。</p>
-
-<h2 id="h3">维度三：当前估值水位与买入信号的量化判断</h2>
+<p>从数据可以看出：<strong>绿电ETF（159996）并非纯电网工具</strong>，其重仓水电股（如长江电力）提供了防御性，而电网设备部分则贡献弹性。对于希望在电网行情中同时获取高股息安全垫的投资者，该基金是平衡型选择；若追求极致弹性，则需关注更纯粹的电网ETF（025832）。</p> <h2 id="h3">维度三：当前估值水位与买入信号的量化判断</h2>
 <p>截至2025年7月，中证绿色电力指数市盈率（TTM）为15.8倍，处于近5年33%分位，低于中位数17.2倍；市净率1.9倍，处于25%分位。电网设备子板块市盈率约22倍，处于历史中枢偏下区间。结合业绩增速预期（2025年电网设备板块净利润增速预计25%-30%），当前估值具备一定安全边际。</p>
 <p>关于买入信号，建议投资者关注以下三个量化指标：</p>
-<ul>
-  <li><strong>量价突破信号</strong>：当绿电ETF（159996）日成交额连续3日放大至1.5倍均量以上，且收盘价站上20日均线，可视为短期动能开启。</li>
-  <li><strong>资金流向信号</strong>：通过东方财富或同花顺APP的ETF资金流数据，观察该基金连续3日净流入超5000万元，通常表明机构资金加仓。</li>
-  <li><strong>政策事件信号</strong>：国网或能源局发布重大招标公告（如特高压线路核准、配网改造计划）后首个交易日，若ETF跳空高开且未回补缺口，可视为趋势确认。</li>
+<ul> <li><strong>量价突破信号</strong>：当绿电ETF（159996）日成交额连续3日放大至1.5倍均量以上，且收盘价站上20日均线，可视为短期动能开启。</li> <li><strong>资金流向信号</strong>：通过东方财富或同花顺APP的ETF资金流数据，观察该基金连续3日净流入超5000万元，通常表明机构资金加仓。</li> <li><strong>政策事件信号</strong>：国网或能源局发布重大招标公告（如特高压线路核准、配网改造计划）后首个交易日，若ETF跳空高开且未回补缺口，可视为趋势确认。</li>
 </ul>
-<p>数据获取渠道：<strong>中证指数官网</strong>查询成分股估值；<strong>Wind、同花顺、雪球</strong>查看ETF实时资金流向及折溢价率；<strong>国家能源局官网、国网电子商务平台</strong>跟踪招标动态。</p>
-
-<h2 id="h4">维度四：绿电ETF（159996）的综合评分</h2>
+<p>数据获取渠道：<strong>中证指数官网</strong>查询成分股估值；<strong>Wind、同花顺、雪球</strong>查看ETF实时资金流向及折溢价率；<strong>国家能源局官网、国网电子商务平台</strong>跟踪招标动态。</p> <h2 id="h4">维度四：绿电ETF（159996）的综合评分</h2>
 <p>基于投资工具评测的五大核心维度，对绿电ETF（159996）进行量化评分（满分10分）：</p>
-<table>
-  <tr>
-    <th>评测维度</th>
-    <th>评分</th>
-    <th>说明</th>
-  </tr>
-  <tr>
-    <td>可读性</td>
-    <td>9</td>
-    <td>基金持仓透明，指数编制规则清晰，投资逻辑易于理解</td>
-  </tr>
-  <tr>
-    <td>数据准确性</td>
-    <td>9</td>
-    <td>所有公开数据可追溯至交易所及基金公司官网，无引用误差</td>
-  </tr>
-  <tr>
-    <td>功能完整性</td>
-    <td>7</td>
-    <td>覆盖电网设备但非纯粹工具，需搭配其他ETF进行精准配置</td>
-  </tr>
-  <tr>
-    <td>使用门槛</td>
-    <td>9</td>
-    <td>ETF交易方式与股票相同，100份起买，无申购赎回费</td>
-  </tr>
-  <tr>
-    <td>性价比</td>
-    <td>8</td>
-    <td>管理费率0.50%低于行业平均，但换手率中等需注意交易成本</td>
-  </tr>
-  <tr>
-    <td><strong>综合评分</strong></td>
-    <td><strong>8.4</strong></td>
-    <td>适合风险偏好中等的电网主题配置型投资者</td>
-  </tr>
+<table> <tr> <th>评测维度</th> <th>评分</th> <th>说明</th> </tr> <tr> <td>可读性</td> <td>9</td> <td>基金持仓透明，指数编制规则清晰，投资逻辑易于理解</td> </tr> <tr> <td>数据准确性</td> <td>9</td> <td>所有公开数据可追溯至交易所及基金公司官网，无引用误差</td> </tr> <tr> <td>功能完整性</td> <td>7</td> <td>覆盖电网设备但非纯粹工具，需搭配其他ETF进行精准配置</td> </tr> <tr> <td>使用门槛</td> <td>9</td> <td>ETF交易方式与股票相同，100份起买，无申购赎回费</td> </tr> <tr> <td>性价比</td> <td>8</td> <td>管理费率0.50%低于行业平均，但换手率中等需注意交易成本</td> </tr> <tr> <td><strong>综合评分</strong></td> <td><strong>8.4</strong></td> <td>适合风险偏好中等的电网主题配置型投资者</td> </tr>
 </table>
-<p>评分显示，绿电ETF（159996）在透明度与易用性上表现优秀，但功能完整性因指数设计因素略显不足。建议追求纯电网弹性的用户可将该基金作为底仓，搭配电网ETF（025832）进行卫星配置。</p>
-
-<h2 id="h5">操作要点总结</h2>
+<p>评分显示，绿电ETF（159996）在透明度与易用性上表现优秀，但功能完整性因指数设计因素略显不足。建议追求纯电网弹性的用户可将该基金作为底仓，搭配电网ETF（025832）进行卫星配置。</p> <h2 id="h5">操作要点总结</h2>
 <p>综合以上分析，针对当前电网设备板块行情，整理出以下操作要点：</p>
-<ol>
-  <li><strong>明确工具定位</strong>：绿电ETF（159996）适合作为“电网+高股息”的平衡型配置，仓位比例建议占总ETF组合的30%以内；若看好电网设备弹性，优先选择电网ETF（025832）或AI主题ETF（012733）中的算力电网交叉标的。</li>
-  <li><strong>设定买入纪律</strong>：建议采用“分批低吸+信号确认”策略。第一次建仓可在指数回踩120日均线且估值分位低于30%时进行；第二次加仓等待前文所述的量价突破或资金流入信号确认。</li>
-  <li><strong>关注政策兑现节奏</strong>：2025年9-10月是国网特高压招标高峰期，届时若板块出现放量拉升，可逐步兑现利润；若订单不及预期，需警惕预期差的回调风险。</li>
-  <li><strong>数据监控工具</strong>：每日收盘后查看绿电ETF（159996）的溢价率（高于1%需警惕套利风险），每周通过中证指数官网跟踪成分股变化，每月对比实际业绩与市场一致预期的偏差。</li>
-  <li><strong>风险控制</strong>：设置最大回撤容忍度15%，当基金净值从高点回落超此幅度且跌破年线时，建议降低仓位至50%以下。</li>
-</ol>
-
-<blockquote>本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。</blockquote>
-    </div>
-
-    <div class="article-footer">
-      <a class="source-link" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:0.82rem;padding:6px 12px;border:1px solid var(--border);border-radius:6px;text-decoration:none;">🔗 查看原始来源</a>
-
-      <!-- 免责声明 -->
-      <div class="disclaimer">
-        <strong>⚠️ 免责声明</strong><br>
-        本文内容由 AI 自动生成，仅供学习参考，<strong>不构成投资建议</strong>。投资有风险，决策前请做好独立研究。
-      </div>
-    </div>
-
-    <!-- 关注公众号 -->
-    <div class="subscribe-box">
-      <h3>📬 关注公众号</h3>
-      <p>搜索微信公众号 <strong style="color:var(--text)">「无缘的人」</strong> 关注，每日文章推送到微信。</p>
-      <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;">或添加微信：727601845@qq.com</p>
-    </div>
-
-    <!-- 相关文章 -->
-    <div class="related">
-      <div class="section-title">相关文章</div>
-      <div class="related-grid" id="related-grid"></div>
-    </div>
-  </article>
-
-  <!-- 目录 -->
-  <aside>
-    <div class="toc">
-      <div class="toc-title">文章目录</div>
-      <ul class="toc-list" id="toc-list"></ul>
-    </div>
-  </aside>
-</div>
-
-<script>
-// ─── 目录生成 ────────────────────────────────────────
-function buildTOC() {
-  const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-  const toc = document.getElementById('toc-list');
-  headings.forEach((h, i) => {
-    h.id = 'heading-' + i;
-    const li = document.createElement('li');
-    li.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-sub' : '');
-    li.innerHTML = `<a href="#heading-${i}">${h.textContent}</a>`;
-    toc.appendChild(li);
-  });
-}
-
-function initScrollSpy() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = document.querySelector(`.toc-list a[href="#${id}"]`);
-      if (link) link.classList.toggle('active', entry.isIntersecting);
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  document.querySelectorAll('.article-content h2, .article-content h3').forEach(h => observer.observe(h));
-}
-
-buildTOC();
-initScrollSpy();
-
-// ─── 相关文章 ────────────────────────────────────────
-async function loadRelated() {
-  try {
-    const res = await fetch('/data/articles.json');
-    const arts = await res.json();
-    const grid = document.getElementById('related-grid');
-    arts.slice(0, 4).forEach(art => {
-      grid.innerHTML += `<a class="related-card" href="/${art.url}">
-        <h4>${art.title}</h4>
-        <span>${art.date} · ${art.readTime || '5 分钟'}</span>
-      </a>`;
-    });
-  } catch {}
-}
-loadRelated();
-</script>
+<ol> <li><strong>明确工具定位</strong>：绿电ETF（159996）适合作为“电网+高股息”的平衡型配置，仓位比例建议占总ETF组合的30%以内；若看好电网设备弹性，优先选择电网ETF（025832）或AI主题ETF（012733）中的算力电网交叉标的。</li> <li><strong>设定买入纪律</strong>：建议采用“分批低吸+信号确认”策略。第一次建仓可在指数回踩120日均线且估值分位低于30%时进行；第二次加仓等待前文所述的量价突破或资金流入信号确认。</li> <li><strong>关注政策兑现节奏</strong>：2025年9-10月是国网特高压招标高峰期，届时若板块出现放量拉升，可逐步兑现利润；若订单不及预期，需警惕预期差的回调风险。</li> <li><strong>数据监控工具</strong>：每日收盘后查看绿电ETF（159996）的溢价率（高于1%需警惕套利风险），每周通过中证指数官网跟踪成分股变化，每月对比实际业绩与市场一致预期的偏差。</li> <li><strong>风险控制</strong>：设置最大回撤容忍度15%，当基金净值从高点回落超此幅度且跌破年线时，建议降低仓位至50%以下。</li>
+</ol> <blockquote>本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。</blockquote> </div> <div</div>
 </body>
 </html>

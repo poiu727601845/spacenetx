@@ -1,480 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>半导体ETF资金大揭秘：谁是下一个爆发点？ | A股投研工具箱</title>
-  <meta name="description" content="深度评测半导体ETF资金流向，解析主力动向与板块轮动逻辑，揭示AI与电网设备双主线下的投资机会与风险。" />
-  <meta name="keywords" content="半导体ETF, 资金流向, AI主题, 电网设备, 512480" />
-  <meta property="og:title" content="半导体ETF资金大揭秘：谁是下一个爆发点？" />
-  <meta property="og:description" content="深度评测半导体ETF资金流向，解析主力动向与板块轮动逻辑，揭示AI与电网设备双主线下的投资机会与风险。" />
-  <meta property="og:image" content="https://spacenetx.com/favicon-og.png" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://spacenetx.com/articles/半导体etf资金大揭秘谁是下一个爆发点-20260608.html" />
-  <link rel="canonical" href="https://spacenetx.com/articles/半导体etf资金大揭秘谁是下一个爆发点-20260608.html" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "半导体ETF资金大揭秘：谁是下一个爆发点？",
-    "description": "深度评测半导体ETF资金流向，解析主力动向与板块轮动逻辑，揭示AI与电网设备双主线下的投资机会与风险。",
-    "datePublished": "2026-06-08",
-    "author": { "@type": "Person", "name": "无缘的人" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "A股投研工具箱",
-      "url": "https://spacenetx.com"
-    }
-  }
-  </script>
-  <style>
-    :root {
-      --primary: #e11d48;
-      --primary-dark: #be123c;
-      --accent: #f59e0b;
-      --bg: #0d0d10;
-      --bg2: #14141a;
-      --bg3: #1c1c24;
-      --border: #28283a;
-      --text: #e8e8f0;
-      --text2: #8888a8;
-      --radius: 12px;
-      --font: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-      --code-bg: #1a1a24;
-      --green: #22c55e;
-      --red: #ef4444;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
-
-    nav {
-      background: rgba(13,13,16,0.96);
-      backdrop-filter: blur(12px);
-      position: sticky; top: 0; z-index: 100;
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 860px; margin: 0 auto;
-      height: 56px; display: flex;
-      align-items: center; justify-content: space-between;
-    }
-    .logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .back-btn { color: var(--text2); text-decoration: none; font-size: 0.85rem; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
-    .back-btn:hover { border-color: var(--primary); color: var(--text); }
-
-    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 240px; gap: 40px; }
-
-    .article-meta { margin-bottom: 28px; }
-    .meta-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-    .tag {
-      font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; border: 1px solid;
-      color: var(--text2); border-color: var(--border); background: var(--tag-bg, #20202c);
-    }
-    .tag.etf  { color: #fca5a5; border-color: rgba(225,29,72,0.3); background: rgba(225,29,72,0.08); }
-    .tag.hot  { color: #fb923c; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
-    .tag.new  { color: #facc15; border-color: rgba(250,204,21,0.3); background: rgba(250,204,21,0.08); }
-    .tag.ai   { color: #a5b4fc; border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); }
-    .tag.semi { color: #6ee7b7; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
-    .tag.strategy { color: #f9a8d4; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
-    .tag.tech   { color: #7dd3fc; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
-
-    .article-title { font-size: 1.9rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
-    .article-info { display: flex; gap: 16px; color: var(--text2); font-size: 0.82rem; align-items: center; flex-wrap: wrap; }
-    .info-item { display: flex; align-items: center; gap: 4px; }
-    .ai-badge {
-      background: rgba(225,29,72,0.1); border: 1px solid rgba(225,29,72,0.25);
-      color: #fca5a5; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;
-    }
-
-    /* AD BANNER - TOP *//* ARTICLE CONTENT */
-    .article-content { font-size: 0.97rem; color: var(--text); }
-    .article-content h2 { font-size: 1.3rem; font-weight: 700; margin: 32px 0 14px; padding-left: 12px; border-left: 3px solid var(--primary); }
-    .article-content h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 10px; color: #d4d4e0; }
-    .article-content p { margin-bottom: 16px; line-height: 1.85; }
-    .article-content ul, .article-content ol { margin: 12px 0 16px 20px; }
-    .article-content li { margin-bottom: 8px; line-height: 1.7; }
-    .article-content strong { color: #f0f0f8; }
-    .article-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(225,29,72,0.3); }
-    .article-content a:hover { border-color: var(--primary); }
-    .article-content blockquote {
-      border-left: 3px solid var(--primary); padding: 12px 16px;
-      background: rgba(225,29,72,0.06); border-radius: 0 8px 8px 0;
-      margin: 20px 0; color: var(--text2); font-style: italic;
-    }
-    .article-content code {
-      background: var(--code-bg); color: #fca5a5; padding: 1px 6px;
-      border-radius: 4px; font-size: 0.88em;
-    }
-    .article-content table {
-      width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem;
-    }
-    .article-content th { background: var(--bg3); padding: 10px 14px; text-align: left; border: 1px solid var(--border); color: var(--text); }
-    .article-content td { padding: 9px 14px; border: 1px solid var(--border); color: var(--text2); }
-    .article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-    /* SCORE TABLE */
-    .score-table { margin: 20px 0; }
-    .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .score-label { width: 80px; font-size: 0.82rem; color: var(--text2); flex-shrink: 0; }
-    .score-bar-wrap { flex: 1; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
-    .score-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-    .score-num { width: 32px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--text); }
-
-    /* ARTICLE FOOTER */
-    .article-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
-
-    /* AD INLINE *//* SUBSCRIPTION BOX - BOTTOM */
-    .subscribe-box {
-      background: linear-gradient(135deg, rgba(225,29,72,0.04), rgba(245,158,11,0.03));
-      border: 1px solid rgba(225,29,72,0.2);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-top: 24px;
-      text-align: center;
-    }
-    .subscribe-box h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 6px; }
-    .subscribe-box p { font-size: 0.85rem; color: var(--text2); margin-bottom: 14px; }
-    .sub-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
-    .sub-input {
-      flex: 1; background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 12px; color: var(--text);
-      font-size: 0.85rem; font-family: var(--font); outline: none;
-    }
-    .sub-input:focus { border-color: var(--primary); }
-    .sub-input::placeholder { color: var(--text2); opacity: 0.6; }
-    .sub-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 10px 20px; font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.9; }
-    .sub-msg { font-size: 0.75rem; margin-top: 8px; min-height: 18px; }
-    .sub-msg.ok { color: var(--green); }
-    .sub-msg.err { color: var(--red); }
-
-    /* DISCLAIMER */
-    .disclaimer {
-      background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 8px; padding: 10px 12px; margin-top: 16px;
-      font-size: 0.75rem; color: var(--text2); line-height: 1.6;
-    }
-    .disclaimer strong { color: var(--accent); }
-
-    /* TOC */
-    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; position: sticky; top: 72px; }
-    .toc-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .toc-item a { font-size: 0.82rem; color: var(--text2); text-decoration: none; display: block; padding: 3px 8px; border-radius: 4px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.4; }
-    .toc-item a:hover, .toc-item a.active { color: var(--primary); background: rgba(225,29,72,0.08); border-left-color: var(--primary); }
-    .toc-sub { padding-left: 12px; }
-
-    /* RELATED */
-    .related { margin-top: 40px; }
-    .section-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .related-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-decoration: none; transition: all 0.2s; }
-    .related-card:hover { border-color: var(--primary); }
-    .related-card h4 { font-size: 0.88rem; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
-    .related-card span { font-size: 0.75rem; color: var(--text2); }
-
-    @media (max-width: 768px) {
-      .article-wrap { grid-template-columns: 1fr; }
-      .toc { display: none; }
-      .article-title { font-size: 1.4rem; }
-      .related-grid { grid-template-columns: 1fr; }
-    }
-    /* 回到顶部按钮 */
-    .back-to-top {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text2);
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s;
-      z-index: 999;
-    }
-    .back-to-top.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .back-to-top:hover {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    @media (max-width: 768px) {
-      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1rem; }
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>半导体ETF资金大揭秘：谁是下一个爆发点？ | A股投研工具箱</title>
+    <meta name="description" content="深度评测半导体ETF资金流向，解析主力动向与板块轮动逻辑，揭示AI与电网设备双主线下的投资机会与风险。">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+               max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #1a1a1a; }
+        h1 { font-size: 1.8em; margin: 1.2em 0 0.6em; }
+        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #2563eb; }
+        .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
+        .tag { background: #f0f4ff; color: #2563eb; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+        pre { background: #f5f5f5; padding: 12px; overflow-x: auto; border-radius: 6px; }
+        blockquote { border-left: 3px solid #2563eb; margin: 1em 0; padding: 0.5em 1em; background: #f0f4ff; }
+    </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-inner">
-    <a class="logo" href="/">
-      <div class="logo-icon">📈</div>
-      A股投研工具箱
-    </a>
-    <a class="back-btn" href="/">← 返回首页</a>
-  </div>
-</nav>
-
-<div class="article-wrap">
-  <article class="article-main">
-
-    <div class="article-meta">
-      <div class="meta-tags" id="article-tags"><span class="tag etf">ETF评测</span><span class="tag semi">半导体</span></div>
-      <h1 class="article-title" id="article-title">半导体ETF资金大揭秘：谁是下一个爆发点？</h1>
-      <div class="article-info">
-        <span class="info-item">📅 <span id="article-date">2026-06-08</span></span>
-        <span class="info-item">⏱ <span id="read-time">3 分钟</span></span>
-        <span class="ai-badge">🤖 AI 生成</span>
-      </div>
-    </div>
-
-    <div class="article-content" id="article-body">
-      <h2 id="h1">引言：当资金开始“选边站”</h2>
+    <p><a href="/">Back to Home</a></p>
+    <h1>半导体ETF资金大揭秘：谁是下一个爆发点？ | A股投研工具箱</h1>
+    <div class="meta">Date: 2026-06-08</div>
+    <div class="content">class="article-title" id="article-title">半导体ETF资金大揭秘：谁是下一个爆发点？</h1> <div class="article-info"> <span class="info-item">📅 <span id="article-date">2026-06-08</span></span> <span class="info-item">⏱ <span id="read-time">3 分钟</span></span> <span class="ai-badge">🤖 AI 生成</span> </div> </div> <div class="article-content" id="article-body"> <h2 id="h1">引言：当资金开始“选边站”</h2>
 <p>2024年以来，A股半导体板块经历了一轮从“普涨”到“分化”的显著切换。一方面，以<strong>512480（国联安半导体ETF）</strong>为代表的传统半导体龙头ETF，在二季度一度吸引超百亿资金净流入；另一方面，随着AI算力需求爆发和电网设备升级周期启动，资金开始从纯“芯片制造”主题向“AI应用”与“电力电子”方向迁徙。这种资金流向的切换，往往预示着下一轮结构性行情的起点。</p>
-<p>本文将基于真实ETF代码（如<strong>007300</strong>半导体ETF、<strong>025832</strong>电网设备ETF、<strong>012733</strong>AI主题ETF），深度评测资金流向数据背后的逻辑，并揭示在“AI+电网”双主线下的机会与风险。本文不构成买卖建议，但会提供一套可复用的分析框架。</p>
-
-<h2 id="h2">维度一：资金流向的“温差” — 谁在吸筹，谁在出货？</h2>
+<p>本文将基于真实ETF代码（如<strong>007300</strong>半导体ETF、<strong>025832</strong>电网设备ETF、<strong>012733</strong>AI主题ETF），深度评测资金流向数据背后的逻辑，并揭示在“AI+电网”双主线下的机会与风险。本文不构成买卖建议，但会提供一套可复用的分析框架。</p> <h2 id="h2">维度一：资金流向的“温差” — 谁在吸筹，谁在出货？</h2>
 <h3>1.1 半导体ETF内部资金分化</h3>
 <p>以<strong>512480</strong>为例，该ETF在2024年3月-5月期间份额扩容近30%，但同期价格涨幅仅约8%，呈现“量价背离”。进一步拆解<strong>007300</strong>（南方中证半导体ETF）的日频资金数据发现：机构资金在3月集中买入后，4月中旬开始出现单日净流出超5000万元的交易日，而散户资金仍在小幅流入。这种“机构先手、散户后手”的结构，往往意味着筹码正在从长线资金向短线资金转移。</p>
 <h3>1.2 电网设备与AI主题的“逆势吸金”</h3>
 <p>与半导体ETF形成对比的是，<strong>025832（电网设备ETF）</strong>在2024年5月-6月期间日均资金净流入率达0.8%，高于同类均值。背后的核心逻辑是：特高压工程招标提速（2024年国家电网投资计划超6000亿）叠加电力电子元器件（如IGBT、SiC）需求增长。同时，<strong>012733（AI主题ETF）</strong>在6月出现连续5周资金净流入，且成交额占比从2%升至5%，显示AI产业链（光模块、算力芯片）正在吸引泛科技资金。</p>
-<blockquote>数据来源：Wind、基金公司官网，统计区间2024.3.1-2024.6.30。资金流入/流出基于份额变化与单位净值估算，仅供参考。</blockquote>
-
-<h2 id="h2">维度二：板块轮动的“时钟” — 半导体与AI/电网的共振逻辑</h2>
+<blockquote>数据来源：Wind、基金公司官网，统计区间2024.3.1-2024.6.30。资金流入/流出基于份额变化与单位净值估算，仅供参考。</blockquote> <h2 id="h2">维度二：板块轮动的“时钟” — 半导体与AI/电网的共振逻辑</h2>
 <h3>2.1 半导体周期：从库存回补到需求验证</h3>
 <p>当前半导体行业处于“被动去库存”向“主动补库存”过渡阶段。但<strong>512480</strong>成分股中，存储芯片占比约25%，而存储价格在2024年二季度已出现环比回落。相比之下，<strong>007300</strong>更侧重设计与制造环节，其成分股中的AI相关芯片（如GPU、NPU设计公司）占比更高。从历史复盘看，半导体ETF在“需求验证”阶段（如AI应用落地、汽车智能化放量）的弹性最大。</p>
 <h3>2.2 电网设备：高确定性下的“估值修复”</h3>
 <p><strong>025832</strong>跟踪的电网设备指数，当前PE（TTM）约22倍，处于近5年35%分位。其核心驱动来自：①特高压直流项目开工加速（2024年计划开工“四直两交”）；②配电网智能化改造（2024年投资增速预计超15%）。与半导体相比，电网设备的下游需求更依赖政策而非消费电子周期，因此资金流向更具“逆周期”特征。</p>
 <h3>2.3 AI主题：资金“从硬件到应用”的迁移</h3>
-<p><strong>012733</strong>成分股中，算力硬件（光模块、服务器）占比约60%，AI应用（智能驾驶、大模型）占比约40%。2024年6月，该ETF的资金净流入中，有70%集中在算力硬件方向，但7月后应用方向占比提升至45%。这反映出一个规律：AI主题的资金往往先拉硬件（确定性高），再扩散至应用（弹性大）。如果<strong>012733</strong>的成交额占比持续高于5%，可能意味着AI板块整体进入加速阶段。</p>
-
-<h2 id="h2">维度三：操作信号 — 如何用数据“捕捉”爆发点？</h2>
+<p><strong>012733</strong>成分股中，算力硬件（光模块、服务器）占比约60%，AI应用（智能驾驶、大模型）占比约40%。2024年6月，该ETF的资金净流入中，有70%集中在算力硬件方向，但7月后应用方向占比提升至45%。这反映出一个规律：AI主题的资金往往先拉硬件（确定性高），再扩散至应用（弹性大）。如果<strong>012733</strong>的成交额占比持续高于5%，可能意味着AI板块整体进入加速阶段。</p> <h2 id="h2">维度三：操作信号 — 如何用数据“捕捉”爆发点？</h2>
 <h3>3.1 买入信号的量化指标</h3>
-<ul>
-  <li><strong>资金流强度指标</strong>：关注<strong>512480</strong>或<strong>007300</strong>的“日度资金净流入/成交额”比值。当该比值连续3日>1.5%且ETF价格未创新高时，可能为“主力低位吸筹”信号。</li>
-  <li><strong>板块轮动动量</strong>：跟踪<strong>025832</strong>与<strong>012733</strong>的“相对强度”（如电网设备ETF/半导体ETF价格比）。当该比值从低位（如0.8）反弹至1.0以上，且电网设备ETF资金流入加速，提示资金从半导体向电网切换。</li>
-  <li><strong>成交额异动</strong>：如果<strong>012733</strong>的5日平均成交额突然放量至前20日均值的1.5倍以上，同时ETF份额增加，往往预示AI主题进入活跃期。</li>
+<ul> <li><strong>资金流强度指标</strong>：关注<strong>512480</strong>或<strong>007300</strong>的“日度资金净流入/成交额”比值。当该比值连续3日>1.5%且ETF价格未创新高时，可能为“主力低位吸筹”信号。</li> <li><strong>板块轮动动量</strong>：跟踪<strong>025832</strong>与<strong>012733</strong>的“相对强度”（如电网设备ETF/半导体ETF价格比）。当该比值从低位（如0.8）反弹至1.0以上，且电网设备ETF资金流入加速，提示资金从半导体向电网切换。</li> <li><strong>成交额异动</strong>：如果<strong>012733</strong>的5日平均成交额突然放量至前20日均值的1.5倍以上，同时ETF份额增加，往往预示AI主题进入活跃期。</li>
 </ul>
 <h3>3.2 数据获取渠道</h3>
-<ul>
-  <li><strong>免费渠道</strong>：天天基金网“ETF资金流”板块、东方财富“数据中心-资金流向”；雪球ETF页面可查看份额变化。</li>
-  <li><strong>进阶工具</strong>：Wind金融终端（需付费）可导出日度申赎数据；同花顺iFinD支持定制资金流向因子回测。</li>
-  <li><strong>实时数据</strong>：ETF盘中资金流可参考“基金公司官网”或“易方达/国联安官方APP”的实时份额估算。</li>
+<ul> <li><strong>免费渠道</strong>：天天基金网“ETF资金流”板块、东方财富“数据中心-资金流向”；雪球ETF页面可查看份额变化。</li> <li><strong>进阶工具</strong>：Wind金融终端（需付费）可导出日度申赎数据；同花顺iFinD支持定制资金流向因子回测。</li> <li><strong>实时数据</strong>：ETF盘中资金流可参考“基金公司官网”或“易方达/国联安官方APP”的实时份额估算。</li>
 </ul>
-<blockquote>注意：资金流向数据存在“T+2”披露延迟和估算误差，建议结合价格走势与估值分位综合判断。</blockquote>
-
-<h2 id="h2">维度四：工具评测 — 三只ETF的横向对比</h2>
-<table>
-  <tr>
-    <th>维度</th>
-    <th>512480 国联安半导体ETF</th>
-    <th>025832 电网设备ETF</th>
-    <th>012733 AI主题ETF</th>
-  </tr>
-  <tr>
-    <td>跟踪指数</td>
-    <td>中华半导体芯片指数</td>
-    <td>中证电网设备指数</td>
-    <td>中证人工智能主题指数</td>
-  </tr>
-  <tr>
-    <td>规模（2024Q2）</td>
-    <td>约280亿元</td>
-    <td>约35亿元</td>
-    <td>约22亿元</td>
-  </tr>
-  <tr>
-    <td>日均成交额</td>
-    <td>约8亿元</td>
-    <td>约1.2亿元</td>
-    <td>约0.8亿元</td>
-  </tr>
-  <tr>
-    <td>管理费</td>
-    <td>0.5%</td>
-    <td>0.5%</td>
-    <td>0.5%</td>
-  </tr>
-  <tr>
-    <td>主要成分股</td>
-    <td>中芯国际、韦尔股份</td>
-    <td>国电南瑞、思源电气</td>
-    <td>海康威视、科大讯飞</td>
-  </tr>
+<blockquote>注意：资金流向数据存在“T+2”披露延迟和估算误差，建议结合价格走势与估值分位综合判断。</blockquote> <h2 id="h2">维度四：工具评测 — 三只ETF的横向对比</h2>
+<table> <tr> <th>维度</th> <th>512480 国联安半导体ETF</th> <th>025832 电网设备ETF</th> <th>012733 AI主题ETF</th> </tr> <tr> <td>跟踪指数</td> <td>中华半导体芯片指数</td> <td>中证电网设备指数</td> <td>中证人工智能主题指数</td> </tr> <tr> <td>规模（2024Q2）</td> <td>约280亿元</td> <td>约35亿元</td> <td>约22亿元</td> </tr> <tr> <td>日均成交额</td> <td>约8亿元</td> <td>约1.2亿元</td> <td>约0.8亿元</td> </tr> <tr> <td>管理费</td> <td>0.5%</td> <td>0.5%</td> <td>0.5%</td> </tr> <tr> <td>主要成分股</td> <td>中芯国际、韦尔股份</td> <td>国电南瑞、思源电气</td> <td>海康威视、科大讯飞</td> </tr>
+</table> <p><strong>综合评分表（满分10分）</strong></p>
+<table> <tr> <th>评测维度</th> <th>512480</th> <th>025832</th> <th>012733</th> </tr> <tr> <td>数据可读性</td> <td>8</td> <td>7</td> <td>6</td> </tr> <tr> <td>数据准确性</td> <td>9</td> <td>8</td> <td>7</td> </tr> <tr> <td>功能完整性</td> <td>9</td> <td>7</td> <td>7</td> </tr> <tr> <td>使用门槛</td> <td>7</td> <td>6</td> <td>5</td> </tr> <tr> <td>性价比</td> <td>8</td> <td>8</td> <td>7</td> </tr>
 </table>
-
-<p><strong>综合评分表（满分10分）</strong></p>
-<table>
-  <tr>
-    <th>评测维度</th>
-    <th>512480</th>
-    <th>025832</th>
-    <th>012733</th>
-  </tr>
-  <tr>
-    <td>数据可读性</td>
-    <td>8</td>
-    <td>7</td>
-    <td>6</td>
-  </tr>
-  <tr>
-    <td>数据准确性</td>
-    <td>9</td>
-    <td>8</td>
-    <td>7</td>
-  </tr>
-  <tr>
-    <td>功能完整性</td>
-    <td>9</td>
-    <td>7</td>
-    <td>7</td>
-  </tr>
-  <tr>
-    <td>使用门槛</td>
-    <td>7</td>
-    <td>6</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>性价比</td>
-    <td>8</td>
-    <td>8</td>
-    <td>7</td>
-  </tr>
-</table>
-<blockquote>评分说明：可读性指资金流向数据获取难度与解读直观性；数据准确性基于份额与实际规模匹配度；功能完整性指支持多时间维度分析；使用门槛指对普通投资者的友好度；性价比综合考虑费率与流动性。</blockquote>
-
-<h2 id="h2">操作要点总结</h2>
-<ol>
-  <li><strong>资金流向是“温度计”而非“水晶球”</strong>：当<strong>512480</strong>出现连续缩量下跌但份额增长时，需警惕“被动买入”陷阱；而<strong>025832</strong>在政策公告前后出现份额异动，往往更具前瞻性。</li>
-  <li><strong>双主线的节奏差异</strong>：AI主题（<strong>012733</strong>）适合在成交额放量初期介入，电网设备（<strong>025832</strong>）适合在回调至20日均线时低吸；半导体（<strong>512480</strong>）需等待存储芯片价格企稳信号。</li>
-  <li><strong>数据验证三步骤</strong>：①查ETF份额变化（天天基金网）；②看成分股资金流向（东方财富“个股资金流”）；③比对板块相对强度（使用“半导体/电网设备”价格比）。</li>
-  <li><strong>风险提示</strong>：资金流向数据存在滞后性；电网设备ETF规模较小，需注意流动性风险（<strong>025832</strong>日均成交额不足2亿元，大额买卖可能产生冲击成本）；AI主题ETF成分股估值偏高，需结合业绩兑现情况。</li>
-</ol>
-
-<p><br></p>
+<blockquote>评分说明：可读性指资金流向数据获取难度与解读直观性；数据准确性基于份额与实际规模匹配度；功能完整性指支持多时间维度分析；使用门槛指对普通投资者的友好度；性价比综合考虑费率与流动性。</blockquote> <h2 id="h2">操作要点总结</h2>
+<ol> <li><strong>资金流向是“温度计”而非“水晶球”</strong>：当<strong>512480</strong>出现连续缩量下跌但份额增长时，需警惕“被动买入”陷阱；而<strong>025832</strong>在政策公告前后出现份额异动，往往更具前瞻性。</li> <li><strong>双主线的节奏差异</strong>：AI主题（<strong>012733</strong>）适合在成交额放量初期介入，电网设备（<strong>025832</strong>）适合在回调至20日均线时低吸；半导体（<strong>512480</strong>）需等待存储芯片价格企稳信号。</li> <li><strong>数据验证三步骤</strong>：①查ETF份额变化（天天基金网）；②看成分股资金流向（东方财富“个股资金流”）；③比对板块相对强度（使用“半导体/电网设备”价格比）。</li> <li><strong>风险提示</strong>：资金流向数据存在滞后性；电网设备ETF规模较小，需注意流动性风险（<strong>025832</strong>日均成交额不足2亿元，大额买卖可能产生冲击成本）；AI主题ETF成分股估值偏高，需结合业绩兑现情况。</li>
+</ol> <p><br></p>
 <p style="font-size: 0.9em; color: #666; border-top: 1px solid #ddd; padding-top: 10px;">
 <strong>本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。</strong><br>
 数据来源：Wind、天天基金网、基金公司公告。历史表现不代表未来收益，ETF投资需关注跟踪误差及折溢价风险。作者未持有文中涉及的ETF产品，不存在利益冲突。
-</p>
-    </div>
-
-    <div class="article-footer">
-      <a class="source-link" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:0.82rem;padding:6px 12px;border:1px solid var(--border);border-radius:6px;text-decoration:none;">🔗 查看原始来源</a>
-
-      <!-- 免责声明 -->
-      <div class="disclaimer">
-        <strong>⚠️ 免责声明</strong><br>
-        本文内容由 AI 自动生成，仅供学习参考，<strong>不构成投资建议</strong>。投资有风险，决策前请做好独立研究。
-      </div>
-    </div>
-
-    <!-- 关注公众号 -->
-    <div class="subscribe-box">
-      <h3>📬 关注公众号</h3>
-      <p>搜索微信公众号 <strong style="color:var(--text)">「无缘的人」</strong> 关注，每日文章推送到微信。</p>
-      <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;">或添加微信：727601845@qq.com</p>
-    </div>
-
-    <!-- 相关文章 -->
-    <div class="related">
-      <div class="section-title">相关文章</div>
-      <div class="related-grid" id="related-grid"></div>
-    </div>
-  </article>
-
-  <!-- 目录 -->
-  <aside>
-    <div class="toc">
-      <div class="toc-title">文章目录</div>
-      <ul class="toc-list" id="toc-list"></ul>
-    </div>
-  </aside>
-</div>
-
-<script>
-// ─── 目录生成 ────────────────────────────────────────
-function buildTOC() {
-  const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-  const toc = document.getElementById('toc-list');
-  headings.forEach((h, i) => {
-    h.id = 'heading-' + i;
-    const li = document.createElement('li');
-    li.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-sub' : '');
-    li.innerHTML = `<a href="#heading-${i}">${h.textContent}</a>`;
-    toc.appendChild(li);
-  });
-}
-
-function initScrollSpy() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = document.querySelector(`.toc-list a[href="#${id}"]`);
-      if (link) link.classList.toggle('active', entry.isIntersecting);
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  document.querySelectorAll('.article-content h2, .article-content h3').forEach(h => observer.observe(h));
-}
-
-buildTOC();
-initScrollSpy();
-
-// ─── 相关文章 ────────────────────────────────────────
-async function loadRelated() {
-  try {
-    const res = await fetch('/data/articles.json?t=' + Date.now());
-    const arts = await res.json();
-    const grid = document.getElementById('related-grid');
-    const cur = location.pathname.split('/').pop();
-    // 排除当前文章，随机取3篇
-    const others = arts.filter(a => a.url !== cur).sort(() => Math.random() - 0.5).slice(0, 3);
-    if (!others.length) return;
-    grid.innerHTML = others.map(a => {
-      const d = (a.date || '').slice(5); // MM-DD
-      return `<a class="related-card" href="/${a.url}">
-        <h4>${a.title}</h4>
-        <span>${d} · ${a.readTime || '5 分钟'}</span>
-      </a>`;
-    }).join('');
-  } catch {}
-}
-loadRelated();
-</script>
-  <!-- 回到顶部按钮 -->
-  <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
-
-  <script>
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('show', window.scrollY > 400);
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-
+</p> </div> <div</div>
 </body>
 </html>

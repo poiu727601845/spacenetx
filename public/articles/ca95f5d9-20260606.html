@@ -1,431 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>电网ETF目标价复盘：025832能否突破前高 | A股投研工具箱</title>
-  <meta name="description" content="深度复盘025832电网ETF近期走势与目标价，分析电网设备板块驱动力，研判后市投资机会。" />
-  <meta name="keywords" content="025832,电网ETF,目标价位,电网设备,投资策略,ETF评测" />
-  <meta property="og:title" content="电网ETF目标价复盘：025832能否突破前高" />
-  <meta property="og:description" content="深度复盘025832电网ETF近期走势与目标价，分析电网设备板块驱动力，研判后市投资机会。" />
-  <meta property="og:image" content="https://spacenetx.com/favicon-og.png" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://spacenetx.com/articles/电网etf目标价复盘025832能否突破前高-20260606.html" />
-  <link rel="canonical" href="https://spacenetx.com/articles/电网etf目标价复盘025832能否突破前高-20260606.html" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "电网ETF目标价复盘：025832能否突破前高",
-    "description": "深度复盘025832电网ETF近期走势与目标价，分析电网设备板块驱动力，研判后市投资机会。",
-    "datePublished": "2026-06-06",
-    "author": { "@type": "Person", "name": "无缘的人" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "A股投研工具箱",
-      "url": "https://spacenetx.com"
-    }
-  }
-  </script>
-  <style>
-    :root {
-      --primary: #e11d48;
-      --primary-dark: #be123c;
-      --accent: #f59e0b;
-      --bg: #0d0d10;
-      --bg2: #14141a;
-      --bg3: #1c1c24;
-      --border: #28283a;
-      --text: #e8e8f0;
-      --text2: #8888a8;
-      --radius: 12px;
-      --font: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-      --code-bg: #1a1a24;
-      --green: #22c55e;
-      --red: #ef4444;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.7; }
-
-    nav {
-      background: rgba(13,13,16,0.96);
-      backdrop-filter: blur(12px);
-      position: sticky; top: 0; z-index: 100;
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-    }
-    .nav-inner {
-      max-width: 860px; margin: 0 auto;
-      height: 56px; display: flex;
-      align-items: center; justify-content: space-between;
-    }
-    .logo { font-size: 1rem; font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-    .back-btn { color: var(--text2); text-decoration: none; font-size: 0.85rem; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all 0.2s; }
-    .back-btn:hover { border-color: var(--primary); color: var(--text); }
-
-    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; display: grid; grid-template-columns: 1fr 240px; gap: 40px; }
-
-    .article-meta { margin-bottom: 28px; }
-    .meta-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-    .tag {
-      font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; border: 1px solid;
-      color: var(--text2); border-color: var(--border); background: var(--tag-bg, #20202c);
-    }
-    .tag.etf  { color: #fca5a5; border-color: rgba(225,29,72,0.3); background: rgba(225,29,72,0.08); }
-    .tag.hot  { color: #fb923c; border-color: rgba(249,115,22,0.3); background: rgba(249,115,22,0.08); }
-    .tag.new  { color: #facc15; border-color: rgba(250,204,21,0.3); background: rgba(250,204,21,0.08); }
-    .tag.ai   { color: #a5b4fc; border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.08); }
-    .tag.semi { color: #6ee7b7; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.08); }
-    .tag.strategy { color: #f9a8d4; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.08); }
-    .tag.tech   { color: #7dd3fc; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.08); }
-
-    .article-title { font-size: 1.9rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
-    .article-info { display: flex; gap: 16px; color: var(--text2); font-size: 0.82rem; align-items: center; flex-wrap: wrap; }
-    .info-item { display: flex; align-items: center; gap: 4px; }
-    .ai-badge {
-      background: rgba(225,29,72,0.1); border: 1px solid rgba(225,29,72,0.25);
-      color: #fca5a5; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;
-    }
-
-    /* AD BANNER - TOP *//* ARTICLE CONTENT */
-    .article-content { font-size: 0.97rem; color: var(--text); }
-    .article-content h2 { font-size: 1.3rem; font-weight: 700; margin: 32px 0 14px; padding-left: 12px; border-left: 3px solid var(--primary); }
-    .article-content h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 10px; color: #d4d4e0; }
-    .article-content p { margin-bottom: 16px; line-height: 1.85; }
-    .article-content ul, .article-content ol { margin: 12px 0 16px 20px; }
-    .article-content li { margin-bottom: 8px; line-height: 1.7; }
-    .article-content strong { color: #f0f0f8; }
-    .article-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(225,29,72,0.3); }
-    .article-content a:hover { border-color: var(--primary); }
-    .article-content blockquote {
-      border-left: 3px solid var(--primary); padding: 12px 16px;
-      background: rgba(225,29,72,0.06); border-radius: 0 8px 8px 0;
-      margin: 20px 0; color: var(--text2); font-style: italic;
-    }
-    .article-content code {
-      background: var(--code-bg); color: #fca5a5; padding: 1px 6px;
-      border-radius: 4px; font-size: 0.88em;
-    }
-    .article-content table {
-      width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.88rem;
-    }
-    .article-content th { background: var(--bg3); padding: 10px 14px; text-align: left; border: 1px solid var(--border); color: var(--text); }
-    .article-content td { padding: 9px 14px; border: 1px solid var(--border); color: var(--text2); }
-    .article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-    /* SCORE TABLE */
-    .score-table { margin: 20px 0; }
-    .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .score-label { width: 80px; font-size: 0.82rem; color: var(--text2); flex-shrink: 0; }
-    .score-bar-wrap { flex: 1; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
-    .score-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-    .score-num { width: 32px; text-align: right; font-size: 0.82rem; font-weight: 600; color: var(--text); }
-
-    /* ARTICLE FOOTER */
-    .article-footer { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
-
-    /* AD INLINE *//* SUBSCRIPTION BOX - BOTTOM */
-    .subscribe-box {
-      background: linear-gradient(135deg, rgba(225,29,72,0.04), rgba(245,158,11,0.03));
-      border: 1px solid rgba(225,29,72,0.2);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-top: 24px;
-      text-align: center;
-    }
-    .subscribe-box h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 6px; }
-    .subscribe-box p { font-size: 0.85rem; color: var(--text2); margin-bottom: 14px; }
-    .sub-form { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
-    .sub-input {
-      flex: 1; background: var(--bg3); border: 1px solid var(--border);
-      border-radius: 8px; padding: 10px 12px; color: var(--text);
-      font-size: 0.85rem; font-family: var(--font); outline: none;
-    }
-    .sub-input:focus { border-color: var(--primary); }
-    .sub-input::placeholder { color: var(--text2); opacity: 0.6; }
-    .sub-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff; border: none; border-radius: 8px;
-      padding: 10px 20px; font-size: 0.85rem; font-weight: 600;
-      cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
-    }
-    .sub-btn:hover { opacity: 0.9; }
-    .sub-msg { font-size: 0.75rem; margin-top: 8px; min-height: 18px; }
-    .sub-msg.ok { color: var(--green); }
-    .sub-msg.err { color: var(--red); }
-
-    /* DISCLAIMER */
-    .disclaimer {
-      background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 8px; padding: 10px 12px; margin-top: 16px;
-      font-size: 0.75rem; color: var(--text2); line-height: 1.6;
-    }
-    .disclaimer strong { color: var(--accent); }
-
-    /* TOC */
-    .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; position: sticky; top: 72px; }
-    .toc-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
-    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .toc-item a { font-size: 0.82rem; color: var(--text2); text-decoration: none; display: block; padding: 3px 8px; border-radius: 4px; border-left: 2px solid transparent; transition: all 0.15s; line-height: 1.4; }
-    .toc-item a:hover, .toc-item a.active { color: var(--primary); background: rgba(225,29,72,0.08); border-left-color: var(--primary); }
-    .toc-sub { padding-left: 12px; }
-
-    /* RELATED */
-    .related { margin-top: 40px; }
-    .section-title { font-size: 0.8rem; font-weight: 600; color: var(--text2); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .related-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-decoration: none; transition: all 0.2s; }
-    .related-card:hover { border-color: var(--primary); }
-    .related-card h4 { font-size: 0.88rem; color: var(--text); line-height: 1.4; margin-bottom: 6px; }
-    .related-card span { font-size: 0.75rem; color: var(--text2); }
-
-    @media (max-width: 768px) {
-      .article-wrap { grid-template-columns: 1fr; }
-      .toc { display: none; }
-      .article-title { font-size: 1.4rem; }
-      .related-grid { grid-template-columns: 1fr; }
-    }
-    /* 回到顶部按钮 */
-    .back-to-top {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text2);
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s;
-      z-index: 999;
-    }
-    .back-to-top.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .back-to-top:hover {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    @media (max-width: 768px) {
-      .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1rem; }
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电网ETF目标价复盘：025832能否突破前高 | A股投研工具箱</title>
+    <meta name="description" content="深度复盘025832电网ETF近期走势与目标价，分析电网设备板块驱动力，研判后市投资机会。">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+               max-width: 720px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #1a1a1a; }
+        h1 { font-size: 1.8em; margin: 1.2em 0 0.6em; }
+        h2 { font-size: 1.3em; margin: 1em 0 0.5em; color: #2563eb; }
+        .meta { color: #888; font-size: 0.9em; margin-bottom: 2em; }
+        .tag { background: #f0f4ff; color: #2563eb; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
+        pre { background: #f5f5f5; padding: 12px; overflow-x: auto; border-radius: 6px; }
+        blockquote { border-left: 3px solid #2563eb; margin: 1em 0; padding: 0.5em 1em; background: #f0f4ff; }
+    </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-inner">
-    <a class="logo" href="/">
-      <div class="logo-icon">📈</div>
-      A股投研工具箱
-    </a>
-    <a class="back-btn" href="/">← 返回首页</a>
-  </div>
-</nav>
-
-<div class="article-wrap">
-  <article class="article-main">
-
-    <div class="article-meta">
-      <div class="meta-tags" id="article-tags"><span class="tag etf">ETF评测</span><span class="tag new">电网设备</span></div>
-      <h1 class="article-title" id="article-title">电网ETF目标价复盘：025832能否突破前高</h1>
-      <div class="article-info">
-        <span class="info-item">📅 <span id="article-date">2026-06-06</span></span>
-        <span class="info-item">⏱ <span id="read-time">5 分钟</span></span>
-        <span class="ai-badge">🤖 AI 生成</span>
-      </div>
-    </div>
-
-    <div class="article-content" id="article-body">
-      <h2 id="h1">一、引言：025832 电网ETF 的“前高攻坚战”</h2>
+    <p><a href="/">Back to Home</a></p>
+    <h1>电网ETF目标价复盘：025832能否突破前高 | A股投研工具箱</h1>
+    <div class="meta">Date: 2026-06-06</div>
+    <div class="content">class="article-title" id="article-title">电网ETF目标价复盘：025832能否突破前高</h1> <div class="article-info"> <span class="info-item">📅 <span id="article-date">2026-06-06</span></span> <span class="info-item">⏱ <span id="read-time">5 分钟</span></span> <span class="ai-badge">🤖 AI 生成</span> </div> </div> <div class="article-content" id="article-body"> <h2 id="h1">一、引言：025832 电网ETF 的“前高攻坚战”</h2>
 <p>2025年4月以来，<strong>025832 电网ETF</strong>（跟踪中证电网设备指数）成为A股结构性行情中少有的“逆势抗跌”品种。截至4月25日，该ETF年内收益率超过12%，显著跑赢沪深300与创业板指。当前，指数点位已逼近2024年10月高点——即所谓的“前高”阻力位。投资者密集关注两个问题：<strong>这一轮上涨能否突破前高？025832 的合理目标价位在哪里？</strong></p>
-<p>本文将从指数构成、资金面、业绩支撑与估值比价四个维度进行深度复盘，并结合历史走势数据，研判后市操作逻辑。需说明，本文不构成任何买卖建议，仅提供分析框架与数据参考。</p>
-
-<h2 id="h2">二、指数构成：电网设备板块的“硬核”底色</h2>
+<p>本文将从指数构成、资金面、业绩支撑与估值比价四个维度进行深度复盘，并结合历史走势数据，研判后市操作逻辑。需说明，本文不构成任何买卖建议，仅提供分析框架与数据参考。</p> <h2 id="h2">二、指数构成：电网设备板块的“硬核”底色</h2>
 <h3>2.1 成分股特征：特高压+智能电网+出海三足鼎立</h3>
 <p>025832 跟踪的<strong>中证电网设备指数</strong>（代码：931757）共纳入50只成分股，前十大权重股合计占比约45%，覆盖输变电设备、智能电表、电力电缆、变压器等细分领域。其中，<strong>特高压建设（如平高电气、中国西电）</strong>与<strong>电网数字化（如国电南瑞、四方股份）</strong>是两大核心驱动力。</p>
 <p>值得注意的是，2024年下半年以来，电力设备出海逻辑持续强化，指数中海外营收占比超过20%的公司（如思源电气、金盘科技）贡献了主要的增量弹性。这与2023年单纯依赖国内电网投资周期有本质区别。</p>
 <h3>2.2 与同类ETF的差异</h3>
-<p>对比<strong>007300 半导体ETF</strong>（侧重周期弹性）和<strong>012733 AI主题ETF</strong>（高成长但波动大），025832 的防御属性更突出：2024年全年最大回撤仅14.3%，远低于半导体ETF的28.7%和AI主题ETF的35.6%。这使其成为机构资金“高切低”配置的首选方向之一。</p>
-
-<h2 id="h3">三、目标价位复盘：前高附近的“三重压力”</h2>
+<p>对比<strong>007300 半导体ETF</strong>（侧重周期弹性）和<strong>012733 AI主题ETF</strong>（高成长但波动大），025832 的防御属性更突出：2024年全年最大回撤仅14.3%，远低于半导体ETF的28.7%和AI主题ETF的35.6%。这使其成为机构资金“高切低”配置的首选方向之一。</p> <h2 id="h3">三、目标价位复盘：前高附近的“三重压力”</h2>
 <h3>3.1 历史前高的形成与突破逻辑</h3>
 <p>以025832 的复权价格计算，2024年10月8日创下的<strong>1.285元</strong>为历史前高。此轮上涨自2025年2月低点1.098元启动，至4月25日盘中最高触及1.272元，距离前高仅差1.0%。</p>
 <p>当前面临的三重压力：</p>
-<ul>
-  <li><strong>技术面压力：</strong>周线级别RSI已进入70超买区域，且日线MACD顶背离雏形出现。</li>
-  <li><strong>资金面压力：</strong>4月以来ETF份额累计净赎回约1.2亿份，部分短线资金选择兑现。</li>
-  <li><strong>事件面压力：</strong>二季度特高压招标规模环比可能回落，市场担忧增速放缓。</li>
+<ul> <li><strong>技术面压力：</strong>周线级别RSI已进入70超买区域，且日线MACD顶背离雏形出现。</li> <li><strong>资金面压力：</strong>4月以来ETF份额累计净赎回约1.2亿份，部分短线资金选择兑现。</li> <li><strong>事件面压力：</strong>二季度特高压招标规模环比可能回落，市场担忧增速放缓。</li>
 </ul>
 <h3>3.2 数据获取与验证方法</h3>
 <p>目标价位分析不能依赖“拍脑袋”。投资者可通过以下工具获取实时数据：</p>
-<ol>
-  <li><strong>ETF实时净值与持仓：</strong>券商APP或天天基金网输入025832，查看“净值估算”与“十大持仓”变动。</li>
-  <li><strong>行业指数估值：</strong>中证指数官网查询931757的PE、PB历史分位（当前PE约25倍，处于近5年45%分位）。</li>
-  <li><strong>资金流向：</strong>东方财富Choice或Wind终端关注“电网设备板块主力资金净流入/流出”趋势。</li>
+<ol> <li><strong>ETF实时净值与持仓：</strong>券商APP或天天基金网输入025832，查看“净值估算”与“十大持仓”变动。</li> <li><strong>行业指数估值：</strong>中证指数官网查询931757的PE、PB历史分位（当前PE约25倍，处于近5年45%分位）。</li> <li><strong>资金流向：</strong>东方财富Choice或Wind终端关注“电网设备板块主力资金净流入/流出”趋势。</li>
 </ol>
-<blockquote>关键信号：若025832 连续三日成交额放大至3亿元以上（当前日均约1.8亿元），且指数站稳1.285元上方，则突破有效性确认；反之，若缩量冲高回落，需警惕假突破。</blockquote>
-
-<h2 id="h4">四、后市研判：突破前高的核心驱动力</h2>
+<blockquote>关键信号：若025832 连续三日成交额放大至3亿元以上（当前日均约1.8亿元），且指数站稳1.285元上方，则突破有效性确认；反之，若缩量冲高回落，需警惕假突破。</blockquote> <h2 id="h4">四、后市研判：突破前高的核心驱动力</h2>
 <h3>4.1 国内电网投资：量稳质升</h3>
 <p>国家电网2025年计划投资预计超过6300亿元，同比增速约5%。虽然增速低于2024年的15%，但结构变化明显：<strong>特高压工程（如陕北-安徽直流）</strong>与<strong>配电网智能化</strong>占比提升至60%以上。这对于025832 中权重占比最高的输变电设备企业（合计权重超40%）构成直接利好。</p>
 <h3>4.2 出海逻辑：北美+欧洲电网改造需求爆发</h3>
 <p>根据BNEF数据，2025-2030年全球电网投资年均增速预计达8%，其中北美、欧洲因老旧电网改造与新能源并网需求，对变压器、电力电缆的进口需求激增。025832 中海外营收占比超过15%的成分股数量已从2023年的8家增至14家，<strong>出海弹性</strong>成为指数突破前高的“胜负手”。</p>
 <h3>4.3 估值比较：相对性价比仍存</h3>
-<p>当前025832 对应的指数PE为25倍，低于半导体ETF（007300）的45倍和AI主题ETF（012733）的60倍。如果2025年成分股净利润增速维持20%以上（Wind一致预期），则动态PE将降至21倍，与历史中位数18-20倍相比，<strong>估值吸引力尚可</strong>，但并非极端低估。</p>
-
-<h2 id="h5">五、操作要点总结</h2>
+<p>当前025832 对应的指数PE为25倍，低于半导体ETF（007300）的45倍和AI主题ETF（012733）的60倍。如果2025年成分股净利润增速维持20%以上（Wind一致预期），则动态PE将降至21倍，与历史中位数18-20倍相比，<strong>估值吸引力尚可</strong>，但并非极端低估。</p> <h2 id="h5">五、操作要点总结</h2>
 <p>基于上述复盘，给投资者提供三个维度的操作参考（非买卖建议）：</p>
-<ul>
-  <li><strong>买入信号观察：</strong>关注025832 日线级别放量突破1.285元且连续3日收盘站稳；或缩量回踩1.20元支撑位后出现“早晨之星”K线组合。</li>
-  <li><strong>数据获取渠道：</strong>每日15:00后查看ETF折溢价率（溢价超过1%时不宜追涨）；每周关注中证指数官网披露的指数估值数据。</li>
-  <li><strong>仓位管理建议：</strong>若仓位较重（如超过总资产20%），可在前高附近分批止盈10%-15%仓位；若仓位较轻，可在回调至20日均线附近时定投加仓。</li>
+<ul> <li><strong>买入信号观察：</strong>关注025832 日线级别放量突破1.285元且连续3日收盘站稳；或缩量回踩1.20元支撑位后出现“早晨之星”K线组合。</li> <li><strong>数据获取渠道：</strong>每日15:00后查看ETF折溢价率（溢价超过1%时不宜追涨）；每周关注中证指数官网披露的指数估值数据。</li> <li><strong>仓位管理建议：</strong>若仓位较重（如超过总资产20%），可在前高附近分批止盈10%-15%仓位；若仓位较轻，可在回调至20日均线附近时定投加仓。</li>
 </ul>
 <p>最后附上对025832 电网ETF（及同类工具）的综合评分（基于评测博主立场，满分10分）：</p>
-<table border="1" cellpadding="5" cellspacing="0">
-  <tr>
-    <th>维度</th>
-    <th>评分</th>
-    <th>说明</th>
-  </tr>
-  <tr>
-    <td>可读性</td>
-    <td>8</td>
-    <td>数据图表清晰，但成分股逻辑对新手略复杂</td>
-  </tr>
-  <tr>
-    <td>数据准确性</td>
-    <td>9</td>
-    <td>指数编制规则透明，净值偏离度低</td>
-  </tr>
-  <tr>
-    <td>功能完整性</td>
-    <td>8</td>
-    <td>支持T+1交易，但缺乏期货期权衍生品</td>
-  </tr>
-  <tr>
-    <td>使用门槛</td>
-    <td>7</td>
-    <td>需要一定行业知识，不适合纯小白</td>
-  </tr>
-  <tr>
-    <td>性价比</td>
-    <td>8</td>
-    <td>管理费0.5%/年，低于同类主动基金</td>
-  </tr>
+<table border="1" cellpadding="5" cellspacing="0"> <tr> <th>维度</th> <th>评分</th> <th>说明</th> </tr> <tr> <td>可读性</td> <td>8</td> <td>数据图表清晰，但成分股逻辑对新手略复杂</td> </tr> <tr> <td>数据准确性</td> <td>9</td> <td>指数编制规则透明，净值偏离度低</td> </tr> <tr> <td>功能完整性</td> <td>8</td> <td>支持T+1交易，但缺乏期货期权衍生品</td> </tr> <tr> <td>使用门槛</td> <td>7</td> <td>需要一定行业知识，不适合纯小白</td> </tr> <tr> <td>性价比</td> <td>8</td> <td>管理费0.5%/年，低于同类主动基金</td> </tr>
 </table>
 <p><strong>综合评价：</strong>025832 作为电网设备主题ETF，工具属性扎实，但突破前高需要基本面与资金面的共振。当前阶段更宜采取“右侧确认+左侧分批”的混合策略，切忌在技术指标未确认前重仓押注。</p>
-<blockquote>免责声明：本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。文中提及的任何ETF代码及历史数据均不预示未来表现，请投资者根据自身风险承受能力审慎决策。</blockquote>
-    </div>
-
-    <div class="article-footer">
-      <a class="source-link" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:0.82rem;padding:6px 12px;border:1px solid var(--border);border-radius:6px;text-decoration:none;">🔗 查看原始来源</a>
-
-      <!-- 免责声明 -->
-      <div class="disclaimer">
-        <strong>⚠️ 免责声明</strong><br>
-        本文内容由 AI 自动生成，仅供学习参考，<strong>不构成投资建议</strong>。投资有风险，决策前请做好独立研究。
-      </div>
-    </div>
-
-    <!-- 关注公众号 -->
-    <div class="subscribe-box">
-      <h3>📬 关注公众号</h3>
-      <p>搜索微信公众号 <strong style="color:var(--text)">「无缘的人」</strong> 关注，每日文章推送到微信。</p>
-      <p style="font-size:0.82rem;color:var(--text2);margin-top:6px;">或添加微信：727601845@qq.com</p>
-    </div>
-
-    <!-- 相关文章 -->
-    <div class="related">
-      <div class="section-title">相关文章</div>
-      <div class="related-grid" id="related-grid"></div>
-    </div>
-  </article>
-
-  <!-- 目录 -->
-  <aside>
-    <div class="toc">
-      <div class="toc-title">文章目录</div>
-      <ul class="toc-list" id="toc-list"></ul>
-    </div>
-  </aside>
-</div>
-
-<script>
-// ─── 目录生成 ────────────────────────────────────────
-function buildTOC() {
-  const headings = document.querySelectorAll('.article-content h2, .article-content h3');
-  const toc = document.getElementById('toc-list');
-  headings.forEach((h, i) => {
-    h.id = 'heading-' + i;
-    const li = document.createElement('li');
-    li.className = 'toc-item' + (h.tagName === 'H3' ? ' toc-sub' : '');
-    li.innerHTML = `<a href="#heading-${i}">${h.textContent}</a>`;
-    toc.appendChild(li);
-  });
-}
-
-function initScrollSpy() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = document.querySelector(`.toc-list a[href="#${id}"]`);
-      if (link) link.classList.toggle('active', entry.isIntersecting);
-    });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  document.querySelectorAll('.article-content h2, .article-content h3').forEach(h => observer.observe(h));
-}
-
-buildTOC();
-initScrollSpy();
-
-// ─── 相关文章 ────────────────────────────────────────
-async function loadRelated() {
-  try {
-    const res = await fetch('/data/articles.json?t=' + Date.now());
-    const arts = await res.json();
-    const grid = document.getElementById('related-grid');
-    const cur = location.pathname.split('/').pop();
-    // 排除当前文章，随机取3篇
-    const others = arts.filter(a => a.url !== cur).sort(() => Math.random() - 0.5).slice(0, 3);
-    if (!others.length) return;
-    grid.innerHTML = others.map(a => {
-      const d = (a.date || '').slice(5); // MM-DD
-      return `<a class="related-card" href="/${a.url}">
-        <h4>${a.title}</h4>
-        <span>${d} · ${a.readTime || '5 分钟'}</span>
-      </a>`;
-    }).join('');
-  } catch {}
-}
-loadRelated();
-</script>
-  <!-- 回到顶部按钮 -->
-  <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
-
-  <script>
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('show', window.scrollY > 400);
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-
+<blockquote>免责声明：本文内容仅供学习参考，不构成投资建议，投资有风险，决策请做独立研究。文中提及的任何ETF代码及历史数据均不预示未来表现，请投资者根据自身风险承受能力审慎决策。</blockquote> </div> <div</div>
 </body>
 </html>
